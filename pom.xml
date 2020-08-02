@@ -23,7 +23,6 @@
     </properties>
 
     <dependencies>
-
         <!--使用freemarker的starter，里面包含spring-boot-starter-web组件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
