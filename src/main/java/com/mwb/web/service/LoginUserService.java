@@ -10,6 +10,6 @@ import com.mwb.web.model.LoginUser;
  */
 public interface LoginUserService extends BaseService<LoginUser> {
 
-    boolean login(String name, String password);
+    LoginUser getByName(String name);
 
 }

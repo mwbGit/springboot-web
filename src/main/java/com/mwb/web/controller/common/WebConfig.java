@@ -1,10 +1,13 @@
-package com.mwb.web.controller;
+package com.mwb.web.controller.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 /**
  * 描述:
@@ -20,13 +23,17 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/toTest").setViewName("/test");
-        registry.addViewController("/toindex").setViewName("/index");
-        registry.addViewController("/table").setViewName("/table");
+        registry.addViewController("/index.html").setViewName("/index");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adapter);
+        registry.addInterceptor(adapter).excludePathPatterns("/static/**", "/html/login", "/html/register" ,"/login/**", "/register");
+    }
+
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new WebArgumentResolver());
     }
 }

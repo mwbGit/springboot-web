@@ -15,9 +15,15 @@ import java.io.Serializable;
 public class UserQuery extends PageQuery implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
 
+    private Long id;
+
     private String name;
 
-    private Long id;
+    private Integer ageMin;
+
+    private Integer ageMax;
+
+    private Integer sex;
 
 
 }

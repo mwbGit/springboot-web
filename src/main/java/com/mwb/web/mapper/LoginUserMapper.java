@@ -14,7 +14,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface LoginUserMapper extends tk.mybatis.mapper.common.Mapper<LoginUser> {
 
-
-    @Select("select count(*) from login_user where name = #{name} and password =#{password}")
-    int countByNameAndPassword(@Param("name") String name, @Param("password") String password);
+    @Select("select * from login_user where name = #{name}")
+    LoginUser selectByName(@Param("name") String name);
 }

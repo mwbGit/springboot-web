@@ -47,6 +47,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         if (query.getId() != null) {
             criteria.andGreaterThan("id", query.getId());
         }
+        if (query.getSex() != null) {
+            criteria.andEqualTo("sex", query.getSex());
+        }
+        if (query.getAgeMin() != null) {
+            criteria.andGreaterThanOrEqualTo("age", query.getAgeMin());
+        }
+        if (query.getAgeMax() != null) {
+            criteria.andLessThanOrEqualTo("age", query.getAgeMax());
+        }
         //排序
         example.orderBy("id").desc();
         //去重

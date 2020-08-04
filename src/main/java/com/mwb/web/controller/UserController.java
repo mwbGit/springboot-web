@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.User;
 import com.mwb.web.model.UserQuery;
 import com.mwb.web.model.common.ApiResult;
-import com.mwb.web.model.common.PageResult;
 import com.mwb.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

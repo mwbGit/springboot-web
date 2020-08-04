@@ -19,8 +19,7 @@ public class LoginUserServiceImpl extends BaseServiceImpl<LoginUser> implements 
     private LoginUserMapper loginUserMapper;
 
     @Override
-    public boolean login(String name, String password) {
-        int count = loginUserMapper.countByNameAndPassword(name, password);
-        return count > 0;
+    public LoginUser getByName(String name) {
+        return loginUserMapper.selectByName(name);
     }
 }
