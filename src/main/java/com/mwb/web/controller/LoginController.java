@@ -5,6 +5,7 @@ import com.mwb.web.model.common.ApiResult;
 import com.mwb.web.service.LoginUserService;
 import com.mwb.web.utils.AESUtil;
 import com.mwb.web.utils.HttpUtil;
+import com.mwb.web.utils.MD5Util;
 import com.mwb.web.utils.WebConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class LoginController {
     public ApiResult to(@RequestParam("name") String name, @RequestParam("password") String password, HttpServletResponse response) {
         LoginUser user = loginUserService.getByName(name);
         if (user != null) {
-            if (user.getPassword().equals(password)) {
+            if (user.getPassword().equals(MD5Util.md5(password))) {
                 String token = AESUtil.encrypt(String.valueOf(user.getId()));
                 HttpUtil.saveCookie(response, WebConstant.WAP_COOKIE_NAME, token, WebConstant.TC_EXPIRE_TIME, "/");
                 return ApiResult.success(user);
@@ -80,7 +81,7 @@ public class LoginController {
         LoginUser loginUser = new LoginUser();
         loginUser.setAddTime(new Date());
         loginUser.setUpdateTime(new Date());
-        loginUser.setPassword(password);
+        loginUser.setPassword(MD5Util.md5(password));
         loginUser.setName(name);
         int result = loginUserService.save(loginUser);
         String token = AESUtil.encrypt(String.valueOf(loginUser.getId()));
@@ -94,9 +95,9 @@ public class LoginController {
         if (!loginUser.getPassword().equals(oldPassword)) {
             return ApiResult.failed("当前密码不正确");
         }
-        loginUser.setPassword(newPassword);
+        loginUser.setPassword(MD5Util.md5(newPassword));
         loginUser.setUpdateTime(new Date());
-        loginUserService.updateNotNull(loginUser);
+        loginUserService.update(loginUser);
         return ApiResult.success();
     }
 }

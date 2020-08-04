@@ -40,7 +40,7 @@ public class WebConfigurerAdapter extends HandlerInterceptorAdapter {
             response.sendRedirect("/html/login");
             return false;
         }
-        LoginUser loginUser = loginUserService.selectByKey(userId);
+        LoginUser loginUser = loginUserService.getById(userId);
         if (loginUser == null) {
             authError(response, "用户权限限制");
             return false;

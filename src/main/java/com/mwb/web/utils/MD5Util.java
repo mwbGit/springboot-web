@@ -1,30 +1,15 @@
 package com.mwb.web.utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.springframework.util.DigestUtils;
 
 public class MD5Util {
+    private static final String SAFE = "mwb_md5_";
 
-    private static MessageDigest instance;
-
-    static {
-        try {
-            instance = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+    public static String md5(String str) {
+        return DigestUtils.md5DigestAsHex((SAFE + str).getBytes());
     }
 
-    public static long md5(String str) {
-        instance.reset();
-        instance.update(str.getBytes());
-        byte[] digest = instance.digest();
-
-        long h = 0;
-        for (int i = 0; i < 4; i++) {
-            h <<= 8;
-            h |= ((int) digest[i]) & 0xFF;
-        }
-        return h;
+    public static void main(String[] args) {
+        System.out.println(MD5Util.md5("aaaaaaaaa"));
     }
 }

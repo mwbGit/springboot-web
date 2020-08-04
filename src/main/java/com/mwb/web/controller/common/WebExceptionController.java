@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Slf4j
 @ControllerAdvice
-public class ExceptionController {
+public class WebExceptionController {
 
     @ResponseBody
     @ExceptionHandler(Exception.class)

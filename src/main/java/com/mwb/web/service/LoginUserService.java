@@ -12,4 +12,7 @@ public interface LoginUserService extends BaseService<LoginUser> {
 
     LoginUser getByName(String name);
 
+    LoginUser getById(long id);
+
+    LoginUser update(LoginUser user);
 }

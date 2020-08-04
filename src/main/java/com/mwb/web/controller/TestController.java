@@ -2,6 +2,8 @@ package com.mwb.web.controller;
 
 import com.mwb.web.model.LoginUser;
 import com.mwb.web.model.common.ApiResult;
+import com.mwb.web.service.LoginUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class TestController {
+
+    @Autowired
+    private LoginUserService loginUserService;
 
     @RequestMapping("/test")
     public ModelAndView test(LoginUser user) {
@@ -36,7 +41,7 @@ public class TestController {
     @ResponseBody
     @RequestMapping("/test2")
     public ApiResult test2(LoginUser user) {
-
+        user = loginUserService.getById(user.getId());
         return ApiResult.success(user);
     }
 }
