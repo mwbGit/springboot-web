@@ -2,8 +2,12 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>用户管理</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
     <link rel="stylesheet" href="../static/css/layui.css">
 </head>
 <body>
@@ -43,8 +47,10 @@
         </div>
         <div class="layui-inline">
             <div class="layui-btn-container">
-                <button class="layui-btn" lay-event="search" lay-submit lay-filter="search_btn" >查询</button>
-                <button class="layui-btn" lay-event="add" lay-submit lay-filter="add_btn" > <i class="layui-icon">&#xe608;</i> 添加</button>
+                <button class="layui-btn" lay-event="search" lay-submit lay-filter="search_btn">查询</button>
+                <button class="layui-btn" lay-event="add" lay-submit lay-filter="add_btn"><i
+                            class="layui-icon">&#xe608;</i> 添加
+                </button>
             </div>
         </div>
     </div>

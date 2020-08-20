@@ -1,8 +1,11 @@
 package com.mwb.web.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -64,4 +67,27 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         //重点：这个查询支持通过Example类指定查询列，通过selectProperties方法指定查询列
         return mapper.selectByExample(example);
     }
+
+    @Override
+    public T selectOneByExample(Object example) {
+        return mapper.selectOneByExample(example);
+    }
+
+    @Override
+    public List<T> pageSearch(PageQuery query, Class<T> entityClass) {
+        //分页
+        if (query.isPaged()) {
+            PageHelper.startPage(query.getPage(), query.getPageSize());
+        }
+        Example example = new Example(entityClass);
+        //排序
+        example.orderBy(query.getOrder()).desc();
+        return mapper.selectByExample(example);
+    }
+
+    @Override
+    public List<T> selectAll() {
+        return mapper.selectAll();
+    }
+
 }

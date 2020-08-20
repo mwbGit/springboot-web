@@ -11,14 +11,15 @@ import java.util.Date;
 
 /**
  * 描述:
+ * 宠物图片
  *
  * @author mengweibo@kanzhun.com
- * @create 2020/7/31
+ * @create 2020/8/6
  */
 
 @Data
-@Table(name = "login_user")
-public class LoginUser implements Serializable {
+@Table(name = "pet_picture")
+public class PetPicture implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
 
     @Id
@@ -26,20 +27,21 @@ public class LoginUser implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "pet_id")
+    private long petId;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "status")
-    private int status;
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "level")
+    private int level;
 
     @Column(name = "add_time", updatable = false)
     private Date addTime;
 
     @Column(name = "update_time")
     private Date updateTime;
-
-
 }

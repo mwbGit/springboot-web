@@ -75,10 +75,10 @@ layui.use(['form', 'layer', 'table'], function () {
             });
         } else if (layEvent === 'edit') { //编辑
             form.val("add_form", {
-                "id" : data.id,
-                "name" : data.name,
-                "age" : data.age,
-                "sex" : data.sex
+                "id": data.id,
+                "name": data.name,
+                "age": data.age,
+                "sex": data.sex
             });
 
             layer.open({
@@ -96,11 +96,11 @@ layui.use(['form', 'layer', 'table'], function () {
                         username: '123'
                         , title: 'xxx'
                     });
-                }, end : function () {
+                }, end: function () {
                     form.val("add_form", {
-                        "id" : '0',
-                        "age" : '',
-                        "name" : ''
+                        "id": '0',
+                        "age": '',
+                        "name": ''
                     });
                 }
             });
@@ -152,7 +152,7 @@ layui.use(['form', 'layer', 'table'], function () {
     }
 
     //添加或者保存
-    function addOrUpdate(index){
+    function addOrUpdate(index) {
         var formData = form.val("add_form");
         if (formData.name == '') {
             layer.msg('名称不可以为空', {icon: 2});

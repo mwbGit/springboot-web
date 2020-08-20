@@ -13,6 +13,20 @@
             <PatternLayout pattern="${ENCODER_PATTERN}"/>
         </Console>
 
+        <RollingFile name="ACCESS_FILE" filename="${LOG_HOME}/${APP_NAME}_access.log"
+                     filepattern="${LOG_HOME}/${APP_NAME}_access.log.%d{yyyy-MM-dd}">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT"/>
+            </Filters>
+
+            <PatternLayout pattern="${ENCODER_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
         <RollingFile name="INFO_FILE" filename="${LOG_HOME}/${APP_NAME}_info.log"
                      filepattern="${LOG_HOME}/${APP_NAME}_info.log.%d{yyyy-MM-dd}">
             <Filters>
@@ -55,6 +69,11 @@
 
     </Appenders>
     <Loggers>
+        <AsyncLogger name="com.mwb.web.controller.common.WebAuthInterceptor" additivity="false" level="INFO">
+            <AppenderRef ref="ACCESS_FILE"/>
+            <AppenderRef ref="WARN_FILE"/>
+            <AppenderRef ref="ERROR_FILE"/>
+        </AsyncLogger>
         <AsyncLogger name="com.mwb" additivity="false" level="INFO">
             <AppenderRef ref="INFO_FILE"/>
             <AppenderRef ref="WARN_FILE"/>

@@ -16,19 +16,18 @@ import java.util.List;
  * @create 2020/7/31
  */
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfigurer implements WebMvcConfigurer {
 
     @Autowired
-    private WebConfigurerAdapter adapter;
+    private WebAuthInterceptor adapter;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/index.html").setViewName("/index");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adapter).excludePathPatterns("/static/**", "/html/login", "/html/register" ,"/login/**", "/register");
+        registry.addInterceptor(adapter).addPathPatterns("/**").excludePathPatterns("/static/**");
     }
 
 

@@ -1,6 +1,6 @@
 package com.mwb.web.controller.common;
 
-import com.mwb.web.model.LoginUser;
+import com.mwb.web.model.UserInfo;
 import com.mwb.web.utils.WebConstant;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -21,14 +21,14 @@ public class WebArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().equals(LoginUser.class);
+        return parameter.getParameterType().equals(UserInfo.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         Class<?> clazz = parameter.getParameterType();
-        if (clazz.equals(LoginUser.class)) {
+        if (clazz.equals(UserInfo.class)) {
             return webRequest.getAttribute(WebConstant.USER_BASE, RequestAttributes.SCOPE_REQUEST);
         } else {
             return null;

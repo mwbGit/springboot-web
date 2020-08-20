@@ -2,7 +2,7 @@ package com.mwb.web.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.User;
-import com.mwb.web.model.UserQuery;
+import com.mwb.web.model.query.UserQuery;
 
 import java.util.List;
 

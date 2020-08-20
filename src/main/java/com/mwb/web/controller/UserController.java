@@ -2,8 +2,8 @@ package com.mwb.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.User;
-import com.mwb.web.model.UserQuery;
 import com.mwb.web.model.common.ApiResult;
+import com.mwb.web.model.query.UserQuery;
 import com.mwb.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,20 +44,5 @@ public class UserController {
         return ApiResult.success();
     }
 
-    @RequestMapping("/detail")
-    public ApiResult detail(long id) {
-        return ApiResult.success(userService.selectByKey(id));
-    }
-
-    @RequestMapping("/detail1")
-    public ApiResult detail1(long id) {
-        try {
-            throw new RuntimeException();
-
-        } catch (Exception e) {
-            log.error("aaaaaaaaaaaaaaaaaaa", e);
-        }
-        return ApiResult.failed();
-    }
 
 }

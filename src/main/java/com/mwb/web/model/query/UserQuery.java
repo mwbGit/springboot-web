@@ -1,4 +1,4 @@
-package com.mwb.web.model;
+package com.mwb.web.model.query;
 
 import com.mwb.web.model.common.PageQuery;
 import lombok.Data;

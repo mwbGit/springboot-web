@@ -1,5 +1,6 @@
 package com.mwb.web.service;
 
+import com.mwb.web.model.common.PageQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,11 @@ public interface BaseService<T> {
 
     int updateNotNull(T entity);
 
+    T selectOneByExample(Object example);
+
     List<T> selectByExample(Object example);
 
-    //TODO 其他...
+    List<T> selectAll();
+
+    List<T> pageSearch(PageQuery query, Class<T> entityClass);
 }

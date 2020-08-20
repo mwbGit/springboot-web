@@ -9,7 +9,4 @@ public class MD5Util {
         return DigestUtils.md5DigestAsHex((SAFE + str).getBytes());
     }
 
-    public static void main(String[] args) {
-        System.out.println(MD5Util.md5("aaaaaaaaa"));
-    }
 }

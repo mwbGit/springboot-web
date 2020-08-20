@@ -2,46 +2,111 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layDate快速使用</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>文章详情</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
     <link rel="stylesheet" href="../static/css/layui.css" media="all">
 </head>
-<body>
+<style type="text/css">
+    .cmdlist-container img {
+        max-width: 320px;
+        max-height: 160px;
+    }
 
-<div class="layui-col-md12">
-    <div class="layui-card">
-        <div class="layui-card-header">修改密码</div>
-        <div class="layui-card-body" pad15="">
+    .cmdlist-container {
+        margin: 5px 5px
+    }
 
-            <div class="layui-form" lay-filter="">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">当前密码</label>
-                    <div class="layui-input-inline">
-                        <input type="password" name="oldPassword" lay-verify="required" lay-vertype="tips" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">新密码</label>
-                    <div class="layui-input-inline">
-                        <input type="password" name="password" lay-verify="pass" lay-vertype="tips" autocomplete="off" id="LAY_password" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">6到16个字符</div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">确认新密码</label>
-                    <div class="layui-input-inline">
-                        <input type="password" name="repassword" lay-verify="repass" lay-vertype="tips" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="setmypass">确认修改</button>
-                    </div>
+    .cmdlist-text .info {
+        height: 40px;
+        font-size: 14px;
+        line-height: 20px;
+        width: 100%;
+        overflow: hidden;
+        color: #666;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+</style>
+<body style="margin: 10px 60px 15px 60px;">
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+
+        <div class="layui-col-md12">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>最新图片</legend>
+            </fieldset>
+            <div class="layui-row layui-col-space15">
+                <div id="t_body">
+
                 </div>
             </div>
-
         </div>
+
     </div>
+    <img alt="" style="display:none" id="displayimg" src=""/>
 </div>
 <script src="../static/layui.js"></script>
+
+<script>
+    layui.use(['layer', 'util', 'flow'], function () {
+        var $ = layui.jquery, util = layui.util;
+        var flow = layui.flow;
+        util.event('lay-active', {
+            e1: function () {
+            }
+        });
+        util.event('lay-active', {
+            e1: function () {
+                var url = this.getAttribute('lay-data');
+                $("#displayimg").attr("src", url);
+                var height = $("#displayimg").height();
+                var width = $("#displayimg").width();
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: 1,
+                    shadeClose: true,
+                    area: [width + 'px', height + 'px'], //宽高
+                    content: "<img alt=" + name + " title=" + name + " src=" + url + " />"
+                });
+            }
+        });
+
+        flow.load({
+            elem: '#t_body' //指定列表容器
+            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+                var lis = [];
+                //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                $.get('/pet/picture/search?page=' + page, function (res) {
+                    //假设你的列表返回在data集合中
+                    layui.each(res.data, function (index, val) {
+                        var str = '' +
+                            '<div class="layui-input-inline">' +
+                            '<div class="cmdlist-container">' +
+                            '<a href="javascript:;" lay-active="e1" lay-data="' + val.image + '">' +
+                            '<img  src="' + val.image + '" alt="' + val.title + '"> ' +
+                            '<div class="cmdlist-text">' +
+                            // '<p class="info">' + val.title + '</p>' +
+                            '</div>' +
+                            ' </a>' +
+                            '</div>' +
+                            '</div>';
+                        lis.push(str);
+                    });
+                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                    next(lis.join(''), page < res.pages);
+                });
+            }
+        });
+    });
+</script>
+
+
 </body>
 </html>

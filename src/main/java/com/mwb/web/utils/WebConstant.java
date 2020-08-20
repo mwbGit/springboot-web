@@ -8,7 +8,7 @@ package com.mwb.web.utils;
  */
 public class WebConstant {
 
-    public static final String WAP_COOKIE_NAME = "mwb";
+    public static final String WAP_COOKIE_NAME = "pet";
     public static final String USER_BASE = "user";
     public static final int TC_EXPIRE_TIME = 60 * 60 * 24 * 3;
 

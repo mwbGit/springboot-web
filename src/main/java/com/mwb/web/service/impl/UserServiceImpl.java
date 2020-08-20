@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.mapper.UserMapper;
 import com.mwb.web.model.User;
-import com.mwb.web.model.UserQuery;
+import com.mwb.web.model.query.UserQuery;
 import com.mwb.web.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

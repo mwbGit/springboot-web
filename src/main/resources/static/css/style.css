@@ -581,3 +581,11 @@ html body .layui-nav .layui-nav-bar {
         display: none;
     }
 }
+
+.card-link a {
+    display: inline-block;
+    width: 20%;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}

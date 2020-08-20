@@ -32,6 +32,8 @@ public class ApiResult<T> implements Serializable {
 
     protected long count;
 
+    protected long pages;
+
     /**
      * 业务数据
      */
@@ -53,6 +55,14 @@ public class ApiResult<T> implements Serializable {
         this.data = data;
     }
 
+    public ApiResult(int code, String msg, long count, long pages, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.count = count;
+        this.pages = pages;
+        this.data = data;
+    }
+
     public static final ApiResult FAIL = ApiResult.failed(ERROR_CODE, ERROR_MSG);
 
 
@@ -67,6 +77,11 @@ public class ApiResult<T> implements Serializable {
     public static <T> ApiResult<T> success(T data, long count) {
         return new ApiResult<T>(SUCCESS_CODE, SUCCESS_MSG, count, data);
     }
+
+    public static <T> ApiResult<T> success(T data, long count, long pages) {
+        return new ApiResult<T>(SUCCESS_CODE, SUCCESS_MSG, count, pages, data);
+    }
+
 
     public static <T> ApiResult<T> success() {
         return wrap(SUCCESS_CODE, SUCCESS_MSG, (T) Collections.emptyMap());
