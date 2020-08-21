@@ -15,7 +15,7 @@ public interface PetService extends BaseService<PetInfo> {
 
     PageInfo<PetInfo> search(PetQuery query);
 
-    PetInfo saveOrUpdate(PetInfo petInfo);
+    PetInfo saveOrUpdate(PetInfo petInfo, String[] types);
 
 
 }

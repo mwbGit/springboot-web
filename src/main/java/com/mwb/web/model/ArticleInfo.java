@@ -48,6 +48,9 @@ public class ArticleInfo implements Serializable {
     @Column(name = "type")
     private int type;
 
+    @Column(name = "pet_id")
+    private int petId;
+
     @Column(name = "add_time", updatable = false)
     private Date addTime;
 

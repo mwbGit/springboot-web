@@ -88,7 +88,7 @@
         //文件-发布动态
         upload.render({
             elem: '#test11'
-            , url: '/user/update'
+            , url: '/user/info/update'
             , accept: 'images'
             , acceptMime: 'image/*'
             , size: 5120
@@ -128,7 +128,7 @@
             var a = $('#demo1').attr("lay-data");
             if (a == '') {
                 $.ajax({
-                    url: '/user/update',
+                    url: '/user/info/update',
                     data: data.field,
                     dataType: 'json',
                     type: 'post',

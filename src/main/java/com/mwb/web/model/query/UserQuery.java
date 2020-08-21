@@ -17,13 +17,13 @@ public class UserQuery extends PageQuery implements Serializable {
 
     private Long id;
 
+    private String account;
+
     private String name;
 
-    private Integer ageMin;
-
-    private Integer ageMax;
-
     private Integer sex;
+
+    private Integer status;
 
 
 }

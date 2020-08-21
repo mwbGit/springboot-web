@@ -59,4 +59,22 @@ public class PetCharacterServiceImpl extends BaseServiceImpl<PetCharacter> imple
         List<PetCharacter> petCharacters = selectByExample(example);
         return CollectionUtils.isEmpty(petCharacters) ? Collections.emptyList() : petCharacters.stream().map(PetCharacter::getName).distinct().collect(Collectors.toList());
     }
+
+    @Override
+    public List<PetCharacter> search(Long petId) {
+        List<PetCharacter> all = selectAll();
+        if (petId == null) {
+            return all;
+        }
+        List<Long> typeIds = characterMappingService.getPetTypeIdsByPetId(petId);
+        if (CollectionUtils.isNotEmpty(typeIds)) {
+            for (PetCharacter character : all) {
+                if (typeIds.contains(character.getId())) {
+                    character.setChecked(true);
+                }
+            }
+        }
+
+        return all;
+    }
 }

@@ -32,15 +32,40 @@ public class BannerInfo implements Serializable {
     @Column(name = "image")
     private String image;
 
+    /**
+     * 类型 0无 1文章 2品种 3动态
+     */
     @Column(name = "type")
     private int type;
 
+    /**
+     * 0 下线 1 上线
+     */
+    @Column(name = "status")
+    private int status;
+
     @Column(name = "level")
     private int level;
+
+    @Column(name = "object_id")
+    private int objectId;
 
     @Column(name = "add_time", updatable = false)
     private Date addTime;
 
     @Column(name = "update_time")
     private Date updateTime;
+
+    public String getTypeDesc(){
+        switch (type) {
+            case 1:
+                return "文章";
+            case 2:
+                return "品种";
+            case 3:
+                return "动态";
+            default:
+                return "图片";
+        }
+    }
 }

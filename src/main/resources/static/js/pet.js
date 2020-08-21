@@ -7,7 +7,7 @@ layui.use(['layer', 'jquery', 'util'], function () {
 
     $.get('/pet/characters', function (data) {
         if (data.code == 0) {
-            var str = '';
+            var str = '<a class="petType"  href="javascript:;" lay-active="e1" lay-id="0">全部</a>';
             $.each(data.data, function (i, val) {
                 str += '<a class="petType"  href="javascript:;" lay-active="e1" lay-id="' + val.id + '">' + val.name + '</a>';
             });
@@ -26,9 +26,9 @@ layui.use(['layer', 'jquery', 'util'], function () {
 
     function reload(type) {
         $.ajax({
-            url: '/pet/search',
+            url: '/pet/search?order=level',
             data: {
-                type: type
+                characterId: type
             },
             dataType: 'json',
             type: 'post',

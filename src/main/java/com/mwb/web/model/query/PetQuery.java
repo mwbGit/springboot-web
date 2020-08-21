@@ -15,5 +15,13 @@ import java.io.Serializable;
 public class PetQuery extends PageQuery implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
 
-    private int type;
+    private String name;
+
+    private Integer level;
+
+    private Integer score;
+
+    private int characterId;
+
+    private String order = "id";
 }

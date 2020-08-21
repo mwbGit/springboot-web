@@ -47,7 +47,7 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
 
         UserInfo userInfo = null;
         if (userId > 0) {
-            userInfo = loginUserService.getById(userId);
+            userInfo = loginUserService.getCacheById(userId);
         }
 
         // 权限校验
@@ -62,6 +62,10 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
                     if (userInfo.isFrozen()) {
                         authError(response, "账号已冻结");
                         accessLog.info("---access---isFrozen---ip:{},uri:{}，userInfo:{}", HttpUtil.getIpAddress(request), request.getRequestURI(), userInfo);
+                        return false;
+                    } else if (userInfo.unPass()) {
+                        authError(response, "请修改个人信息后重试");
+                        accessLog.info("---access---unPass---ip:{},uri:{}，userInfo:{}", HttpUtil.getIpAddress(request), request.getRequestURI(), userInfo);
                         return false;
                     }
                 }

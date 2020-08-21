@@ -1,5 +1,6 @@
 package com.mwb.web.model;
 
+import com.mwb.web.model.common.UserRobot;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import tk.mybatis.mapper.annotation.KeySql;
@@ -22,7 +23,6 @@ import java.util.Date;
 @Table(name = "user_info")
 public class UserInfo implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-    private static final String DEFAULT_AVATAR = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2078562713,2600960194&fm=26&gp=0.jpg";
 
     @Id
     @KeySql(useGeneratedKeys = true)
@@ -51,7 +51,7 @@ public class UserInfo implements Serializable {
     private String password;
 
     /**
-     * 0 待审核 1 有效 2冻结
+     * 0 待审核 1 有效 2 驳回 3 冻结
      */
     @Column(name = "status")
     private int status;
@@ -75,6 +75,10 @@ public class UserInfo implements Serializable {
         return status == 2;
     }
 
+    public boolean unPass() {
+        return status == 3;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -85,7 +89,30 @@ public class UserInfo implements Serializable {
                 '}';
     }
 
+    public String getSexDesc() {
+        return sex == 0 ? "女" : "男";
+    }
+
+    public String getStatusDesc() {
+        switch (status) {
+            case 0:
+                return "待审核";
+            case 1:
+                return "审核通过";
+            case 2:
+                return "审核驳回";
+            case 3:
+                return "冻结";
+            default:
+                return "";
+        }
+    }
+
+    public boolean isAdmin() {
+        return identity == 1;
+    }
+
     public String getAvatar() {
-        return StringUtils.isNotEmpty(headImg) ? headImg : DEFAULT_AVATAR;
+        return StringUtils.isNotEmpty(headImg) ? headImg : UserRobot.DEFAULT_AVATAR;
     }
 }

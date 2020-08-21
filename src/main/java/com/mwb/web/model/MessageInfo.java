@@ -2,6 +2,7 @@ package com.mwb.web.model;
 
 import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
+import lombok.ToString;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import java.util.Date;
  * @author mengweibo@kanzhun.com
  * @create 2020/8/7
  */
+@ToString
 @Data
 @Table(name = "message_info")
 public class MessageInfo implements Serializable {
@@ -39,7 +41,7 @@ public class MessageInfo implements Serializable {
     private String body;
 
     /**
-     * 类型 1 系统 2 动态
+     * 类型 0 系统 1 动态
      */
     @Column(name = "type")
     private int type;
@@ -64,9 +66,9 @@ public class MessageInfo implements Serializable {
 
     public String getTypeDesc() {
         switch (type) {
-            case 1:
+            case 0:
                 return "系统通知";
-            case 2:
+            case 1:
                 return "动态消息";
             default:
                 return "其他消息";

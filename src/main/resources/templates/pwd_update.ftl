@@ -102,7 +102,7 @@
         //监听提交
         form.on('submit(setmypass)', function (data) {
             $.ajax({
-                url: '/password/update',
+                url: '/user/password/update',
                 type: 'post',
                 dataType: 'json',
                 data: data.field,

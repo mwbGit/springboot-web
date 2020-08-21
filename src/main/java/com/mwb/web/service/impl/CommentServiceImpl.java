@@ -1,9 +1,13 @@
 package com.mwb.web.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.mwb.web.mapper.CommentMapper;
 import com.mwb.web.model.CommentInfo;
+import com.mwb.web.model.query.CommentQuery;
 import com.mwb.web.service.CommentService;
+import com.mwb.web.service.DynamicService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -25,8 +29,33 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
     @Autowired
     private CommentMapper commentMapper;
 
+    @Autowired
+    private DynamicService dynamicService;
+
     @Override
-    public List<CommentInfo> search(List<Long> dynamicIds) {
+    public PageInfo<CommentInfo> search(CommentQuery query) {
+        Example example = new Example(CommentInfo.class);
+        //条件查询
+        Example.Criteria criteria = example.createCriteria();
+        if (query.getDynamicId() != null) {
+            criteria.andEqualTo("dynamicId", query.getDynamicId());
+        }
+        if (query.getStatus() != null) {
+            criteria.andEqualTo("status", query.getStatus());
+        }
+        if (query.getUserId() != null) {
+            criteria.andEqualTo("userId", query.getUserId());
+        }
+        if (StringUtils.isNotBlank(query.getUserName())) {
+            criteria.andEqualTo("userName", query.getUserName());
+        }
+        //排序
+        example.orderBy("id").desc();
+        return new PageInfo<>(selectByExample(example));
+    }
+
+    @Override
+    public List<CommentInfo> searchById(List<Long> dynamicIds) {
         if (CollectionUtils.isEmpty(dynamicIds)) {
             return Collections.emptyList();
         }
@@ -41,15 +70,30 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
     }
 
     @Override
-    public CommentInfo saveOrUpdate(CommentInfo articleInfo) {
-        articleInfo.setAddTime(new Date());
-        articleInfo.setUpdateTime(new Date());
-        if (articleInfo.getId() > 0) {
-            updateNotNull(articleInfo);
+    public CommentInfo saveOrUpdate(CommentInfo commentInfo) {
+        commentInfo.setAddTime(new Date());
+        commentInfo.setUpdateTime(new Date());
+        if (commentInfo.getId() > 0) {
+            updateNotNull(commentInfo);
         } else {//新建
-            saveNotNull(articleInfo);
+            saveNotNull(commentInfo);
         }
-        return articleInfo;
+        return commentInfo;
     }
 
+    @Override
+    public void audit(long id, int status, boolean sendMsg) {
+        CommentInfo commentInfo = selectByKey(id);
+        if (commentInfo != null && commentInfo.getStatus() != status) {
+            commentInfo.setStatus(status);
+            updateNotNull(commentInfo);
+
+            if (status == 1) {
+                dynamicService.updateCommentNum(commentInfo.getDynamicId());
+            }
+            if (sendMsg) {
+                //todo msg
+            }
+        }
+    }
 }

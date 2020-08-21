@@ -39,6 +39,9 @@ public class PetInfo implements Serializable {
     @Column(name = "introduce")
     private String introduce;
 
+    /**
+     * 状态 0-猫 1狗
+     */
     @Column(name = "type")
     private int type;
 
@@ -66,6 +69,8 @@ public class PetInfo implements Serializable {
     @Column(name = "price")
     private String price;
 
+    @Column(name = "deleted")
+    private int deleted;
 
     public List<String> getTraits() {
         if (StringUtils.isBlank(trait)) {

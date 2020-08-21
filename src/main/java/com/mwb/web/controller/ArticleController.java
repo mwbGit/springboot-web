@@ -5,8 +5,8 @@ import com.mwb.web.model.ArticleInfo;
 import com.mwb.web.model.PraiseInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
-import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.model.common.WebLogin;
+import com.mwb.web.model.query.ArticleQuery;
 import com.mwb.web.service.ArticleService;
 import com.mwb.web.service.PraiseService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * 描述:
@@ -37,7 +38,7 @@ public class ArticleController {
     private PraiseService praiseService;
 
     @RequestMapping("/search")
-    public ApiResult search(PageQuery query) {
+    public ApiResult search(ArticleQuery query) {
         PageInfo<ArticleInfo> pageInfo = articleService.search(query);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
@@ -79,19 +80,24 @@ public class ArticleController {
     /**
      * admin 接口
      *
-     * @param user
      * @return
      */
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/saveOrUpdate")
-    public ApiResult saveOrUpdate(ArticleInfo user) {
-        return ApiResult.success(articleService.saveOrUpdate(user));
+    public ApiResult saveOrUpdate(ArticleInfo articleInfo) {
+        return ApiResult.success(articleService.saveOrUpdate(articleInfo));
     }
 
     @WebLogin(option = WebLogin.Option.ADMIN)
-    @RequestMapping("/delete")
+    @RequestMapping("/praise/add")
     public ApiResult delete(@RequestParam("id") long id) {
-        articleService.delete(id);
+        ArticleInfo articleInfo = articleService.selectByKey(id);
+        if (articleInfo != null) {
+            int num = new Random().nextInt(100);
+            articleInfo.setPraiseNum(articleInfo.getPraiseNum() + num);
+            articleInfo.setViewNum(articleInfo.getViewNum() + (num + new Random().nextInt(50)));
+            articleService.updateNotNull(articleInfo);
+        }
         return ApiResult.success();
     }
 }

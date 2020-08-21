@@ -17,4 +17,6 @@ public interface PetCharacterService extends BaseService<PetCharacter> {
     PetCharacter saveOrUpdate(PetCharacter petCharacter);
 
     List<String> getCharacterNames(long petId);
+
+    List<PetCharacter> search(Long petId);
 }

@@ -16,4 +16,5 @@ public interface PetCharacterMappingService extends BaseService<PetCharacterMapp
 
     List<Long> getPetTypeIdsByPetId(long petId);
 
+    void deleteAndAdd(long petId, String[] types);
 }

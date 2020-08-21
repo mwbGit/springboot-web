@@ -6,6 +6,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,4 +38,7 @@ public class PetCharacter implements Serializable {
 
     @Column(name = "update_time")
     private Date updateTime;
+
+    @Transient
+    private boolean checked;
 }

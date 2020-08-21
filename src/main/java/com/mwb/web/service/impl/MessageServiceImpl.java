@@ -7,6 +7,7 @@ import com.mwb.web.model.MessageInfo;
 import com.mwb.web.model.query.MsgQuery;
 import com.mwb.web.service.MessageService;
 import com.mwb.web.service.UserInfoService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -42,6 +43,9 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageInfo> implements 
 
     @Override
     public boolean sendMsg(MessageInfo messageInfo) {
+        if (messageInfo == null) {
+            return false;
+        }
         saveNotNull(messageInfo);
         userService.updateCache(messageInfo.getUserId());
         return false;
@@ -55,7 +59,7 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageInfo> implements 
         //条件查询
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("userId", query.getUserId());
-        if (query.getType() > 0) {
+        if (query.getType() >= 0) {
             criteria.andEqualTo("type", query.getType());
         }
         if (query.getStatus() != null) {
@@ -67,4 +71,20 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageInfo> implements 
         return new PageInfo<>(users);
     }
 
+    @Override
+    public boolean batchSend(MessageInfo messageInfo) {
+        if (messageInfo.getUserId() > 0) {
+            sendMsg(messageInfo);
+            return true;
+        }
+        List<Long> userIds = userService.getValidIds();
+        if (CollectionUtils.isNotEmpty(userIds)) {
+            for (Long userId : userIds) {
+                messageInfo.setId(0);
+                messageInfo.setUserId(userId);
+                sendMsg(messageInfo);
+            }
+        }
+        return true;
+    }
 }

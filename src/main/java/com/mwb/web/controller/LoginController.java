@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @RestController
 public class LoginController {
+
     @Autowired
     private UserInfoService loginUserService;
 

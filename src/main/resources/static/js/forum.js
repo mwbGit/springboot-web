@@ -153,6 +153,17 @@ layui.use(['form', 'upload', 'layer', 'util', 'flow', 'element'], function () {
                 $(this).text('取消发布');
                 $('#form1').show();
             }
+        } , e5: function () {
+            var data = this.getAttribute("lay-data");
+            if (data == 'true') {
+                this.setAttribute("lay-data", "false");
+                $(this).text('发布动态');
+                $('#form1').hide();
+            } else {
+                this.setAttribute("lay-data", "true");
+                $(this).text('取消发布');
+                $('#form1').show();
+            }
         }
     });
 
@@ -201,7 +212,7 @@ layui.use(['form', 'upload', 'layer', 'util', 'flow', 'element'], function () {
             '    </a>' +
             '    <div class="media-body">' +
             '        <div class="pad-btm">' +
-            '            <p class="fontColor"><a href="javascript:;">' + data.userName + '</a> &nbsp 发布动态 &nbsp<span>' + data.title + '</span>' +
+            '            <p class="fontColor"><a href="/user/info?userId='+data.userId+'">' + data.userName + '</a> &nbsp 发布动态 &nbsp<a href="/user/info?dynamicId='+data.id+'"><span>' + data.title + '</span></a>' +
             '            </p>' +
             '            <p class="min-font">' +
             '               <span class="layui-breadcrumb" lay-separator="-" style="visibility: visible;">' +

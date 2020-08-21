@@ -47,10 +47,6 @@
         var flow = layui.flow;
         util.event('lay-active', {
             e1: function () {
-            }
-        });
-        util.event('lay-active', {
-            e1: function () {
                 var url = this.getAttribute('lay-data');
                 $("#displayimg").attr("src", url);
                 var height = $("#displayimg").height();

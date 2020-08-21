@@ -20,4 +20,7 @@ public interface MessageService extends BaseService<MessageInfo> {
     boolean sendMsg(MessageInfo messageInfo);
 
     PageInfo<MessageInfo> search(MsgQuery query);
+
+    boolean batchSend(MessageInfo messageInfo);
+
 }

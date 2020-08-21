@@ -1,6 +1,8 @@
 package com.mwb.web.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.CommentInfo;
+import com.mwb.web.model.query.CommentQuery;
 
 import java.util.List;
 
@@ -13,9 +15,13 @@ import java.util.List;
 
 public interface CommentService extends BaseService<CommentInfo> {
 
-    List<CommentInfo> search(List<Long> dynamicIds);
+    List<CommentInfo> searchById(List<Long> dynamicIds);
+
+    PageInfo<CommentInfo> search(CommentQuery query);
 
     CommentInfo saveOrUpdate(CommentInfo bannerInfo);
+
+    void audit(long id, int status, boolean sendMsg);
 
 
 }

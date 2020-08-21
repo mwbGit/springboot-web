@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 /**
  * 描述:
  *
@@ -49,12 +51,6 @@ public class PetController {
         return ApiResult.success(petCharacterService.getAll());
     }
 
-    @RequestMapping("/delete")
-    public ApiResult delete(@RequestParam("id") long id) {
-        petService.delete(id);
-        return ApiResult.success();
-    }
-
     @RequestMapping("/detail")
     public ModelAndView detail(@RequestParam("id") long id) {
         ModelAndView modelAndView = new ModelAndView("/pet_detail");
@@ -69,7 +65,7 @@ public class PetController {
     }
 
     @RequestMapping("/picture/search")
-    public ApiResult search(PageQuery query) {
+    public ApiResult pictureSearch(PageQuery query) {
         PageInfo<PetPicture> pageInfo = petPictureService.search(query);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
@@ -83,8 +79,41 @@ public class PetController {
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/saveOrUpdate")
-    public ApiResult saveOrUpdate(PetInfo user) {
-        return ApiResult.success(petService.saveOrUpdate(user));
+    public ApiResult saveOrUpdate(PetInfo petInfo, @RequestParam(value = "types", required = false, defaultValue = "") String types) {
+        return ApiResult.success(petService.saveOrUpdate(petInfo, types.split(",")));
     }
 
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/picture/delete")
+    public ApiResult delete(@RequestParam("id") long id) {
+        petPictureService.delete(id);
+        return ApiResult.success();
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/picture/save")
+    public ApiResult pictureSave(PetPicture petPicture,  @RequestParam("images") String images) {
+        String[] urls = images.split(",");
+        petPicture.setAddTime(new Date());
+        for (String image : urls) {
+            petPicture.setImage(image);
+            petPicture.setId(0);
+            petPictureService.saveNotNull(petPicture);
+        }
+        return ApiResult.success();
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/info")
+    public ModelAndView info(@RequestParam(value = "id", required = false) Long id) {
+        ModelAndView modelAndView = new ModelAndView("/admin/pet_add");
+        if (id != null) {
+            PetInfo petInfo = petService.selectByKey(id);
+            if (petInfo != null) {
+            }
+            modelAndView.addObject("pet", petInfo);
+        }
+        modelAndView.addObject("types", petCharacterService.search(id));
+        return modelAndView;
+    }
 }

@@ -18,7 +18,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<dd> <div>' +
-                    '<p>' + val.userName + ' 发布新动态 <a href="javascript:;"> 【' + val.title + '】</a></p>' +
+                    '<p>' + val.userName + ' 发布新动态 <a href="/user/info?dynamicId='+val.id+'"> 【' + val.title + '】</a></p>' +
                     '<span>' + val.timeDesc + '</span>' +
                     '</div></dd>';
             });
@@ -52,7 +52,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
     });
 
     //品种
-    $.get('/pet/search?pageSize=8', function (data) {
+    $.get('/pet/search?order=level&pageSize=8', function (data) {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {
@@ -78,7 +78,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
                     '<div class="layui-col-md8" >' +
                     '<div class="layui-row layui-col-space5" >' +
                     '<div class="layui-col-md12">' +
-                    ' <h2><a href="/article/detail?id=' + val.id + '" target="_blank"> ' + val.title + '</a></h2>' +
+                    ' <h2><a href="/article/detail?id=' + val.id + '"> ' + val.title + '</a></h2>' +
                     '</div>' +
                     '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
                     '<span>' + val.body + '</span>' +

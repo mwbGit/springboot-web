@@ -3,7 +3,6 @@ package com.mwb.web.controller;
 import com.mwb.web.model.MessageInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
-import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.service.CommentService;
 import com.mwb.web.service.DynamicService;
 import com.mwb.web.service.MessageService;
@@ -50,17 +49,11 @@ public class TestController {
         return true;
     }
 
-    @ResponseBody
-    @RequestMapping("/test1")
-    public ApiResult test1(UserInfo user) {
-        return ApiResult.success(dynamicService.search(new PageQuery(), user.getId()));
-    }
-
 
     @ResponseBody
     @RequestMapping("/test11")
     public ApiResult test11(UserInfo user) {
-        return ApiResult.success(commentService.search(Collections.singletonList(1L)));
+        return ApiResult.success(commentService.searchById(Collections.singletonList(1L)));
     }
 
 

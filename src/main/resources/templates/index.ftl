@@ -25,6 +25,13 @@
         <ul class="layui-nav layui-layout-right" lay-filter="test1">
             <#if avatar!>
                 <li class="layui-nav-item" lay-unselect="">
+                    <#if admin == true >
+                        <a href="/admin/index.html" target="_blank">
+                            后台管理
+                        </a>
+                    </#if>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
                     <a lay-href="/html/msg" lay-text="消息中心">
                         <i class="layui-icon layui-icon-notice"></i>
                         <#if unRead == true>

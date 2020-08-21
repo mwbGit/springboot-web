@@ -54,4 +54,11 @@ public class MessageController {
         return ApiResult.success();
     }
 
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/send")
+    public ApiResult batchSend(MessageInfo messageInfo) {
+        messageService.batchSend(messageInfo);
+        log.info("MessageController.batchSend msg={}", messageInfo);
+        return ApiResult.success();
+    }
 }

@@ -7,6 +7,9 @@ layui.use(['form', 'layer', 'table', 'element', 'util'], function () {
         elem: '#test'  //绑定table id
         , url: '/msg/list'  //数据请求路径
         , cellMinWidth: 80
+        , where : {
+            type: -1
+        }
         , cols: [[
             {type: 'space', hide: true}
             , {
@@ -66,7 +69,7 @@ layui.use(['form', 'layer', 'table', 'element', 'util'], function () {
     function reloadTable(tab) {
         table.reload('userReload', {
             where: { //设定异步数据接口的额外参数，任意设
-                type: tab
+                type: tab-1
             }
             , page: {
                 curr: 1 //重新从第 1 页开始

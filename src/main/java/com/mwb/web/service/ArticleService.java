@@ -2,7 +2,7 @@ package com.mwb.web.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.ArticleInfo;
-import com.mwb.web.model.common.PageQuery;
+import com.mwb.web.model.query.ArticleQuery;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface ArticleService extends BaseService<ArticleInfo> {
 
-    PageInfo<ArticleInfo> search(PageQuery userQuery);
+    PageInfo<ArticleInfo> search(ArticleQuery userQuery);
 
     List<ArticleInfo> hot(int pageSize);
 

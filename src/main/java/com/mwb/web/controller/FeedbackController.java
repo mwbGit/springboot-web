@@ -1,8 +1,11 @@
 package com.mwb.web.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.FeedbackInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
+import com.mwb.web.model.common.PageQuery;
+import com.mwb.web.model.common.WebLogin;
 import com.mwb.web.service.FeedbackService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -39,5 +42,12 @@ public class FeedbackController {
         feedbackInfo.setUpdateTime(new Date());
         feedbackService.saveNotNull(feedbackInfo);
         return ApiResult.success();
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/search")
+    public ApiResult search(PageQuery query) {
+        PageInfo<FeedbackInfo> pageInfo = feedbackService.search(query);
+        return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
 }
