@@ -12,4 +12,6 @@ public class WebConstant {
     public static final String USER_BASE = "user";
     public static final int TC_EXPIRE_TIME = 60 * 60 * 24 * 3;
 
+    public static final int ACCESS_TOTAL = 500;
+
 }

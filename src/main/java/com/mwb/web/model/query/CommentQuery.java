@@ -4,6 +4,7 @@ import com.mwb.web.model.common.PageQuery;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 描述:
@@ -14,6 +15,8 @@ import java.io.Serializable;
 @Data
 public class CommentQuery extends PageQuery implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
+
+    private List<Long> dynamicIds;
 
     private Long dynamicId;
 

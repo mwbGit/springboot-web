@@ -33,7 +33,7 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
             }
             , {field: 'viewNum', title: '观看数', width: 80}
             , {field: 'praiseNum', title: '点赞数', width: 80}
-            , {fixed: 'right', title: '操作', width: 130, align: 'center', toolbar: "#barDemo"}
+            , {fixed: 'right', title: '操作', width: 220, align: 'center', toolbar: "#barDemo"}
         ]]
         , loading: true
         , page: true   //开启分页
@@ -53,6 +53,8 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
         if (layEvent === 'praise') {
             ajaxGet('/article/praise/add?id=' + data.id);
+        } else if (layEvent === 'delete') {
+            ajaxGet('/article/delete?id=' + data.id);
         }
         reloadTable();
     });

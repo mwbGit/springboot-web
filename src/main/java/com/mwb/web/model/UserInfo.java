@@ -41,6 +41,9 @@ public class UserInfo implements Serializable {
     @Column(name = "head_img")
     private String headImg;
 
+    @Column(name = "introduce")
+    private String introduce;
+
     /**
      * 0 女 1 男
      */

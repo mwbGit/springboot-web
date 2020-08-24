@@ -168,7 +168,7 @@
 
 
 <script src="../../static/layui.js"></script>
-<script src="../static/admin/pet.js"></script>
+<script src="../../static/admin/pet.js"></script>
 <script type="text/html" id="sexTpl">
     {{#  if(d.headImg != ""){ }}
     <div><img src="{{ d.image }}" style="width: 100%" lay-active="e1" lay-data="{{ d.image }}"></div>

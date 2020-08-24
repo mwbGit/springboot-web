@@ -53,7 +53,7 @@ public class LoginController {
         }
         UserInfo user = loginUserService.getByAccount(account);
         if (user != null) {
-            if (user.getPassword().equals(MD5Util.md5(password))) {
+            if (user.getPassword().equals(MD5Util.md5Pwd(password))) {
                 String token = AESUtil.encrypt(String.valueOf(user.getId()));
                 HttpUtil.saveCookie(response, WebConstant.WAP_COOKIE_NAME, token, WebConstant.TC_EXPIRE_TIME, "/");
                 return ApiResult.success(user);
@@ -87,7 +87,7 @@ public class LoginController {
         }
 
         UserInfo userInfo = new UserInfo();
-        userInfo.setPassword(MD5Util.md5(password));
+        userInfo.setPassword(MD5Util.md5Pwd(password));
         userInfo.setAccount(account);
         userInfo.setName(account);
         userInfo.setSex(sex);

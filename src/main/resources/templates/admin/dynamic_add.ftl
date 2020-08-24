@@ -81,7 +81,7 @@
     </div>
 </div>
 
-<script src="../static/layui.js"></script>
+<script src="../../static/layui.js"></script>
 
 <script type="text/javascript">
     layui.use(['form', 'upload'], function () {

@@ -46,7 +46,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">搜索选择框</label>
                         <div class="layui-input-inline">
-                            <select name="modules" lay-verify="required" lay-search="" lay-filter="selectF" id ="selectF">
+                            <select name="petId" lay-verify="required" lay-search="" lay-filter="selectF" id ="selectF">
 
                             </select>
                         </div>
@@ -68,15 +68,8 @@
         var $ = layui.jquery, util = layui.util;
         var flow = layui.flow;
         var form = layui.form;
-
         reload();
-        form.on('select(selectF)', function(data){
-            console.log(data.elem); //得到select原始DOM对象
-            console.log(data.value); //得到被选中的值
-            console.log(data.othis); //得到美化后的DOM对象
-            if (data.value != '') {
-            }
-        });
+
 
         util.event('lay-active', {
             e1: function () {

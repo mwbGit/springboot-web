@@ -24,6 +24,7 @@
                 <li class="layui-this">全部消息</li>
                 <li>系统通知</li>
                 <li>动态消息</li>
+                <li>私信消息</li>
             </ul>
             <div class="layui-tab-content">
 
@@ -52,7 +53,13 @@
     已读
     {{#  }  }}
 </script>
-
+<script type="text/html" id="statusTpl1">
+    {{#  if(d.type == 2){ }}
+        <a href="/user/info?id={{d.objectId}}" target="_blank" style="color: blue">{{d.title}}</a>
+    {{#  } else{ }}
+    {{ d.title }}
+    {{#  }  }}
+</script>
 <style id="LAY_layadmin_theme">.layui-side-menu, .layadmin-pagetabs .layui-tab-title li:after, .layadmin-pagetabs .layui-tab-title li.layui-this:after, .layui-layer-admin .layui-layer-title, .layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-item > .layui-nav-child {
         background-color: #20222A !important;
     }

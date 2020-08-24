@@ -19,7 +19,8 @@ layui.use(['form', 'layer', 'table', 'element', 'util'], function () {
             }, {
                 field: 'title',
                 title: '标题',
-                width: '20%'
+                width: '20%',
+                templet: '#statusTpl1'
             } , {field: 'body', title: '内容'}
             , {
                 field: 'status',

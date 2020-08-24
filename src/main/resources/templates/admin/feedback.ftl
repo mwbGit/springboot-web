@@ -23,7 +23,7 @@
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
 
-<script src="../static/layui.js"></script>
+<script src="../../static/layui.js"></script>
 
 <script type="text/javascript">
     layui.use(['table'], function () {

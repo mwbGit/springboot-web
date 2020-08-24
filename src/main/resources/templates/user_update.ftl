@@ -42,7 +42,12 @@
                                     <input type="text" name="wechat" class="layui-input" placeholder="微信号">
                                 </div>
                             </div>
-
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">介绍</label>
+                                <div class="layui-input-inline" style="width: 400px">
+                                    <textarea  name="introduce" class="layui-textarea" placeholder="最多1000字" lay-verify="required"></textarea>
+                                </div>
+                            </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label"></label>
                                 <div class="layui-input-inline">
@@ -80,6 +85,7 @@
             form.val("form1", {
                 "wechat": res.data.wechat
                 , "name": res.data.name
+                , "introduce": res.data.introduce
             });
             $('#demo1').attr("src", res.data.avatar)
             $('#account').text(res.data.account)

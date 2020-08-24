@@ -2,10 +2,7 @@ package com.mwb.web.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.DynamicInfo;
-import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.model.query.DynamicQuery;
-
-import java.util.List;
 
 /**
  * 描述:
@@ -17,8 +14,6 @@ import java.util.List;
 public interface DynamicService extends BaseService<DynamicInfo> {
 
     PageInfo<DynamicInfo> search(DynamicQuery userQuery, long userId);
-
-    List<DynamicInfo> getNewList(PageQuery query);
 
     DynamicInfo saveOrUpdate(DynamicInfo articleInfo);
 

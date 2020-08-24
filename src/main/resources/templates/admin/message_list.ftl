@@ -18,21 +18,21 @@
 </style>
 <body style="margin: 10px 60px 15px 60px;">
 <fieldset class="layui-elem-field layui-field-title">
-    <legend>评论管理</legend>
+    <legend>私信管理</legend>
 </fieldset>
 <form class="layui-form" action="" lay-filter="search_form">
     <br>
     <div class="layui-form-item">
 
         <div class="layui-inline">
-            <label class="layui-form-label">动态ID:</label>
+            <label class="layui-form-label">发送方ID:</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="dynamicId" autocomplete="off" class="layui-input">
+                <input type="text" name="objectId" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-inline">
-            <label class="layui-form-label">用户ID:</label>
+            <label class="layui-form-label">接收方ID:</label>
             <div class="layui-input-inline" style="width: 100px;">
                 <input type="text" name="userId" autocomplete="off" class="layui-input">
             </div>
@@ -42,9 +42,10 @@
             <label class="layui-form-label">状态:</label>
             <div class="layui-input-inline" style="width: 100px;">
                 <select name="status" style="width: 30px">
-                    <option value="0">未审核</option>
-                    <option value="1">审核通过</option>
-                    <option value="2">审核驳回</option>
+                    <option value="2">未审核</option>
+                    <option value="3">驳回</option>
+                    <option value="0">未读</option>
+                    <option value="1">已读</option>
                     <option value="">全部</option>
                 </select>
             </div>
@@ -53,38 +54,7 @@
         <div class="layui-inline">
             <div class="layui-btn-container">
                 <button class="layui-btn" lay-event="search" lay-submit lay-filter="search_btn">查询</button>
-                <button class="layui-btn" lay-event="add" lay-submit lay-filter="add_btn"> 添加
                 </button>
-            </div>
-        </div>
-    </div>
-</form>
-<form class="layui-form" action="" id="test2" style="display: none;" lay-filter="add_form">
-    </br>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">动态ID:</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <input type="text" name="dynamicId" autocomplete="off" class="layui-input" lay-verify="required">
-            </div>
-            <label class="layui-form-label" style="width: 100px">评论的用户:</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <select name="userType" style="width: 30px">
-                    <option value="0">当前用户</option>
-                    <option value="1">用户A</option>
-                    <option value="2">用户B</option>
-                    <option value="3">用户C</option>
-                    <option value="4">用户D</option>
-                    <option value="5">用户E</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">内容:</label>
-            <div class="layui-input-inline" style="width: 500px;">
-                <textarea type="text" name="content" rows="5" class="layui-textarea" lay-verify="required"></textarea>
             </div>
         </div>
     </div>
@@ -93,25 +63,22 @@
 <table class="layui-hide" id="test" lay-filter="table"></table>
 
 <script src="../../static/layui.js"></script>
-<script src="../../static/admin/comment.js"></script>
-<script type="text/html" id="sexTpl">
-    {{#  if(d.headImg != ""){ }}
-     <div> <img src="{{ d.headImg }}" style="width: 100%" lay-active="e1" lay-data="{{ d.headImg }}"></div>
-    {{#  }  }}
-</script>
+<script src="../../static/admin/msg.js"></script>
 
 <script type="text/html" id="sexTp3">
-    {{#  if(d.status == 2){ }}
+    {{#  if(d.status == 3){ }}
     <span style="color: red">驳回</span>
+    {{#  } else if(d.status == 2) { }}
+    <span style="color: green">待审核</span>
     {{#  } else if(d.status == 1) { }}
-    <span style="color: green">通过</span>
+    <span>已读</span>
     {{#  } else { }}
-    <span style="">未审核</span>
+    <span>未读</span>
     {{#  }  }}
 </script>
 
 <script type="text/html" id="barDemo">
-    {{#  if(d.status == 0){ }}
+    {{#  if(d.status == 2){ }}
     <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="unPass">驳回</a>
     {{#  } else{ }}

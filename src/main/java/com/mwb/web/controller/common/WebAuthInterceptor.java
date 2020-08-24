@@ -5,7 +5,7 @@ import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.AccessLimit;
 import com.mwb.web.model.common.ApiResult;
 import com.mwb.web.model.common.WebLogin;
-import com.mwb.web.service.CacheService;
+import com.mwb.web.service.AccessCacheService;
 import com.mwb.web.service.UserInfoService;
 import com.mwb.web.utils.AESUtil;
 import com.mwb.web.utils.HttpUtil;
@@ -37,13 +37,21 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private UserInfoService loginUserService;
+
     @Autowired
-    private CacheService cacheService;
+    private AccessCacheService accessCacheService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         long userId = getLoginUserId(request);
-        accessLog.info("---access---total_access:{},userId:{},ip:{},uri:{}", TOTAL_ACCESS++, userId, HttpUtil.getIpAddress(request), request.getRequestURI());
+        String ip = HttpUtil.getIpAddress(request);
+        String uri = request.getRequestURI();
+        accessLog.info("---access---total_access:{},userId:{},ip:{},uri:{}", TOTAL_ACCESS++, userId, ip, uri);
+        //黑名单校验
+        if (accessCacheService.isBlackList(ip)) {
+            accessLog.warn("---access---isBlackList:{},userId:{},ip:{},uri:{}", TOTAL_ACCESS++, userId, ip, uri);
+            return false;
+        }
 
         UserInfo userInfo = null;
         if (userId > 0) {
@@ -55,24 +63,24 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
         if (annotation != null) {
             if (annotation.option() == WebLogin.Option.MUST) {
                 if (userInfo == null) {
-                    accessLog.info("---access---noLogin---ip:{},uri:{}，userInfo:{}", HttpUtil.getIpAddress(request), request.getRequestURI(), userInfo);
+                    accessLog.info("---access---noLogin---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
                     authError(response, "请登录后操作");
                     return false;
                 } else if (annotation.valid()) {
                     if (userInfo.isFrozen()) {
                         authError(response, "账号已冻结");
-                        accessLog.info("---access---isFrozen---ip:{},uri:{}，userInfo:{}", HttpUtil.getIpAddress(request), request.getRequestURI(), userInfo);
+                        accessLog.info("---access---isFrozen---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
                         return false;
                     } else if (userInfo.unPass()) {
                         authError(response, "请修改个人信息后重试");
-                        accessLog.info("---access---unPass---ip:{},uri:{}，userInfo:{}", HttpUtil.getIpAddress(request), request.getRequestURI(), userInfo);
+                        accessLog.info("---access---unPass---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
                         return false;
                     }
                 }
             } else if (annotation.option() == WebLogin.Option.ADMIN) {
                 if (userInfo == null || userInfo.getIdentity() != 1) {
                     authError(response, "无权限操作");
-                    accessLog.info("---access---identity---ip:{},uri:{}，userInfo:{}", HttpUtil.getIpAddress(request), request.getRequestURI(), userInfo);
+                    accessLog.info("---access---identity---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
                     return false;
                 }
             }
@@ -82,8 +90,7 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
         int accessMax = annotation != null ? annotation.accessMax() : 3;
         int accessSeconds = annotation != null ? annotation.accessSeconds() : 1;
         if (accessMax > 0 && accessSeconds > 0) {
-            String ip = HttpUtil.getIpAddress(request);
-            AccessLimit accessLimit = cacheService.get(ip, request.getRequestURI());
+            AccessLimit accessLimit = accessCacheService.get(ip, uri);
             if (accessLimit != null) {
                 int curNum = 0;
                 long lastTime = System.currentTimeMillis() - (accessSeconds * 1000);
@@ -96,11 +103,11 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
                 }
                 if (curNum > accessMax) {
                     authError(response, "请稍后再试");
-                    accessLog.info("---access---limit---userId:{},ip:{},uri:{}，curNum:{}", userId, HttpUtil.getIpAddress(request), request.getRequestURI(), curNum);
+                    accessLog.info("---access---limit---userId:{},ip:{},uri:{}，curNum:{}", userId, ip, uri, curNum);
                     return false;
                 }
             }
-            cacheService.put(ip, request.getRequestURI());
+            accessCacheService.put(ip, uri);
         }
 
         if (userInfo != null) {

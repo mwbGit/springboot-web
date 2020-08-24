@@ -114,7 +114,7 @@ public class UserController {
         } else if (newPassword.length() < 6) {
             return ApiResult.failed("密码过短");
         }
-        userInfo.setPassword(MD5Util.md5(newPassword));
+        userInfo.setPassword(MD5Util.md5Pwd(newPassword));
         userInfo.setUpdateTime(new Date());
         userService.update(userInfo);
         return ApiResult.success();
@@ -123,7 +123,7 @@ public class UserController {
     @WebLogin(option = WebLogin.Option.MUST, valid = true, accessMax = 1, accessSeconds = 3)
     @RequestMapping("/info/update")
     public ApiResult userUpdate(UserInfo userInfo, @RequestParam("name") String name, @RequestParam(value = "wechat", required = false, defaultValue = "") String wechat,
-                                @RequestParam(value = "file", required = false) MultipartFile file) {
+                                @RequestParam(value = "introduce", required = false, defaultValue = "") String introduce, @RequestParam(value = "file", required = false) MultipartFile file) {
         log.info("UserInfoController.userUpdate name={},wechat={},file={}", userInfo, wechat, file == null);
         if (StringUtils.isBlank(name)) {
             return ApiResult.failed("用户名不可以为空");
@@ -131,10 +131,15 @@ public class UserController {
             return ApiResult.failed("用户名过长");
         } else if (name.length() < 3) {
             return ApiResult.failed("用户名过短");
+        }  else if (introduce.length() > 1000) {
+            return ApiResult.failed("用户名过短");
         }
         userInfo.setName(name);
         if (StringUtils.isNotBlank(wechat)) {
             userInfo.setWechat(wechat);
+        }
+        if (StringUtils.isNotBlank(introduce)) {
+            userInfo.setIntroduce(introduce);
         }
         if (file != null) {
             String url = ossService.uploadImage(file);
@@ -143,7 +148,7 @@ public class UserController {
             }
         }
         userInfo.setUpdateTime(new Date());
-        userService.update(userInfo);
+        userService.updateNotNull(userInfo);
         return ApiResult.success();
     }
 
@@ -155,6 +160,7 @@ public class UserController {
         user.setHeadImg(userInfo.getAvatar());
         user.setWechat(userInfo.getWechat());
         user.setAccount(userInfo.getAccount());
+        user.setIntroduce(userInfo.getIntroduce());
         return ApiResult.success(user);
     }
 
@@ -188,7 +194,7 @@ public class UserController {
         newUser.setStatus(status);
         newUser.setSex(sex);
         newUser.setIdentity(identity);
-        newUser.setPassword(MD5Util.md5(password));
+        newUser.setPassword(MD5Util.md5Pwd(password));
         newUser.setAddTime(new Date());
         newUser.setUpdateTime(new Date());
         userService.saveNotNull(newUser);

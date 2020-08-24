@@ -58,12 +58,20 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageInfo> implements 
         Example example = new Example(MessageInfo.class);
         //条件查询
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("userId", query.getUserId());
+        if (query.getUserId() != null) {
+            criteria.andEqualTo("userId", query.getUserId());
+        }
+        if (query.getObjectId() != null) {
+            criteria.andEqualTo("objectId", query.getObjectId());
+        }
         if (query.getType() >= 0) {
             criteria.andEqualTo("type", query.getType());
         }
         if (query.getStatus() != null) {
             criteria.andEqualTo("status", query.getStatus());
+        }
+        if (query.getStatusList() != null) {
+            criteria.andIn("status", query.getStatusList());
         }
         //排序
         example.orderBy("id").desc();

@@ -86,8 +86,8 @@
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
 
-<script src="../static/layui.js"></script>
-<script src="../static/admin/article.js"></script>
+<script src="../../static/layui.js"></script>
+<script src="../../static/admin/article.js"></script>
 <script type="text/html" id="sexTpl">
     {{#  if(d.image != ""){ }}
      <div> <img src="{{ d.image }}" style="width: 100%" lay-active="e1" lay-data="{{ d.image }}"></div>
@@ -112,7 +112,9 @@
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" href="/article/detail?id={{ d.id }}" target="_blank">查看</a>
+    <a class="layui-btn layui-btn-xs" href="/article/info?id={{ d.id }}" >编辑</a>
     <a class="layui-btn layui-btn-xs" lay-event="praise">+赞</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 
 <script type="text/html" id="toolbarDemo">

@@ -58,7 +58,7 @@
                             <a href="javascript:;" lay-href="/admin/article_list.html" lay-active="e1">文章管理</a>
                         </dd>
                         <dd data-name="console">
-                            <a href="javascript:;" lay-href="/admin/user_list.html" lay-active="e1">添加文章</a>
+                            <a href="javascript:;" lay-href="/admin/article_info.html" lay-active="e1">添加文章</a>
                         </dd>
                     </dl>
                 </li>
@@ -84,6 +84,17 @@
                         </dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item"><a href="javascript:;">
+                        <i class="layui-icon layui-icon-dialogue"></i> 消息管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-name="console">
+                            <a href="javascript:;" lay-href="/admin/message_list.html" lay-active="e1">消息审核</a>
+                        </dd>
+                        <dd data-name="console">
+                            <a href="javascript:;" lay-href="/admin/message_add.html" lay-active="e1">群发消息</a>
+                        </dd>
+                    </dl>
+                </li>
                 <#--    图标            https://www.layui.com/doc/element/icon.html-->
                 <li class="layui-nav-item"><a href="javascript:;" lay-href="/admin/user_list.html"
                                               lay-active="e1"><i class="layui-icon layui-icon-group"></i>用户管理</a></li>
@@ -93,8 +104,6 @@
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;" lay-href="/admin/comment_list.html"
                                               lay-active="e1"><i class="layui-icon layui-icon-reply-fill"></i> 评论管理</a></li>
-                <li class="layui-nav-item"><a href="javascript:;" lay-href="/admin/message.html"
-                                              lay-active="e1"><i class="layui-icon layui-icon-dialogue"></i> 消息管理</a></li>
                 <li class="layui-nav-item"><a href="javascript:;" lay-href="/admin/feedback.html"
                                               lay-active="e1"><i class="layui-icon layui-icon-help"></i> 反馈管理</a></li>
 
@@ -112,7 +121,7 @@
         © layui.com - 底部固定区域
     </div>
 </div>
-<script src="../static/layui.js"></script>
+<script src="../../static/layui.js"></script>
 <script>
     layui.use(['element', 'jquery', 'util'], function () {
         var element = layui.element;

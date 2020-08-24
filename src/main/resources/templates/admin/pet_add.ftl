@@ -149,8 +149,8 @@
 </div>
 
 
-<script src="../static/layui.js"></script>
-<script src="../static/admin/pet.js"></script>
+<script src="../../static/layui.js"></script>
+<script src="../../static/admin/pet.js"></script>
 
 </body>
 </html>

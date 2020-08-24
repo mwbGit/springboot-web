@@ -10,7 +10,11 @@ import com.mwb.web.service.MessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * 描述:
@@ -28,9 +32,26 @@ public class MessageController {
     private MessageService messageService;
 
     @WebLogin(option = WebLogin.Option.MUST)
+    @RequestMapping("/alone/send")
+    public ApiResult aloneSend(UserInfo userInfo, @RequestParam("userId") long userId, @RequestParam("content") String content) {
+        log.info("MessageController.aloneSend userInfo={},userId={},content={}", userInfo, userId, content);
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setType(3);
+        messageInfo.setTitle("来自用户" + userInfo.getName() + "的私信");
+        messageInfo.setBody(content);
+        messageInfo.setUserId(userInfo.getId());
+        messageInfo.setObjectId(userId);
+        messageInfo.setStatus(2);
+        messageInfo.setAddTime(new Date());
+        messageService.saveNotNull(messageInfo);
+        return ApiResult.success();
+    }
+
+    @WebLogin(option = WebLogin.Option.MUST)
     @RequestMapping("/list")
-    public ApiResult search(UserInfo user, MsgQuery msgQuery) {
+    public ApiResult list(UserInfo user, MsgQuery msgQuery) {
         msgQuery.setUserId(user.getId());
+        msgQuery.setStatusList(Arrays.asList(0, 1));
         PageInfo<MessageInfo> pageInfo = messageService.search(msgQuery);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal());
     }
@@ -59,6 +80,26 @@ public class MessageController {
     public ApiResult batchSend(MessageInfo messageInfo) {
         messageService.batchSend(messageInfo);
         log.info("MessageController.batchSend msg={}", messageInfo);
+        return ApiResult.success();
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/search")
+    public ApiResult search(MsgQuery msgQuery) {
+        msgQuery.setType(3);
+        PageInfo<MessageInfo> pageInfo = messageService.search(msgQuery);
+        return ApiResult.success(pageInfo.getList(), pageInfo.getTotal());
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/audit")
+    public ApiResult audit(@RequestParam("id") Long id, @RequestParam("status") int status) {
+        MessageInfo messageInfo = messageService.selectByKey(id);
+        if (messageInfo != null) {
+            messageInfo.setStatus(status);
+            messageService.updateNotNull(messageInfo);
+            //todo msg
+        }
         return ApiResult.success();
     }
 }

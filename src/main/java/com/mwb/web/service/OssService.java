@@ -50,7 +50,7 @@ public class OssService {
         }
         try {
             String time = DateTimeUtils.formatYYYYMMDDNOSPACE(new Date());
-            String fileName = time + "/" + MD5Util.md5(FilenameUtils.getBaseName(file.getOriginalFilename())) + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+            String fileName = time + "/" + MD5Util.md5Pwd(FilenameUtils.getBaseName(file.getOriginalFilename())) + "." + FilenameUtils.getExtension(file.getOriginalFilename());
             uploadImageToOss(fileName, file);
             url = ossImageDomain + fileName;
         } catch (Exception ex) {

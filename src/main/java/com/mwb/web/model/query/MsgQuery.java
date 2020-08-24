@@ -4,6 +4,7 @@ import com.mwb.web.model.common.PageQuery;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 描述:
@@ -15,11 +16,15 @@ import java.io.Serializable;
 public class MsgQuery extends PageQuery implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
 
-    private long userId;
+    private Long objectId;
 
-    private int type;
+    private Long userId;
+
+    private Integer type;
 
     private Integer status;
+
+    private List<Integer> statusList;
 
 
 }

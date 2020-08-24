@@ -41,13 +41,13 @@ public class MessageInfo implements Serializable {
     private String body;
 
     /**
-     * 类型 0 系统 1 动态
+     * 类型 0 系统 1 动态 2 私信
      */
     @Column(name = "type")
     private int type;
 
     /**
-     * 状态 0:未读 1:已读
+     * 状态 0:未读 1:已读 2 待审核 3 驳回
      */
     @Column(name = "status")
     private int status;
@@ -70,6 +70,8 @@ public class MessageInfo implements Serializable {
                 return "系统通知";
             case 1:
                 return "动态消息";
+            case 2:
+                return "私信消息";
             default:
                 return "其他消息";
         }

@@ -97,8 +97,8 @@
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
 
-<script src="../static/layui.js"></script>
-<script src="../static/admin/dynamic.js"></script>
+<script src="../../static/layui.js"></script>
+<script src="../../static/admin/dynamic.js"></script>
 <script type="text/html" id="sexTpl">
     {{#  if(d.headImg != ""){ }}
      <div> <img src="{{ d.headImg }}" style="width: 100%" lay-active="e1" lay-data="{{ d.headImg }}"></div>

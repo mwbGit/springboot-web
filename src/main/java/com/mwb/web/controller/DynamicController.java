@@ -6,7 +6,6 @@ import com.mwb.web.model.DynamicInfo;
 import com.mwb.web.model.PraiseInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
-import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.model.common.UserRobot;
 import com.mwb.web.model.common.WebLogin;
 import com.mwb.web.model.query.DynamicQuery;
@@ -51,7 +50,10 @@ public class DynamicController {
 
     @RequestMapping("/new")
     public ApiResult newList(UserInfo userInfo) {
-        return ApiResult.success(dynamicService.getNewList(new PageQuery(5)));
+        DynamicQuery query = new DynamicQuery();
+        query.setPageSize(5);
+        query.setStatus(1);
+        return ApiResult.success(dynamicService.search(query, userInfo.getId()).getList());
     }
 
     @RequestMapping("/search")

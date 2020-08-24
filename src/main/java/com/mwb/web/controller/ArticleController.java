@@ -10,6 +10,7 @@ import com.mwb.web.model.query.ArticleQuery;
 import com.mwb.web.service.ArticleService;
 import com.mwb.web.service.PraiseService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,14 +84,34 @@ public class ArticleController {
      * @return
      */
     @WebLogin(option = WebLogin.Option.ADMIN)
-    @RequestMapping("/saveOrUpdate")
+    @RequestMapping("/info")
+    public ModelAndView info(@RequestParam("id") long id) {
+        ArticleInfo article = articleService.selectByKey(id);
+        ModelAndView modelAndView = new ModelAndView("/admin/article_info");
+        modelAndView.addObject("article", article);
+        return modelAndView;
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/delete")
+    public ApiResult delete(@RequestParam("id") long id) {
+        articleService.delete(id);
+        return ApiResult.success();
+    }
+
+    @WebLogin(option = WebLogin.Option.ADMIN)
+    @RequestMapping("/save")
     public ApiResult saveOrUpdate(ArticleInfo articleInfo) {
-        return ApiResult.success(articleService.saveOrUpdate(articleInfo));
+        if (StringUtils.isBlank(articleInfo.getImage())) {
+            return ApiResult.failed("请上传主图");
+        }
+        articleService.saveOrUpdate(articleInfo);
+        return ApiResult.success();
     }
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/praise/add")
-    public ApiResult delete(@RequestParam("id") long id) {
+    public ApiResult praiseAdd(@RequestParam("id") long id) {
         ArticleInfo articleInfo = articleService.selectByKey(id);
         if (articleInfo != null) {
             int num = new Random().nextInt(100);

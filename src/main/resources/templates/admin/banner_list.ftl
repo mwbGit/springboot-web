@@ -83,8 +83,8 @@
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
 
-<script src="../static/layui.js"></script>
-<script src="../static/admin/banner.js"></script>
+<script src="../../static/layui.js"></script>
+<script src="../../static/admin/banner.js"></script>
 
 <script type="text/html" id="sexTp2">
     {{#  if(d.status == 1){ }}

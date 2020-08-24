@@ -7,39 +7,18 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>文章详情</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css" media="all">
+    <link rel="shortcut icon" href="../../static/favicon.ico">
+    <link rel="stylesheet" href="../../static/css/layui.css" media="all">
 </head>
-<style type="text/css">
-    .cmdlist-container img {
-        max-width: 320px;
-        max-height: 160px;
-    }
-
-    .cmdlist-container {
-        margin: 5px 5px
-    }
-
-    .cmdlist-text .info {
-        height: 40px;
-        font-size: 14px;
-        line-height: 20px;
-        width: 100%;
-        overflow: hidden;
-        color: #666;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-</style>
 <body style="margin: 10px 60px 15px 60px;">
 
 <div class="layui-fluid">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>添加宠物</legend>
+        <legend>编辑文章</legend>
     </fieldset>
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md1">
-        </div>
+<#--        <div class="layui-col-md1">-->
+<#--        </div>-->
         <div class="layui-col-md10">
             <form class="layui-form" action="" id="test2" lay-filter="add_form">
                 </br>
@@ -47,12 +26,12 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">标题:</label>
                         <div class="layui-input-inline" style="width: 500px;">
-                            <#if pet ! >
-                                <input type="hidden" name="id"  value="${pet.id}">
+                            <#if article ! >
+                                <input type="hidden" name="id"  value="${article.id}">
                             <#else >
                                 <input type="hidden" name="id"  value="0">
                             </#if>
-                            <input type="text" name="title" autocomplete="off" class="layui-input" lay-verify="required" value="${pet.title}">
+                            <input type="text" name="title" autocomplete="off" class="layui-input" lay-verify="required" value="${article.title}">
                         </div>
                     </div>
                 </div>
@@ -61,13 +40,13 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">作者:</label>
                         <div class="layui-input-inline" >
-                            <input type="text" name="viewNum" value="猫军" placeholder="100-1000元" autocomplete="off" lay-verify="required"
-                                   class="layui-input" value="${pet.viewNum}">
+                            <input type="text" name="author"  placeholder="猫军" autocomplete="off" lay-verify="required"
+                                   class="layui-input" value="${article.author}">
                         </div>
                         <label class="layui-form-label">来源:</label>
                         <div class="layui-input-inline" >
-                            <input type="text" name="praiseNum" value="猫咪之家" placeholder="猫咪之家" autocomplete="off" lay-verify="required"
-                                   class="layui-input" value="${pet.praiseNum}">
+                            <input type="text" name="source" placeholder="猫咪之家" autocomplete="off" lay-verify="required"
+                                   class="layui-input" value="${article.source}">
                         </div>
                     </div>
                 </div>
@@ -75,7 +54,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">品类:</label>
                         <div class="layui-input-inline">
-                            <select name="petId" lay-verify="required" lay-search="" lay-filter="selectF" id ="selectF">
+                            <select name="petId"  lay-search="" lay-filter="selectF" id ="selectF">
                             </select>
                         </div>
                         <label class="layui-form-label">类别:</label>
@@ -84,15 +63,31 @@
                                 <option value="0">默认</option>
                             </select>
                         </div>
+
                     </div>
                 </div>
 
-
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">观看数:</label>
+                        <div class="layui-input-inline" >
+                            <input type="text" name="viewNum"  autocomplete="off" lay-verify="required"
+                                   class="layui-input" value="${article.viewNum}">
+                        </div>
+                        <label class="layui-form-label">点赞数:</label>
+                        <div class="layui-input-inline" >
+                            <input type="text" name="praiseNum"  autocomplete="off" lay-verify="required"
+                                   class="layui-input" value="${article.praiseNum}">
+                        </div>
+                        <input type="hidden" name="image" id ="image" value="${article.image}">
+                        <button type="button" class="layui-btn" id="test3">上传主图</button>
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">内容:</label>
                         <div class="layui-input-inline" style="width: 800px">
-                            <textarea id="demo" style="display: none;" name="body" lay-verify="required">${pet.body}</textarea>
+                            <textarea id="demo" style="display: none;" name="body" lay-verify="required">${article.body}</textarea>
 
                         </div>
                     </div>
@@ -100,15 +95,19 @@
 
                 <div class="layui-inline1" style="text-align: center">
                     <div class="layui-btn-container">
+                        <#if article ! >
+                            <a class="layui-btn" href="/article/detail?id=${article.id}" target="_blank">查看</a>
+                        </#if>
+
                         <button class="layui-btn" lay-event="search" lay-submit lay-filter="add_btn">保存</button>
                     </div>
-                    <input type="hidden" value="" id="image" name ="image"/>
                 </div>
             </form>
         </div>
-        <div class="layui-col-md1">
+        <div class="layui-col-md2">
             <div class="layui-upload-list">
-                <img id="demo1" src="${pet.image}" style="width: 200px;margin: 0 2px 2px 0">
+                <br>
+                <img id="demo1" src="${article.image}" style="width: 200px;margin: 0 2px 2px 0">
             </div>
         </div>
     </div>
@@ -116,16 +115,16 @@
 </div>
 
 
-<script src="../static/layui.js"></script>
+<script src="../../static/layui.js"></script>
 
 <script>
-    layui.use(['layedit', 'form'], function(){
+    layui.use(['layedit', 'form', 'upload'], function(){
         var layedit = layui.layedit;
-        var $ = layui.jquery;
+        var $ = layui.jquery, upload = layui.upload;
         var form = layui.form;
 
         $.get("/pet/search?paged=false", function (res) {
-            var  str ='<option value="">直接选择或搜索选择</option>';
+            var  str ='<option value="0"></option>';
             if (res.code == 0) {
                 layui.each(res.data, function (index, val) {
                     str += '<option value="'+val.id+'">'+ val.name+'</option>';
@@ -160,9 +159,12 @@
 
         // 添加
         form.on('submit(add_btn)', function (formData) {
+            layedit.sync(index);
+            formData = form.val("add_form");
+
             $.ajax({
                 url: "/article/save",
-                data: formData.field,
+                data: formData,
                 type: "post",
                 dataType: "json",
                 success: function (data) {
@@ -174,6 +176,31 @@
                 }
             });
             return false;
+        });
+
+        //文件-发布动态
+        upload.render({
+            elem: '#test3'
+            , url: '/upload/image1'
+            , accept: 'images'
+            , acceptMime: 'image/*'
+            , size: 10240
+            , drag: true
+            , choose: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr("src", result)
+                });
+            }
+            , done: function (res, index, upload) { //上传后的回调
+                if (res.code == 0) {
+                    $('#image').val(res.data);
+                } else {
+                    layer.msg(res.msg, {icon: 2});
+                }
+            }, error: function (index, upload) {
+                layer.msg('失败', {icon: 2});
+            }
         });
     });
 </script>

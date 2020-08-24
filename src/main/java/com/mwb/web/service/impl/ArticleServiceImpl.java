@@ -42,7 +42,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleInfo> implements 
             criteria.andEqualTo("petId", query.getPetId());
         }
         if (StringUtils.isNotBlank(query.getTitle())) {
-            criteria.andEqualTo("title", "%" + query.getTitle() + "%");
+            criteria.andLike("title", "%" + query.getTitle() + "%");
         }
 
         //排序

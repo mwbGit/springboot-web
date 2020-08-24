@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.CommentInfo;
 import com.mwb.web.model.DynamicInfo;
-import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.model.query.DynamicQuery;
 import com.mwb.web.service.CommentService;
 import com.mwb.web.service.DynamicService;
@@ -55,7 +54,7 @@ public class DynamicServiceImpl extends BaseServiceImpl<DynamicInfo> implements 
             criteria.andEqualTo("userName", query.getUserName());
         }
         if (StringUtils.isNotBlank(query.getTitle())) {
-            criteria.andEqualTo("title", "%" + query.getUserName() + "%");
+            criteria.andLike("title", "%" + query.getUserName() + "%");
         }
         example.orderBy(query.getOrder()).desc();
 
@@ -86,11 +85,6 @@ public class DynamicServiceImpl extends BaseServiceImpl<DynamicInfo> implements 
         }
 
         return new PageInfo<>(dynamicInfos);
-    }
-
-    @Override
-    public List<DynamicInfo> getNewList(PageQuery query) {
-        return pageSearch(query, DynamicInfo.class);
     }
 
     @Override

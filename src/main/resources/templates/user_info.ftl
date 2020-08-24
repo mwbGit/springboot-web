@@ -48,7 +48,7 @@
                             </div>
                             <a href="/user/info?userId=${userInfo.id}"><h4 class="layadmin-homepage-font">${userInfo.name}</h4></a>
                             <br>
-                            <button class="layui-btn layui-btn-fluid">发私信</button>
+                            <button class="layui-btn layui-btn-fluid" lay-active ='e4' lay-id="${userId}">发私信</button>
                         <#else >
                         </#if>
                     </div>
@@ -58,7 +58,11 @@
                 </p>
                 <div class="layadmin-homepage-pad-hor">
                     <mdall>
-                        胡歌喜欢摄影，也喜欢写字，他视角独特，充满着奇思妙想。他有着极丰富的情感，和对生活的热情，他能点燃观众心中爱的火焰；胡歌积极、乐观、坚强，他脚踏实地地做好每一件事，真诚地对待身边每一个人
+                        <#if userInfo !>
+                            ${userInfo.introduce}
+                        <#else >
+                            暂无介绍
+                        </#if>
                     </mdall>
                 </div>
             </div>
@@ -83,17 +87,18 @@
                                             <p class="min-font"><span class="layui-breadcrumb" style="visibility: visible;">
                                             <a href="javascript:;">${dynamicInfo.timeDesc}</a></span></p>
                                         </div>
-                                        <p>${dynamicInfo.content}</p>
-                                        <script type="text/html" template="">
-                                            <img class="h-img"
-                                                 src="{{ layui.setter.base }}style/res/template/huge.jpg">
-                                        </script>
-                                        <img class="h-img" src="./dist/style/res/template/huge.jpg">
+                                        <p>${dynamicInfo.content}
+                                        <#if dynamicInfo.imageUrls !>
+                                                <#list dynamicInfo.imageUrls as url>
+                                                    <img class="h-img" src="${url}" style="width: 100%;">
+                                                </#list>
+                                        </#if>
                                         <#--                                    点赞评论-->
+                                        </p>
                                         <div class="media">
                                             <div class="media-right">
                                                 <ul class="list-inline">
-                                                    <li><a href="javascript:;" lay-active="e3" lay-id="${dynamicInfo.id}" lay-data="false">
+                                                    <li><a href="javascript:;" lay-active="e3" lay-id="${dynamicInfo.id}" lay-data="${dynamicInfo.praised}">
                                                             <#if dynamicInfo.praised>
                                                                 <i class="layui-icon layui-icon-heart-fill"></i>
                                                             <#else >
@@ -163,17 +168,18 @@
                                             <p class="min-font"><span class="layui-breadcrumb" style="visibility: visible;">
                                             <a href="javascript:;">${dynamicItme.timeDesc}</a></span></p>
                                         </div>
-                                        <p>${dynamicItme.content}</p>
-                                        <script type="text/html" template="">
-                                            <img class="h-img"
-                                                 src="{{ layui.setter.base }}style/res/template/huge.jpg">
-                                        </script>
-                                        <img class="h-img" src="./dist/style/res/template/huge.jpg">
+                                        <p>${dynamicItme.content}
+                                            <#if dynamicItme.imageUrls !>
+                                                <#list dynamicItme.imageUrls as url>
+                                                    <img class="h-img" src="${url}" style="width: 100%;">
+                                                </#list>
+                                            </#if>
+                                        </p>
                                         <#--                                    点赞评论-->
                                         <div class="media">
                                             <div class="media-right">
                                                 <ul class="list-inline">
-                                                    <li><a href="javascript:;" lay-active="e3" lay-id="${dynamicItme.id}" lay-data="false">
+                                                    <li><a href="javascript:;" lay-active="e3" lay-id="${dynamicItme.id}" lay-data="${dynamicItme.praised}">
                                                             <#if dynamicItme.praised>
                                                                 <i class="layui-icon layui-icon-heart-fill"></i>
                                                             <#else >
@@ -299,7 +305,7 @@
                     title: '评论规则(审核通过后展示)'
                     , btn: ['评论']
                     , area: ['500px', '300px']
-                    , content: '<textarea  placeholder="请输入内容（最多100个字）"style="width: 100%;height: 100%"></textarea>' //这里content是一个普通的String
+                    , content: '<textarea  placeholder="请输入消息内容（最多100个字）"style="width: 100%;height: 100%"></textarea>' //这里content是一个普通的String
                     , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         var comment = '';
@@ -317,7 +323,7 @@
             , e3: function () {
                 var id = this.getAttribute("lay-id");
                 var data = this.getAttribute("lay-data");
-                if (data == 'true') {
+                if (data === 'true') {
                     this.setAttribute("lay-data", "false");
                     $(this).html('<i class="layui-icon layui-icon-heart"></i>');
                 } else {
@@ -325,6 +331,26 @@
                     $(this).html('<i class="layui-icon layui-icon-heart-fill"></i>');
                 }
                 savePraise(id);
+            }, e4: function () {
+                var id = this.getAttribute("lay-id");
+                layer.open({
+                    title: '私信'
+                    , btn: ['发送']
+                    , area: ['500px', '300px']
+                    , content: '<textarea  placeholder="请输入内容（最多100个字）"style="width: 100%;height: 100%"></textarea>' //这里content是一个普通的String
+                    , yes: function (index, layero) {
+                        //按钮【按钮一】的回调
+                        var comment = '';
+                        $(layero).find("textarea").each(function (i, v) {
+                            comment = $(v).val().trim();
+                        });
+                        layer.close(index);
+
+                        if (comment != null && comment != '') {
+                            sendMsg(id, comment);
+                        }
+                    }
+                });
             }
         });
 
@@ -340,6 +366,25 @@
                 success: function (data) {
                     if (data.code == 0) {
                         layer.msg('成功');
+                    } else {
+                        layer.msg(data.msg, {icon: 2});
+                    }
+                }
+            });
+        }
+
+        function sendMsg(userId, content) {
+            $.ajax({
+                url: '/msg/alone/send',
+                data: {
+                    "userId": userId,
+                    "content": content
+                },
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.msg(data.msg);
                     } else {
                         layer.msg(data.msg, {icon: 2});
                     }

@@ -30,6 +30,9 @@ public class ArticleInfo implements Serializable {
     @Column(name = "author")
     private String author;
 
+    @Column(name = "source")
+    private String source;
+
     @Column(name = "title")
     private String title;
 

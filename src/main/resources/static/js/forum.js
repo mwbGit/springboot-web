@@ -199,7 +199,7 @@ layui.use(['form', 'upload', 'layer', 'util', 'flow', 'element'], function () {
     function getImageHtml(images) {
         var str = '';
         layui.each(images, function (index, val) {
-            str += '<img src="' + val + '" style="width: 80%">';
+            str += '<img src="' + val + '" style="width: 100%">';
         });
         return str;
     }

@@ -40,6 +40,9 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
         if (query.getDynamicId() != null) {
             criteria.andEqualTo("dynamicId", query.getDynamicId());
         }
+        if (query.getDynamicIds() != null) {
+            criteria.andIn("dynamicId", query.getDynamicIds());
+        }
         if (query.getStatus() != null) {
             criteria.andEqualTo("status", query.getStatus());
         }
@@ -50,7 +53,7 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
             criteria.andEqualTo("userName", query.getUserName());
         }
         //排序
-        example.orderBy("id").desc();
+        example.orderBy(query.getOrder()).desc();
         return new PageInfo<>(selectByExample(example));
     }
 
@@ -59,14 +62,10 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
         if (CollectionUtils.isEmpty(dynamicIds)) {
             return Collections.emptyList();
         }
-        Example example = new Example(CommentInfo.class);
-        //条件查询
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andIn("dynamicId", dynamicIds);
-        criteria.andEqualTo("status", 1);
-        //排序
-        example.orderBy("id").desc();
-        return selectByExample(example);
+        CommentQuery query = new CommentQuery();
+        query.setDynamicIds(dynamicIds);
+        query.setStatus(1);
+        return search(query).getList();
     }
 
     @Override

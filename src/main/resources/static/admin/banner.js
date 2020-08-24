@@ -120,14 +120,6 @@ layui.use(['form', 'layer', 'table', 'upload','util'], function () {
         , acceptMime: 'image/*'
         , size: 10240
         , drag: true
-        , data: {
-            "content": function () {
-                return form.val("form1").content;
-            },
-            "title": function () {
-                return form.val("form1").title;
-            }
-        }
         , choose: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
