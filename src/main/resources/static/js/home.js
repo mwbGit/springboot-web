@@ -57,7 +57,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<div class="layui-col-md3">' +
-                    '<a href="/pet/detail?id=' + val.id + '" target="_blank"><img src="' + val.image + '" class="layui-circle" style="width: 80px;height: 80px"></a>' +
+                    '<a href="/pet/detail?id=' + val.id + '" ><img src="' + val.image + '" class="layui-circle" style="width: 80px;height: 80px"></a>' +
                     '<div style="text-align:center">' +
                     '<span class="inf">' + val.name + '</span>' +
                     '</div></div>';
@@ -81,7 +81,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
                     ' <h2><a href="/article/detail?id=' + val.id + '"> ' + val.title + '</a></h2>' +
                     '</div>' +
                     '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
-                    '<span>' + val.body + '</span>' +
+                    '<span>' + val.bodyDesc + '</span>' +
                     '</div>' +
                     '<div class="layui-col-md3">' +
                     '<span><i class="layui-icon">&#xe6c6;</i>' + val.praiseNum + '</span>' +

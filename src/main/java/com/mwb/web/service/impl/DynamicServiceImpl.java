@@ -4,9 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.CommentInfo;
 import com.mwb.web.model.DynamicInfo;
+import com.mwb.web.model.MessageInfo;
 import com.mwb.web.model.query.DynamicQuery;
 import com.mwb.web.service.CommentService;
 import com.mwb.web.service.DynamicService;
+import com.mwb.web.service.MessageService;
 import com.mwb.web.service.PraiseService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +34,9 @@ public class DynamicServiceImpl extends BaseServiceImpl<DynamicInfo> implements 
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private MessageService messageService;
 
     @Override
     public PageInfo<DynamicInfo> search(DynamicQuery query, long userId) {
@@ -118,13 +123,19 @@ public class DynamicServiceImpl extends BaseServiceImpl<DynamicInfo> implements 
     }
 
     @Override
-    public void audit(long id, int status, boolean sendMsg) {
+    public void audit(long id, int status, String reason) {
         DynamicInfo dynamicInfo = selectByKey(id);
         if (dynamicInfo != null && status != dynamicInfo.getStatus()) {
             dynamicInfo.setStatus(status);
             updateNotNull(dynamicInfo);
-            if (sendMsg) {
-                //todo
+            if (StringUtils.isNotBlank(reason)) {
+                MessageInfo messageInfo = new MessageInfo();
+                messageInfo.setUserId(dynamicInfo.getUserId());
+                messageInfo.setType(1);
+                messageInfo.setTitle("动态被驳回");
+                messageInfo.setBody("原因：" + reason);
+                messageInfo.setAddTime(new Date());
+                messageService.sendMsg(messageInfo);
             }
         }
     }

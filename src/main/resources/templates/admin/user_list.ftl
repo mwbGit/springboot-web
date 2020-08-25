@@ -147,6 +147,18 @@
     {{#  }  }}
 </script>
 
+<script type="text/html" id="sexTp3">
+    {{#  if(d.status == 2){ }}
+    <span style="color: red">驳回</span>
+    {{#  } else if(d.status == 3) { }}
+    <span style="color: #ff2a48">冻结</span>
+    {{#  } else if(d.status == 1) { }}
+    <span style="color: green">通过</span>
+    {{#  } else { }}
+    <span style="">未审核</span>
+    {{#  }  }}
+</script>
+
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="unPass">驳回</a>

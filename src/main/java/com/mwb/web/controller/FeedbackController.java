@@ -34,6 +34,8 @@ public class FeedbackController {
     public ApiResult save(UserInfo user, @RequestParam("content") String content) {
         if (StringUtils.isBlank(content)) {
             return ApiResult.failed("请输入反馈内容");
+        } else if (content.length() > 1000) {
+            return ApiResult.failed("反馈内容过长");
         }
         FeedbackInfo feedbackInfo = new FeedbackInfo();
         feedbackInfo.setContent(content);

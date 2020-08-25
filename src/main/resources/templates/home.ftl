@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>用户管理</title>
+    <title>猫咪之家</title>
     <link rel="shortcut icon" href="../static/favicon.ico">
     <link rel="stylesheet" href="../static/css/layui.css">
     <link rel="stylesheet" href="../static/css/admin.css">
@@ -72,16 +72,10 @@
 
             <div class="layui-card">
                 <div class="layui-card-header">
-                    网站公告
-                    <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢" lay-offset="5"></i>
+                    网站寄语
                 </div>
                 <div class="layui-card-body layui-text layadmin-text">
-                    <p>一直以来，layui 秉承无偿开源的初心，虔诚致力于服务各层次前后端 Web
-                        开发者，在商业横飞的当今时代，这一信念从未动摇。即便身单力薄，仍然重拾决心，埋头造轮，以尽可能地填补产品本身的缺口。</p>
-                    <p>在过去的一段的时间，我一直在寻求持久之道，已维持你眼前所见的一切。而 layuiAdmin 是我们尝试解决的手段之一。我相信真正有爱于 layui 生态的你，定然不会错过这一拥抱吧。</p>
-                    <p>子曰：君子不用防，小人防不住。请务必通过官网正规渠道，获得 <a href="http://www.layui.com/admin/"
-                                                        target="_blank">layuiAdmin</a>！</p>
-                    <p>—— 贤心（<a href="http://www.layui.com/" target="_blank">layui.com</a>）</p>
+                    <p>但经历整个人世冷暖，彼此命运交叠成无数曲折，它们说，或许生的序幕由他人打开，但舞台上的热泪盈眶却必须由自己奏响。要永远炙烈燃放如同烟火，即便幻灭而逝，也不要放弃能璀璨永存的那一刻。</p>
                 </div>
             </div>
         </div>

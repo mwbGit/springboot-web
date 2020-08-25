@@ -55,8 +55,9 @@ public class CommentController {
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/audit")
-    public ApiResult audit(@RequestParam("id") long id, @RequestParam("status") int status) {
-        commentService.audit(id, status, true);
+    public ApiResult audit(@RequestParam("id") long id, @RequestParam("status") int status,
+                           @RequestParam(value = "reason", required = false, defaultValue = "") String reason) {
+        commentService.audit(id, status, reason);
         return ApiResult.success();
     }
 

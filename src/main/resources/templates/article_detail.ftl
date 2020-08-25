@@ -29,7 +29,7 @@
                       <span class="layui-breadcrumb" lay-separator="-"
                             style="visibility: visible; float: right;margin-bottom: 20px">
                         <a href="javascript:;">${article.author}</a><span lay-separator="">-</span>
-                        <a href="javascript:;">${article.timeDesc}</a>
+                        <a href="javascript:;">${article.dateTime}</a>
                       </span>
                             </p>
                         </div>
@@ -43,6 +43,14 @@
                         <div class="layui-col-md12" style="text-align: center; margin-top: 100px">
                             <a href="javascript:;" class="layui-btn" lay-active="e1" lay-data="false"
                                lay-id="${article.id}">点赞</a>
+
+                                <h6>
+                                    <#if article.source != "猫咪之家" >
+                                        <span style="font-size: xx-small">来源：猫咪交易网，如有侵权请联系我们删除。</span>
+                                    <#else >
+                                        <span style="font-size: xx-small">来源：<a href="http://www.maomihome.com/"><b>猫咪之家网</b></a>，内容受到版权保护，如若复制将会追究法律责任。</span>
+                                    </#if>
+                                </h6>
                         </div>
                     </div>
                 </div>

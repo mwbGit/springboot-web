@@ -1,6 +1,6 @@
 layui.use(['form', 'layer', 'table', 'util'], function () {
     var table = layui.table, util= layui.util
-        , form = layui.form, $ = layui.$;
+        , form = layui.form, $ = layui.$, layer=layui.layer;
 
     // 表格
     table.render({
@@ -9,28 +9,31 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
         , cellMinWidth: 80
         , cols: [[
             {type: 'space', hide: true}
-            , {field: 'id', title: 'ID',width : 80}
+            , {field: 'id', title: 'ID',width : 50}
             , {
                 field: 'headImg',
                 title: '头像',
                 width : 100,
                 templet: '#sexTpl'
             }
-            , {field: 'account', title: '账号'}
-            , {field: 'name', title: '昵称'}
-            , {field: 'sexDesc', title: '性别', width : 100}
+            , {field: 'account', title: '账号',width : 100,
+                templet: '<div><a href="/user/info?userId={{ d.id }}" target="_blank">{{ d.id }}</div>'
+            }
+            , {field: 'name', title: '昵称',width : 100}
+            , {field: 'sexDesc', title: '性别',width : 80}
+            , {field: 'introduce', title: '介绍'}
             , {
                 field: 'addTime',
                 title: '注册时间',
-                width: 200,
+                width: 180,
                 templet: '<div>{{ layui.util.toDateString(d.addTime, "yyyy-MM-dd HH:mm:ss") }}</div>'
             }
-            , {field: 'statusDesc', title: '状态', width : 100}
-            , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: "#barDemo"}
+            , {field: 'statusDesc', title: '状态', width : 100, templet : "#sexTp3"}
+            , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: "#barDemo"}
         ]]
         , loading: true
         , page: true   //开启分页
-        , limit: 10   //默认十条数据一页
+        , limit: 20   //默认十条数据一页
         , limits: [10, 20, 30, 50]  //数据分页条
         , id: 'userReload'
         , parseData: function (res) { //res 即为原始返回的数据
@@ -53,15 +56,32 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
         if (layEvent === 'pass') { //查看
             ajaxGet('/user/audit?status=1&id=' + data.id);
+            reloadTable();
         } else if (layEvent === 'unPass') { //查看
-            ajaxGet('/user/audit?status=2&id=' + data.id);
+            layer.open({
+                type: 1,
+                title: '驳回原因',
+                btn: ['介绍违规',"昵称违规", "头像违规"]
+                , yes: function (index, layero) {
+                    // debugger
+                    ajaxGet('/user/audit?status=2&id=' + data.id + "&reason=介绍内容包含敏感信息，使用功能将被限制，请尽快修改个人信息。");
+                    layer.close(index);
+                    reloadTable();
+                }, btn2: function (index, layero) {
+                    ajaxGet('/user/audit?status=2&id=' + data.id + "&reason=昵称违规，使用功能将被限制，请尽快修改个人信息。");
+                    reloadTable();
+                }, btn3: function (index, layero) {
+                    ajaxGet('/user/audit?status=2&id=' + data.id + "&reason=头像违规，使用功能将被限制，请尽快修改个人信息。");
+                    reloadTable();
+                }
+            });
         } else if (layEvent === 'frozen') { //删除
             layer.confirm('确定冻结用户"' + data.name + '"?', function (index) {
                 layer.close(index);
-                ajaxGet('/user/audit?status=3&id=' + data.id);
+                ajaxGet('/user/audit?status=3&id=' + data.id + "&reason=账号违规，使用功能已被限制。");
             });
+            reloadTable();
         }
-        reloadTable();
     });
 
     // 查询

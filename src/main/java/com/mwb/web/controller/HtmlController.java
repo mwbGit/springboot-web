@@ -56,4 +56,9 @@ public class HtmlController {
         return modelAndView;
     }
 
+    @RequestMapping("/baidu_verify_VuY12dJa6l.html")
+    public ModelAndView baidu() {
+        ModelAndView modelAndView = new ModelAndView("/baidu_verify_VuY12dJa6l");
+        return modelAndView;
+    }
 }

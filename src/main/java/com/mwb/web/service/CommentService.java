@@ -21,7 +21,7 @@ public interface CommentService extends BaseService<CommentInfo> {
 
     CommentInfo saveOrUpdate(CommentInfo bannerInfo);
 
-    void audit(long id, int status, boolean sendMsg);
+    void audit(long id, int status, String reason);
 
 
 }

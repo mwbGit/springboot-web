@@ -3,9 +3,11 @@ package com.mwb.web.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.mapper.CommentMapper;
 import com.mwb.web.model.CommentInfo;
+import com.mwb.web.model.MessageInfo;
 import com.mwb.web.model.query.CommentQuery;
 import com.mwb.web.service.CommentService;
 import com.mwb.web.service.DynamicService;
+import com.mwb.web.service.MessageService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
 
     @Autowired
     private DynamicService dynamicService;
+
+    @Autowired
+    private MessageService messageService;
 
     @Override
     public PageInfo<CommentInfo> search(CommentQuery query) {
@@ -81,7 +86,7 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
     }
 
     @Override
-    public void audit(long id, int status, boolean sendMsg) {
+    public void audit(long id, int status, String reason) {
         CommentInfo commentInfo = selectByKey(id);
         if (commentInfo != null && commentInfo.getStatus() != status) {
             commentInfo.setStatus(status);
@@ -90,8 +95,14 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
             if (status == 1) {
                 dynamicService.updateCommentNum(commentInfo.getDynamicId());
             }
-            if (sendMsg) {
-                //todo msg
+            if (StringUtils.isNotBlank(reason)) {
+                MessageInfo messageInfo = new MessageInfo();
+                messageInfo.setUserId(commentInfo.getUserId());
+                messageInfo.setType(1);
+                messageInfo.setTitle("评论被驳回");
+                messageInfo.setBody("原因：" + reason);
+                messageInfo.setAddTime(new Date());
+                messageService.sendMsg(messageInfo);
             }
         }
     }

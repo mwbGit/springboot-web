@@ -19,7 +19,7 @@
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/home">主页</a></li>
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/pet">品种</a></li>
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/article_list">文章</a></li>
-            <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/picture">图片</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/picture">萌图</a></li>
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/forum">论坛</a></li>
         </ul>
         <ul class="layui-nav layui-layout-right" lay-filter="test1">
@@ -65,9 +65,9 @@
         <iframe id="frameMain" src="/html/home" style="padding: 15px;width: 100%; height: 100%">内容主体区域</iframe>
     </div>
 
-    <div class="layui-footer" style="left:1px;">
+    <div class="layui-footer" style="text-align: center">
         <!-- 底部固定区域 -->
-        © maomizhijia.com
+        © 2020-猫咪之家 www.maomihome.com 京ICP备17041270号
     </div>
 </div>
 <script src="../static/layui.js"></script>

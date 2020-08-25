@@ -53,7 +53,7 @@ public class DynamicController {
         DynamicQuery query = new DynamicQuery();
         query.setPageSize(5);
         query.setStatus(1);
-        return ApiResult.success(dynamicService.search(query, userInfo.getId()).getList());
+        return ApiResult.success(dynamicService.search(query, 0).getList());
     }
 
     @RequestMapping("/search")
@@ -133,8 +133,9 @@ public class DynamicController {
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/audit")
-    public ApiResult audit(@RequestParam("id") long id, @RequestParam("status") int status) {
-        dynamicService.audit(id, status, true);
+    public ApiResult audit(@RequestParam("id") long id, @RequestParam("status") int status,
+                           @RequestParam(value = "reason", required = false, defaultValue = "") String reason) {
+        dynamicService.audit(id, status, reason);
         return ApiResult.success();
     }
 

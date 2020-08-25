@@ -33,7 +33,7 @@ layui.use(['layer', 'util', 'flow'], function () {
                         ' <h2><a href="/article/detail?id=' + val.id + '"> ' + val.title + '</a></h2>' +
                         '</div>' +
                         '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
-                        '<span>' + val.body + '</span>' +
+                        '<span>' + val.bodyDesc + '</span>' +
                         '</div>' +
                         '<div class="layui-col-md3">' +
                         '<span><i class="layui-icon">&#xe6c6;</i>' + val.praiseNum + '</span>' +

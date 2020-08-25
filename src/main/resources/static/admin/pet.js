@@ -20,7 +20,7 @@ layui.use(['form', 'layer', 'table', 'upload', 'util'], function () {
                 field: 'name',
                 title: '名称',
                 width: 200,
-                templet: '<div><a href="/pet/detail?id={{ d.id }}" target="_blank">{{ d.name }}</div>'
+                templet: '<div><a href="/pet/detail?id={{ d.id }}" >{{ d.name }}</div>'
             }
             , {field: 'level', title: '优先级', width: 80}
             , {field: 'score', title: '星级', width: 80}

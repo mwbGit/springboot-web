@@ -21,5 +21,5 @@ public interface DynamicService extends BaseService<DynamicInfo> {
 
     void updateCommentNum(long id);
 
-    void audit(long id, int status, boolean sendMsg);
+    void audit(long id, int status, String reason);
 }

@@ -8,6 +8,7 @@ import com.mwb.web.utils.HttpUtil;
 import com.mwb.web.utils.MD5Util;
 import com.mwb.web.utils.WebConstant;
 import com.ramostear.captcha.HappyCaptcha;
+import com.ramostear.captcha.support.CaptchaType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class LoginController {
 
     @GetMapping("/captcha")
     public void happyCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        HappyCaptcha.require(request, response).length(4).height(38).build().finish();
+        HappyCaptcha.require(request, response).length(4).height(38).type(CaptchaType.NUMBER).build().finish();
     }
 
     @RequestMapping("/login/out")
@@ -53,6 +54,9 @@ public class LoginController {
         }
         UserInfo user = loginUserService.getByAccount(account);
         if (user != null) {
+            if (user.isFrozen()) {
+                return ApiResult.failed("账号已被冻结");
+            }
             if (user.getPassword().equals(MD5Util.md5Pwd(password))) {
                 String token = AESUtil.encrypt(String.valueOf(user.getId()));
                 HttpUtil.saveCookie(response, WebConstant.WAP_COOKIE_NAME, token, WebConstant.TC_EXPIRE_TIME, "/");

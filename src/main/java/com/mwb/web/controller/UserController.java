@@ -131,7 +131,7 @@ public class UserController {
             return ApiResult.failed("用户名过长");
         } else if (name.length() < 3) {
             return ApiResult.failed("用户名过短");
-        }  else if (introduce.length() > 1000) {
+        } else if (introduce.length() > 1000) {
             return ApiResult.failed("用户名过短");
         }
         userInfo.setName(name);
@@ -173,9 +173,10 @@ public class UserController {
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/audit")
-    public ApiResult audit(UserInfo userInfo, @RequestParam("status") int status, @RequestParam("id") Long id) {
-        log.info("UserController.audit userId={}, id={}, status={}", userInfo.getId(), id, status);
-        return ApiResult.success(userService.audit(id, status));
+    public ApiResult audit(UserInfo userInfo, @RequestParam("status") int status, @RequestParam("id") Long id,
+                           @RequestParam(value = "reason", required = false, defaultValue = "") String reason) {
+        log.info("UserController.audit userId={}, id={}, status={},reason={}", userInfo.getId(), id, status, reason);
+        return ApiResult.success(userService.audit(id, status, reason));
     }
 
     @WebLogin(option = WebLogin.Option.ADMIN)

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Date;
 
 /**
@@ -72,4 +74,23 @@ public class OssService {
         }
     }
 
+    public String uploadImageToOss(String urlStr) {
+        InputStream fis = null;
+        PutObjectResult result = null;
+        try {
+            URL url = new URL(urlStr);
+            URLConnection connection = url.openConnection();
+            connection.setConnectTimeout(1000);
+            fis = connection.getInputStream();
+            String time = DateTimeUtils.formatYYYYMMDDNOSPACE(new Date());
+            String fileName = time + "/" + System.currentTimeMillis() + ".jpg";
+            result = ossClient.putObject(new PutObjectRequest(bucket, fileName, fis));
+            return ossImageDomain + fileName;
+        } catch (Exception e) {
+            log.error("OssService uploadImageToOss err, result={}", result, e);
+        } finally {
+            IOUtils.closeQuietly(fis);
+        }
+        return null;
+    }
 }

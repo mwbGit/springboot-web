@@ -28,5 +28,5 @@ public interface UserInfoService extends BaseService<UserInfo> {
 
     void updateCache(long id);
 
-    boolean audit(long id, int status);
+    boolean audit(long id, int status, String reason);
 }

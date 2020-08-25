@@ -20,98 +20,85 @@
 <body style="margin: 10px 60px 15px 60px;">
 <div class="layui-fluid">
     <div class="layui-row layui-col-space20 layadmin-homepage-list-imgtxt" style="margin-top: 50px">
-        <div class="layui-col-md2">
+        <div class="layui-col-md1">
         </div>
-        <div class="layui-col-md8">
-            <div class="grid-demo">
-                <div class="panel-body layadmin-homepage-shadow">
-                    <div class="media-body">
-                        <div class="layui-row layui-col-space20">
-                            <div class="layui-col-md4 layui-col-sm6">
-                                <div class="layui-col-md12">
-                                    <a href="javascript:;">
-                                        <div class="layadmin-text-center">
-                                            <img src="${pet.image}"
-                                                 style="width: 100%">
-                                        </div>
-                                    </a>
-                                </div>
-
-
+        <div class="layui-col-md10">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md4 layui-col-sm6">
+                    <div class="layui-col-md12">
+                        <a href="javascript:;">
+                            <div class="layadmin-text-center">
+                                <img src="${pet.image}"
+                                     style="width: 100%">
                             </div>
+                        </a>
+                    </div>
 
-                            <div class="layui-col-md8 layadmin-padding-left20 layui-col-sm6">
-                                <div class="layui-row layui-col-space10">
-                                    <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
-                                        <h2 style="font-weight: bold">${pet.name}</h2>
-                                    </div>
 
-                                    <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
-                                        <h3>均价：<span style="color: brown">${pet.price}</span></h3>
-                                    </div>
+                </div>
 
-                                    <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
-                                        <h3>评分：
-                                            <div id="test9"></div>
-                                        </h3>
-                                    </div>
+                <div class="layui-col-md8 layadmin-padding-left20 layui-col-sm6">
+                    <div class="layui-row layui-col-space10">
+                        <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
+                            <h2 style="font-weight: bold">${pet.name}</h2>
+                        </div>
 
-                                    <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
-                                        <h3>特点：
-                                            <#list pet.traits as tag>
-                                                <span class="layui-badge-rim" style="color: blue">${tag}</span>
-                                            </#list>
-                                        </h3>
-                                        <h3>优点：
-                                            <#list pet.advantages as tag>
-                                                <span class="layui-badge-rim" style="color: red">${tag}</span>
-                                            </#list>
-                                        </h3>
-                                        <h3>缺点：
-                                            <#list pet.defects  as tag>
-                                                <span class="layui-badge-rim" style="color: yellowgreen">${tag}</span>
-                                            </#list>
-                                        </h3>
-                                    </div>
+                        <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
+                            <h3>均价：<span style="color: brown">${pet.price}</span></h3>
+                        </div>
 
-                                </div>
-                            </div>
-                            <div class="layui-col-md12">
-                                <div class="layui-card">
-                                    <div class="layui-card-header">介绍</div>
-                                    <div class="layui-card-body">
-                                        <span>${pet.introduce}</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
+                            <h3>评分：
+                                <div id="test9"></div>
+                            </h3>
+                        </div>
 
-                            <#if pictures ! >
-                                <div class="layui-col-md12">
-                                    <div class="layui-card">
-                                        <div class="layui-card-header">图片</div>
-                                        <div class="layui-card-body">
-                                            <#--                                        <div class="layui-carousel" id="test1">-->
-                                            <#--                                            <div carousel-item="" id="banner_ul">-->
-                                            <#--                                                <#list pictures as tag>-->
-                                            <#--                                                    <img src="${tag}" style="width: 100%">-->
-                                            <#--                                                </#list>-->
-                                            <#--                                            </div>-->
-                                            <#--                                        </div>-->
-                                            <#list pictures as tag>
-                                                <div class="layui-input-inline cmdlist-container">
-                                                    <img src="${tag}" lay-data="${tag}" lay-active="e1">
-                                                </div>
-                                            </#list>
-                                        </div>
-                                    </div>
-                                </div>
-                            </#if>
+                        <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
+                            <h3>特点：
+                                <#list pet.traits as tag>
+                                    <span class="layui-badge-rim" style="color: blue">${tag}</span>
+                                </#list>
+                            </h3>
+                            <h3>优点：
+                                <#list pet.advantages as tag>
+                                    <span class="layui-badge-rim" style="color: red">${tag}</span>
+                                </#list>
+                            </h3>
+                            <h3>缺点：
+                                <#list pet.defects  as tag>
+                                    <span class="layui-badge-rim" style="color: yellowgreen">${tag}</span>
+                                </#list>
+                            </h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">介绍</div>
+                        <div class="layui-card-body">
+                            <span>${pet.introduce}</span>
                         </div>
                     </div>
                 </div>
+
+                <#if pictures ! >
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">图片</div>
+                            <div class="layui-card-body">
+                                <#list pictures as tag>
+                                    <div class="layui-input-inline cmdlist-container">
+                                        <img src="${tag}" lay-data="${tag}" lay-active="e1">
+                                    </div>
+                                </#list>
+                            </div>
+                        </div>
+                    </div>
+                </#if>
             </div>
         </div>
-        <div class="layui-col-md2">
+        <div class="layui-col-md1">
         </div>
         <img alt="" style="display:none" id="displayimg" src=""/>
     </div>

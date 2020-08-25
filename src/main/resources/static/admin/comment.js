@@ -54,10 +54,26 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
         if (layEvent === 'pass') { //查看
             ajaxGet('/comment/audit?status=1&id=' + data.id);
+            reloadTable();
         } else if (layEvent === 'unPass') { //查看
-            ajaxGet('/comment/audit?status=2&id=' + data.id);
+            layer.open({
+                type: 1,
+                title: '驳回原因',
+                btn: ['内容违规',"昵称违规", "头像违规"]
+                , yes: function (index, layero) {
+                    // debugger
+                    ajaxGet('/comment/audit?status=2&id=' + data.id + "&reason=评论内容包含敏感信息。");
+                    layer.close(index);
+                    reloadTable();
+                }, btn2: function (index, layero) {
+                    ajaxGet('/comment/audit?status=2&id=' + data.id + "&reason=昵称违规，请修改个人信息后评论。");
+                    reloadTable();
+                }, btn3: function (index, layero) {
+                    ajaxGet('/comment/audit?status=2&id=' + data.id + "&reason=头像违规，请修改个人信息后评论。");
+                    reloadTable();
+                }
+            });
         }
-        reloadTable();
     });
 
     // 查询

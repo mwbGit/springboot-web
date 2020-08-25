@@ -40,13 +40,26 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">作者:</label>
                         <div class="layui-input-inline" >
-                            <input type="text" name="author"  placeholder="猫军" autocomplete="off" lay-verify="required"
-                                   class="layui-input" value="${article.author}">
+                            <#if article ! >
+                                <input type="text" name="author"  placeholder="猫军" autocomplete="off" lay-verify="required"
+                                       class="layui-input" value="${article.author}">
+                            <#else >
+                                <input type="text" name="author"  placeholder="猫军" autocomplete="off" lay-verify="required"
+                                       class="layui-input" value="猫军">
+                            </#if>
+
+
                         </div>
                         <label class="layui-form-label">来源:</label>
                         <div class="layui-input-inline" >
-                            <input type="text" name="source" placeholder="猫咪之家" autocomplete="off" lay-verify="required"
-                                   class="layui-input" value="${article.source}">
+                            <#if article ! >
+                                <input type="text" name="source" placeholder="猫咪之家" autocomplete="off" lay-verify="required"
+                                       class="layui-input" value="${article.source}">
+                            <#else >
+                                <input type="text" name="source" placeholder="猫咪之家" autocomplete="off" lay-verify="required"
+                                       class="layui-input" value="猫咪之家">
+                            </#if>
+
                         </div>
                     </div>
                 </div>
@@ -124,7 +137,7 @@
         var form = layui.form;
 
         $.get("/pet/search?paged=false", function (res) {
-            var  str ='<option value="0"></option>';
+            var  str ='<option value="0">默认</option>';
             if (res.code == 0) {
                 layui.each(res.data, function (index, val) {
                     str += '<option value="'+val.id+'">'+ val.name+'</option>';
@@ -181,7 +194,7 @@
         //文件-发布动态
         upload.render({
             elem: '#test3'
-            , url: '/upload/image1'
+            , url: '/upload/image'
             , accept: 'images'
             , acceptMime: 'image/*'
             , size: 10240

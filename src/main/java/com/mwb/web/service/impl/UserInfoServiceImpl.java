@@ -117,14 +117,19 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
     }
 
     @Override
-    public boolean audit(long id, int status) {
+    public boolean audit(long id, int status, String reason) {
         UserInfo curUser = selectByKey(id);
         if (curUser != null && curUser.getStatus() != status) {
             curUser.setStatus(status);
             updateNotNull(curUser);
-            if (status == 2) {
-                //todo
-                messageService.sendMsg(null);
+            if (StringUtils.isNotBlank(reason)) {
+                MessageInfo messageInfo = new MessageInfo();
+                messageInfo.setUserId(id);
+                messageInfo.setType(1);
+                messageInfo.setTitle("个人信息被驳回");
+                messageInfo.setBody("原因：" + reason);
+                messageInfo.setAddTime(new Date());
+                messageService.sendMsg(messageInfo);
             }
         }
         return false;
