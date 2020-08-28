@@ -20,7 +20,7 @@
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/pet">品种</a></li>
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/article_list">文章</a></li>
             <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/picture">萌图</a></li>
-            <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/forum">论坛</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" lay-href="/html/forum">动态</a></li>
         </ul>
         <ul class="layui-nav layui-layout-right" lay-filter="test1">
             <#if avatar!>
