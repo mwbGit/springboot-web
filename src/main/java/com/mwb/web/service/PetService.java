@@ -13,9 +13,10 @@ import com.mwb.web.model.query.PetQuery;
 
 public interface PetService extends BaseService<PetInfo> {
 
-    PageInfo<PetInfo> search(PetQuery query);
+    PageInfo<PetInfo> simpleSearch(PetQuery query);
 
     PetInfo saveOrUpdate(PetInfo petInfo, String[] types);
 
+    PageInfo<PetInfo> search(PetQuery query);
 
 }

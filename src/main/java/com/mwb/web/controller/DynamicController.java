@@ -51,7 +51,7 @@ public class DynamicController {
     @RequestMapping("/new")
     public ApiResult newList(UserInfo userInfo) {
         DynamicQuery query = new DynamicQuery();
-        query.setPageSize(5);
+        query.setPageSize(6);
         query.setStatus(1);
         return ApiResult.success(dynamicService.search(query, 0).getList());
     }

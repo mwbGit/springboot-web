@@ -52,21 +52,26 @@
                                 <div id="test9"></div>
                             </h3>
                         </div>
-
+                        <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
+                            <h3>祖籍：<span >${pet.nation}</span></h3>
+                        </div>
+                        <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
+                            <h3>寿命：<span >${pet.life}</span></h3>
+                        </div>
                         <div class="layui-col-md12" style="border: 1px solid #e7ecf3">
                             <h3>特点：
                                 <#list pet.traits as tag>
                                     <span class="layui-badge-rim" style="color: blue">${tag}</span>
                                 </#list>
                             </h3>
-                            <h3>优点：
-                                <#list pet.advantages as tag>
-                                    <span class="layui-badge-rim" style="color: red">${tag}</span>
-                                </#list>
-                            </h3>
                             <h3>缺点：
                                 <#list pet.defects  as tag>
                                     <span class="layui-badge-rim" style="color: yellowgreen">${tag}</span>
+                                </#list>
+                            </h3>
+                            <h3>易患病：
+                                <#list pet.easyOfDiseases as tag>
+                                    <span class="layui-badge-rim" style="color: red">${tag}</span>
                                 </#list>
                             </h3>
                         </div>
@@ -75,17 +80,48 @@
                 </div>
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-header">介绍</div>
+                        <div class="layui-card-header">介绍:</div>
                         <div class="layui-card-body">
                             <span>${pet.introduce}</span>
                         </div>
                     </div>
                 </div>
-
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">特征:</div>
+                        <div class="layui-card-body">
+                            <span>${pet.feature}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">喂养要点:</div>
+                        <div class="layui-card-body">
+                            <span>${pet.feedPoints}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">养护知识:</div>
+                        <div class="layui-card-body">
+                            <span>${pet.careKnowledge}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">性格特征:</div>
+                        <div class="layui-card-body">
+                            <span>${pet.characterFeature}</span>
+                        </div>
+                    </div>
+                </div>
                 <#if pictures ! >
                     <div class="layui-col-md12">
                         <div class="layui-card">
-                            <div class="layui-card-header">图片</div>
+                            <div class="layui-card-header">图片:</div>
                             <div class="layui-card-body">
                                 <#list pictures as tag>
                                     <div class="layui-input-inline cmdlist-container">

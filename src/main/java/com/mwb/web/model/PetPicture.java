@@ -1,6 +1,7 @@
 package com.mwb.web.model;
 
 import lombok.Data;
+import lombok.ToString;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 
 @Data
+@ToString
 @Table(name = "pet_picture")
 public class PetPicture implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;

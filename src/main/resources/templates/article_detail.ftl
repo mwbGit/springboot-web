@@ -10,6 +10,25 @@
     <link rel="shortcut icon" href="../static/favicon.ico">
     <link rel="stylesheet" href="../static/css/layui.css" media="all">
     <link rel="stylesheet" href="../static/css/forum.css" media="all">
+ <style type="text/css" >
+     p {
+         margin-bottom: 10px;
+         margin-top: 10px;
+     }
+     .media-body {
+         font-size: 18px;
+     }
+     .media-body b {
+         font-size: 20px;
+     }
+     .media-body ul {
+         margin-left: 20px;
+     }
+     li {
+         list-style-type: square;
+     }
+
+ </style>
 </head>
 <style type="text/css">
 
@@ -46,7 +65,7 @@
 
                                 <h6>
                                     <#if article.source != "猫咪之家" >
-                                        <span style="font-size: xx-small">来源：猫咪交易网，如有侵权请联系我们删除。</span>
+                                        <span style="font-size: xx-small">来源：${article.source}，如有侵权请联系我们删除。</span>
                                     <#else >
                                         <span style="font-size: xx-small">来源：<a href="http://www.maomihome.com/"><b>猫咪之家网</b></a>，内容受到版权保护，如若复制将会追究法律责任。</span>
                                     </#if>

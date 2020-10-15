@@ -34,6 +34,14 @@ public class PetServiceImpl extends BaseServiceImpl<PetInfo> implements PetServi
     private PetCharacterMappingService petCharacterMappingService;
 
     @Override
+    public PageInfo<PetInfo> simpleSearch(PetQuery query) {
+        List<PetInfo> list = petMapper.searchSimple( (query.getPage() - 1) * query.getPageSize(), query.getPageSize());
+        PageInfo<PetInfo> pageInfo = new PageInfo(list);
+        pageInfo.setTotal(petMapper.countAll());
+        return pageInfo;
+    }
+
+    @Override
     public PageInfo<PetInfo> search(PetQuery query) {
         //分页
         if (query.isPaged()) {

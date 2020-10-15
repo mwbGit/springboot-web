@@ -30,7 +30,7 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body">
-                            <div class="layui-carousel" id="test1">
+                            <div class="layui-carousel" id="test1" lay-filter="test1">
                                 <div carousel-item="" id="banner_ul">
                                 </div>
                             </div>
@@ -90,6 +90,8 @@
             </div>
         </div>
     </div>
+    <img alt="" style="display:none" id="displayimg" src=""/>
+
 </div>
 <script src="../static/layui.js"></script>
 <script src="../static/js/home.js"></script>

@@ -10,7 +10,7 @@ public class WebConstant {
 
     public static final String WAP_COOKIE_NAME = "pet";
     public static final String USER_BASE = "user";
-    public static final int TC_EXPIRE_TIME = 60 * 60 * 24 * 7;
+    public static final int TC_EXPIRE_TIME = 60 * 60 * 24 * 15;
 
     public static final int ACCESS_TOTAL = 800;
 

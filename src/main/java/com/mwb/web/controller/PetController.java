@@ -7,6 +7,7 @@ import com.mwb.web.model.common.ApiResult;
 import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.model.common.WebLogin;
 import com.mwb.web.model.query.PetQuery;
+import com.mwb.web.model.vo.PetInfoVO;
 import com.mwb.web.service.PetCharacterService;
 import com.mwb.web.service.PetPictureService;
 import com.mwb.web.service.PetService;
@@ -40,6 +41,12 @@ public class PetController {
     @Autowired
     private PetPictureService petPictureService;
 
+    @RequestMapping("/hot/search")
+    public ApiResult hot(PetQuery query) {
+        PageInfo<PetInfo> pageInfo = petService.simpleSearch(query);
+        return ApiResult.success(PetInfoVO.toVOs(pageInfo.getList()), pageInfo.getTotal());
+    }
+
     @RequestMapping("/search")
     public ApiResult search(PetQuery query) {
         PageInfo<PetInfo> pageInfo = petService.search(query);
@@ -72,7 +79,7 @@ public class PetController {
 
     @RequestMapping("/picture/hot")
     public ApiResult searchHot() {
-        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(16, "level"));
+        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(20, "level"));
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
 

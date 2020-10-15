@@ -72,11 +72,42 @@ public class PetInfo implements Serializable {
     @Column(name = "deleted")
     private int deleted;
 
+    @Column(name = "characters")
+    private String characters;
+
+    @Column(name = "nation")
+    private String nation;
+
+    @Column(name = "easy_of_disease")
+    private String easyOfDisease;
+
+    @Column(name = "life")
+    private String life;
+
+    @Column(name = "feature")
+    private String feature;
+
+    @Column(name = "care_knowledge")
+    private String careKnowledge;
+
+    @Column(name = "feed_points")
+    private String feedPoints;
+
+    @Column(name = "character_feature")
+    private String characterFeature;
+
     public List<String> getTraits() {
         if (StringUtils.isBlank(trait)) {
             return Collections.emptyList();
         }
         return Arrays.asList(trait.split(","));
+    }
+
+    public List<String> getEasyOfDiseases() {
+        if (StringUtils.isBlank(easyOfDisease)) {
+            return Collections.emptyList();
+        }
+        return Arrays.asList(easyOfDisease.split(","));
     }
 
     public List<String> getAdvantages() {

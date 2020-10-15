@@ -8,8 +8,10 @@ layui.use(['carousel', 'layer', 'util'], function () {
         , autoplay: 'true'
         , interval: '5000'
         , width: '100%' //设置容器宽度
+        , height: '350px' //设置容器宽度
         , arrow: 'always' //始终显示箭头
         //,anim: 'updown' //切换动画方式
+        ,trigger : 'click'
     });
 
     //最近动态
@@ -31,28 +33,49 @@ layui.use(['carousel', 'layer', 'util'], function () {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {
-                str += '<div><img src="' + val.image + '" style="width: 100%"></div>';
+                str += '<div><a target="_blank" href="' + val.jumpUrl + '"  ><img src="' + val.image + '" ' +
+                    'style="width: 100%;box-sizing: border-box;position: absolute; left: 50%;top: 50%;transform: translate(-50%, -50%);" ></a></div>';
             });
             $('#banner_ul').html(str);
             ins.reload();
         }
     });
 
-    //轮播
+
+    //图片
     $.get('/pet/picture/hot', function (data) {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<div class="layui-input-inline cmdlist-container">' +
+                    '<a href="javascript:;" lay-active="e1" lay-data="' + val.image + '"> ' +
+
                     '<img src="' + val.image + '" alt="' + val.title + '"' +
-                    'title="' + val.title + '"></div>';
+                    ' title="' + val.title + '"></a></div>';
             });
             $('#img_ul').html(str);
         }
     });
 
+    util.event('lay-active', {
+        e1: function () {
+            var url = this.getAttribute('lay-data');
+            $("#displayimg").attr("src", url);
+            var height = $("#displayimg").height();
+            var width = $("#displayimg").width();
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                shadeClose: true,
+                area: [width + 'px', height + 'px'], //宽高
+                content: "<img alt=" + name + " title=" + name + " src=" + url + " />"
+            });
+        }
+    });
+
     //品种
-    $.get('/pet/search?order=level&pageSize=8', function (data) {
+    $.get('/pet/hot/search?pageSize=8', function (data) {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {
@@ -104,4 +127,6 @@ layui.use(['carousel', 'layer', 'util'], function () {
             return '';
         }
     }
+
+
 });

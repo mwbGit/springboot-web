@@ -47,6 +47,9 @@ public class BannerInfo implements Serializable {
     @Column(name = "level")
     private int level;
 
+    @Column(name = "url")
+    private String url;
+
     @Column(name = "object_id")
     private int objectId;
 
@@ -68,4 +71,18 @@ public class BannerInfo implements Serializable {
                 return "图片";
         }
     }
+
+    public String getJumpUrl(){
+        switch (type) {
+            case 1:
+                return "/article/detail?id=" + objectId;
+            case 2:
+                return "/pet/detail?id=" + objectId;
+            case 3:
+                return "/user/info?dynamicId=" + objectId;
+            default:
+                return url;
+        }
+    }
+
 }

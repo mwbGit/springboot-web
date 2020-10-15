@@ -85,6 +85,20 @@
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
+                        <label class="layui-form-label">祖籍:</label>
+                        <div class="layui-input-inline" style="width: 190px;">
+                            <input type="text" name="nation" autocomplete="off" class="layui-input" value="${pet.nation}">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">寿命:</label>
+                        <div class="layui-input-inline" style="width: 200px;">
+                            <input type="text" name="life" autocomplete="off" class="layui-input" value="${pet.life}">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
                         <label class="layui-form-label">特点:</label>
                         <div class="layui-input-inline" style="width: 480px;">
                             <input type="text" name="trait" placeholder=",英文分割" autocomplete="off" class="layui-input" value="${pet.trait}">
@@ -113,6 +127,38 @@
                         <label class="layui-form-label">介绍:</label>
                         <div class="layui-input-inline" style="width: 480px;">
                             <textarea name="introduce" rows="7" class="layui-input layui-textarea" lay-verify="required">${pet.introduce}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">养护知识:</label>
+                        <div class="layui-input-inline" style="width: 480px;">
+                            <textarea name="careKnowledge" rows="7" class="layui-input layui-textarea"  >${pet.careKnowledge}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">特征:</label>
+                        <div class="layui-input-inline" style="width: 480px;">
+                            <textarea name="feature" rows="7" class="layui-input layui-textarea"  >${pet.feature}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">喂养要点:</label>
+                        <div class="layui-input-inline" style="width: 480px;">
+                            <textarea name="feedPoints" rows="7" class="layui-input layui-textarea" >${pet.feedPoints}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">性格特征:</label>
+                        <div class="layui-input-inline" style="width: 480px;">
+                            <textarea name="characterFeature" rows="7" class="layui-input layui-textarea" >${pet.characterFeature}</textarea>
                         </div>
                     </div>
                 </div>

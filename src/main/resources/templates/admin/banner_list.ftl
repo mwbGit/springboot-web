@@ -8,7 +8,7 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>轮播管理</title>
     <link rel="shortcut icon" href="../../static/favicon.ico">
-    <link rel="stylesheet" href="../../static/css/layui.css"  media="all">
+    <link rel="stylesheet" href="../../static/css/layui.css" media="all">
 </head>
 <style type="text/css">
     .layui-form-label {
@@ -62,14 +62,23 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
+            <label class="layui-form-label">链接</label>
+            <div class="layui-input-inline"  style="width: 380px;">
+                <input type="text" name="url" autocomplete="off" class="layui-input" placeholder="选填">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
             <div class="layui-input-inline" style="text-align: center">
                 <label class="layui-form-label">图片:</label>
                 <img id="demo1" src="" style="width: 100px;margin: 0 2px 2px 0">
-                <input type="hidden" value="0" id="id" />
+                <input type="hidden" value="0" id="id"/>
                 <input type="hidden" value="" id="image" name="image"/>
             </div>
         </div>
     </div>
+
     <div class="layui-form-item" style="float: bottom">
         <div class="layui-inline">
             <label class="layui-form-label"></label>
@@ -106,7 +115,7 @@
     {{#  } else if(d.type == 2) { }}
     <a target="_blank" href="/pet/detail?id={{ d.objectId }}">{{ d.title }}</a>
     {{#  } else { }}
-        {{ d.title }}
+    {{ d.title }}
     {{#  }  }}
 </script>
 
