@@ -47,8 +47,7 @@
                             <p class="min-font">
                       <span class="layui-breadcrumb" lay-separator="-"
                             style="visibility: visible; float: right;margin-bottom: 20px">
-                        <a href="javascript:;">${article.author}</a><span lay-separator="">-</span>
-                        <a href="javascript:;">${article.dateTime}</a>
+                        <a href="http://www.maomihome.com" target="_blank">猫咪之家-${article.author}-${article.dateTime}</a>
                       </span>
                             </p>
                         </div>
@@ -70,6 +69,9 @@
                                         <span style="font-size: xx-small">来源：<a href="http://www.maomihome.com/"><b>猫咪之家网</b></a>，内容受到版权保护，如若复制将会追究法律责任。</span>
                                     </#if>
                                 </h6>
+                                <h7>
+                                    <span ><a href="http://www.maomihome.com/" style="color: #00C0F7" target="_blank">www.maomihome.com</a></span>
+                                </h7>
                         </div>
                     </div>
                 </div>

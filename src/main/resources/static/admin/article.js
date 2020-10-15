@@ -68,22 +68,6 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
 
     });
 
-    // 添加
-    form.on('submit(add_btn)', function (formData) {
-        layer.open({
-            type: 1,
-            title: '添加评论',
-            area: ['600px', '300px'],
-            content: $('#test2'),
-            btn: '添加'
-            , yes: function (index, layero) {
-                // debugger
-                addOrUpdate(index);
-            }
-        });
-        return false;
-    });
-
     //加载table
     function reloadTable() {
         var formData = form.val("search_form");
@@ -93,39 +77,6 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
                 curr: 1 //重新从第 1 页开始
             }
         }); //只重载数据
-    }
-
-    //添加或者保存
-    function addOrUpdate(index) {
-        var formData = form.val("add_form");
-        if (formData.content == '') {
-            layer.msg('评论内容不可以为空', {icon: 2});
-            return;
-        }
-
-        if (formData.dynamicId == '') {
-            layer.msg('动态ID不可以为空', {icon: 2});
-            return;
-        }
-        $.ajax({
-            url: "/comment/save",
-            data: formData,
-            type: "post",
-            dataType: "json",
-            success: function (data) {
-                if (data.code == 0) {
-                    layer.close(index);
-                    layer.msg(data.msg);
-                    reloadTable();
-                    $('#test2')[0].reset()
-                } else {
-                    layer.msg(data.msg, {icon: 2});
-                }
-            },
-            error: function (data) {
-                // layer.msg('你确定删除么1111？' + index);
-            }
-        });
     }
 
     function ajaxGet(url) {

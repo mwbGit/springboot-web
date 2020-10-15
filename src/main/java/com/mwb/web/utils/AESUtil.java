@@ -28,12 +28,16 @@ public class AESUtil {
         return encrypt(content, COMMON_KEY);
     }
 
+    public static String encryptId(long id) {
+        return encrypt(String.valueOf(id), COMMON_KEY);
+    }
+
     /**
      * AES 加密操作
      *
      * @return 返回Base64转码后的加密数据
      */
-    public static String encrypt(String content, String key) {
+    private static String encrypt(String content, String key) {
         try {
             Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);// 创建密码器
 
@@ -55,10 +59,18 @@ public class AESUtil {
         return decrypt(content, COMMON_KEY);
     }
 
+    public static long decryptId(String content) {
+        String result = decrypt(content, COMMON_KEY);
+        if (result == null) {
+            return 0;
+        }
+        return Long.parseLong(result);
+    }
+
     /**
      * AES 解密操作
      */
-    public static String decrypt(String content, String key) {
+    private static String decrypt(String content, String key) {
 
         try {
             // 实例化
@@ -107,8 +119,8 @@ public class AESUtil {
     public static void main(String[] args) {
         String content = "2";
         System.out.println("原始内容:" + content);
-        String s1 = AESUtil.encrypt(content);
+        String s1 = AESUtil.encryptId(22222);
         System.out.println("加密后:" + s1);
-        System.out.println("解密后:" + AESUtil.decrypt(s1));
+        System.out.println("解密后:" + AESUtil.decryptId(s1));
     }
 }

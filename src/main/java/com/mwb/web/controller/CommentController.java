@@ -38,7 +38,7 @@ public class CommentController {
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/save")
-    public ApiResult save(UserInfo userInfo, CommentInfo commentInfo, @RequestParam("userType") int userType) {
+    public ApiResult save(UserInfo userInfo, CommentInfo commentInfo, @RequestParam("userType") long userType) {
         if (userType == 0) {
             commentInfo.setUserId(userInfo.getId());
             commentInfo.setUserName(userInfo.getName());

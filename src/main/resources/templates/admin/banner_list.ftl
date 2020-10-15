@@ -51,6 +51,7 @@
                     <option value="0">图片</option>
                     <option value="1">文章</option>
                     <option value="2">品种</option>
+                    <option value="3">动态</option>
                     <#--                    <option value="3">动态</option>-->
                 </select>
             </div>
@@ -64,7 +65,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">链接</label>
             <div class="layui-input-inline"  style="width: 380px;">
-                <input type="text" name="url" autocomplete="off" class="layui-input" placeholder="选填">
+                <input type="text" id="url" name="url" autocomplete="off" class="layui-input" placeholder="选填">
             </div>
         </div>
     </div>
@@ -91,6 +92,7 @@
 </form>
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
+<img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
 
 <script src="../../static/layui.js"></script>
 <script src="../../static/admin/banner.js"></script>

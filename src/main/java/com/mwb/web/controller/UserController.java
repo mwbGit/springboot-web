@@ -80,8 +80,8 @@ public class UserController {
             user.setAccount(null);
             user.setPassword(null);
             if (user.isFrozen()) {
-                user.setName(UserRobot.DEFAULT_NAME);
-                user.setHeadImg(UserRobot.DEFAULT_AVATAR);
+                user.setName(UserRobot.DEFAULT.getName());
+                user.setHeadImg(UserRobot.DEFAULT.getHeadImg());
             }
             query.setPageSize(10);
             query.setUserId(userId);

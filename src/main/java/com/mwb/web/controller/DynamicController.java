@@ -141,7 +141,7 @@ public class DynamicController {
 
     @WebLogin(option = WebLogin.Option.ADMIN)
     @RequestMapping("/publish")
-    public ApiResult publish(UserInfo userInfo, DynamicInfo dynamicInfo, @RequestParam("userType") int userType) {
+    public ApiResult publish(UserInfo userInfo, DynamicInfo dynamicInfo, @RequestParam("userType") long userType) {
         if (StringUtils.isBlank(dynamicInfo.getTitle())) {
             return ApiResult.failed("请输入标题");
         } else if (StringUtils.isBlank(dynamicInfo.getContent())) {

@@ -1,6 +1,5 @@
 package com.mwb.web.crawlers;
 
-import cn.wanghaomiao.seimi.annotation.Crawler;
 import cn.wanghaomiao.seimi.core.Seimi;
 import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;
 import cn.wanghaomiao.seimi.struct.Request;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
  * @author mengweibo@kanzhun.com
  * @create 2020/10/14
  */
-@Crawler(name = "dynamic")
+//@Crawler(name = "dynamic")
 public class DynamicCrawler extends BaseSeimiCrawler {
 
     Map<String, PetPicture> map = new HashMap<>();
@@ -44,9 +43,6 @@ public class DynamicCrawler extends BaseSeimiCrawler {
         return new String[]{""};
     }
 
-    {
-
-    }
 
     @Override
     public void start(Response response) {

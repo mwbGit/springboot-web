@@ -1,15 +1,13 @@
 package com.mwb.web.model;
 
+import com.mwb.web.model.common.BaseBean;
 import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
 import lombok.ToString;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 描述:
@@ -20,13 +18,8 @@ import java.util.Date;
 @ToString
 @Data
 @Table(name = "message_info")
-public class MessageInfo implements Serializable {
+public class MessageInfo extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "object_id")
     private long objectId;
@@ -58,12 +51,6 @@ public class MessageInfo implements Serializable {
     @Column(name = "deleted")
     private int deleted;
 
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
-
     public String getTypeDesc() {
         switch (type) {
             case 0:
@@ -79,6 +66,6 @@ public class MessageInfo implements Serializable {
 
 
     public String getTimeDesc() {
-        return DateTimeUtils.fromTodayDesc(addTime);
+        return DateTimeUtils.fromTodayDesc(getAddTime());
     }
 }

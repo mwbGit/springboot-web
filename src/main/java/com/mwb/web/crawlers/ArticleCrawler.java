@@ -1,6 +1,5 @@
 package com.mwb.web.crawlers;
 
-import cn.wanghaomiao.seimi.annotation.Crawler;
 import cn.wanghaomiao.seimi.core.Seimi;
 import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;
 import cn.wanghaomiao.seimi.struct.Response;
@@ -19,7 +18,7 @@ import java.util.Random;
  * @author mengweibo@kanzhun.com
  * @create 2020/10/14
  */
-@Crawler(name = "article")
+//@Crawler(name = "article")
 public class ArticleCrawler extends BaseSeimiCrawler {
 
 //    @Autowired

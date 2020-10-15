@@ -51,11 +51,11 @@
                     <div class="layui-input-inline" style="width: 480px;">
                         <select name="userType" style="width: 30px">
                             <option value="0">当前用户</option>
-                            <option value="1">用户A</option>
-                            <option value="2">用户B</option>
-                            <option value="3">用户C</option>
-                            <option value="4">用户D</option>
-                            <option value="5">用户E</option>
+                            <option value="11">猫范儿</option>
+                            <option value="12">猫侠归来</option>
+                            <option value="13">喵小猫</option>
+                            <option value="14">魅力小猫</option>
+                            <option value="15">一根藤上七只猫</option>
                         </select>
                     </div>
                 </div>

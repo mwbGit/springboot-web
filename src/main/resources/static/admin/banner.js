@@ -57,7 +57,7 @@ layui.use(['form', 'layer', 'table', 'upload','util'], function () {
                 "type[option]": data.type,
                 "objectId": data.objectId
             });
-            $('#demo1').attr("src", data.image)
+            $('#demo1').attr("src", data.image);
             layer.open({
                 type: 1,
                 title: '编辑轮播',
@@ -89,11 +89,15 @@ layui.use(['form', 'layer', 'table', 'upload','util'], function () {
     util.event('lay-active', {
         e1: function () {
             var url = this.getAttribute('lay-data');
+            $("#displayimg").attr("src", url);
+            var height = $("#displayimg").height();
+            var width = $("#displayimg").width();
             layer.open({
                 type: 1,
                 title: false,
                 closeBtn: 1,
                 shadeClose: true,
+                area: [width + 'px', height + 'px'], //宽高
                 content: "<img alt=" + name + " title=" + name + " src=" + url + " />"
             });
         },
@@ -129,6 +133,7 @@ layui.use(['form', 'layer', 'table', 'upload','util'], function () {
         , done: function (res, index, upload) { //上传后的回调
             if (res.code == 0) {
                 $('#image').val(res.data);
+                $('#url').val(res.data)
             } else {
                 layer.msg(res.msg, {icon: 2});
             }

@@ -272,6 +272,12 @@
                     <#else >
                         暂无动态
                 </#if>
+                <div class="layui-col-md12" style="text-align: center; margin-top: 55px">
+                    <h7>
+                        <span ><a href="http://www.maomihome.com/" target="_blank">猫咪之家</a></span><br>
+                        <span ><a href="http://www.maomihome.com/" style="color: #00C0F7" target="_blank">www.maomihome.com</a></span>
+                    </h7>
+                </div>
             </div>
         </div>
     </div>

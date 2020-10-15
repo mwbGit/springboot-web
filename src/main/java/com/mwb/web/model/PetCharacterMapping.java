@@ -1,13 +1,12 @@
 package com.mwb.web.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mwb.web.model.common.BaseBean;
 import lombok.Data;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 描述:
@@ -18,13 +17,8 @@ import java.util.Date;
 
 @Data
 @Table(name = "pet_character_mapping")
-public class PetCharacterMapping implements Serializable {
+public class PetCharacterMapping extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "pet_id")
     private long petId;
@@ -32,9 +26,4 @@ public class PetCharacterMapping implements Serializable {
     @Column(name = "character_id")
     private long characterId;
 
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
 }

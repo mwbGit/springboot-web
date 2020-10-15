@@ -19,10 +19,10 @@ import java.util.List;
 @ToString
 public class AccessLimit {
 
-    String ip;
+    private String ip;
 
-    String uri;
+    private String uri;
 
-    List<Long> times;
+    private List<Long> times;
 
 }

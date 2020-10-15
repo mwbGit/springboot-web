@@ -64,36 +64,7 @@
         </div>
     </div>
 </form>
-<form class="layui-form" action="" id="test2" style="display: none;" lay-filter="add_form">
-    </br>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">动态ID:</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <input type="text" name="dynamicId" autocomplete="off" class="layui-input" lay-verify="required">
-            </div>
-            <label class="layui-form-label" style="width: 100px">评论的用户:</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <select name="userType" style="width: 30px">
-                    <option value="0">当前用户</option>
-                    <option value="1">用户A</option>
-                    <option value="2">用户B</option>
-                    <option value="3">用户C</option>
-                    <option value="4">用户D</option>
-                    <option value="5">用户E</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">内容:</label>
-            <div class="layui-input-inline" style="width: 500px;">
-                <textarea type="text" name="content" rows="5" class="layui-textarea" lay-verify="required"></textarea>
-            </div>
-        </div>
-    </div>
-</form>
+
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
 

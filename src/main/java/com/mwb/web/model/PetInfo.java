@@ -1,16 +1,14 @@
 package com.mwb.web.model;
 
+import com.mwb.web.model.common.BaseBean;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,13 +20,8 @@ import java.util.List;
 
 @Data
 @Table(name = "pet_info")
-public class PetInfo implements Serializable {
+public class PetInfo extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "name")
     private String name;
@@ -47,12 +40,6 @@ public class PetInfo implements Serializable {
 
     @Column(name = "level")
     private int level;
-
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
 
     @Column(name = "trait")
     private String trait;

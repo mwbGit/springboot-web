@@ -1,14 +1,12 @@
 package com.mwb.web.model;
 
+import com.mwb.web.model.common.BaseBean;
 import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 描述:
@@ -19,13 +17,9 @@ import java.util.Date;
 
 @Data
 @Table(name = "article_info")
-public class ArticleInfo implements Serializable {
+public class ArticleInfo extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
 
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "author")
     private String author;
@@ -54,22 +48,16 @@ public class ArticleInfo implements Serializable {
     @Column(name = "pet_id")
     private int petId;
 
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
-
     public String getBodyDesc() {
         return body.replaceAll("<img[^>]*>", " ");
     }
 
     public String getTimeDesc() {
-        return DateTimeUtils.fromTodayDesc(addTime);
+        return DateTimeUtils.fromTodayDesc(getAddTime());
     }
 
     public String getDateTime() {
-        return DateTimeUtils.formatYYYYMMDD(addTime);
+        return DateTimeUtils.formatYYYYMMDD(getAddTime());
     }
 
     public static void main(String[] args) {

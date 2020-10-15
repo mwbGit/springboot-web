@@ -1,6 +1,6 @@
 package com.mwb.web.model.common;
 
-import org.apache.commons.lang3.StringUtils;
+import com.mwb.web.model.UserInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,25 +12,28 @@ import java.util.Map;
  * @create 2020/8/21
  */
 public class UserRobot {
-    public static final String DEFAULT_AVATAR = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2078562713,2600960194&fm=26&gp=0.jpg";
-    public static final String DEFAULT_NAME = "萌宠游客";
-    private static final Map<Integer, String> NAME_MAP = new HashMap<>(3);
-    private static final Map<Integer, String> IMG_MAP = new HashMap<>(3);
+    public static final UserInfo DEFAULT = new UserInfo(2, "游客猫", "http://img.boqiicdn.com/Data/BK/P/img79491416973896.jpg");
+    private static final Map<Long, UserInfo> ROBOT_MAP = new HashMap<>(6);
 
     static {
-        NAME_MAP.put(1, "只宠你");
-        NAME_MAP.put(2, "宠爱一员");
-        NAME_MAP.put(3, "着耳朵");
-        IMG_MAP.put(1, "https://imgs-xwz.coohua.com/20200819/1d38b3875aeeeb1a06ad9a1f8e2a522f.jpg");
-        IMG_MAP.put(2, "https://imgs-xwz.coohua.com/20200819/1d38b3875aeeeb1a06ad9a1f8e2a522f.jpg");
-        IMG_MAP.put(3, "https://imgs-xwz.coohua.com/20200819/1d38b3875aeeeb1a06ad9a1f8e2a522f.jpg");
+        ROBOT_MAP.put(11L, new UserInfo(1, "猫范儿", "http://img.boqiicdn.com/Data/BK/P/imagick60751542248890.jpg"));
+        ROBOT_MAP.put(12L, new UserInfo(2, "猫侠归来", "http://img.boqiicdn.com/Data/BK/P/imagick53981542249264.jpg"));
+        ROBOT_MAP.put(13L, new UserInfo(3, "喵小猫", "http://img.boqiicdn.com/Data/BK/P/img49891406109364.jpg"));
+        ROBOT_MAP.put(14L, new UserInfo(4, "魅力小猫", "http://img.boqiicdn.com/Data/BK/P/imagick5801542249763.jpg"));
+        ROBOT_MAP.put(15L, new UserInfo(5, "一根藤上七只猫", "http://img.boqiicdn.com/Data/BK/P/imagick12791473240420.jpg"));
     }
 
-    public static String getImg(int type){
-        return StringUtils.defaultString(IMG_MAP.get(type), IMG_MAP.get(0));
+    public static String getImg(long userId){
+        if (ROBOT_MAP.containsKey(userId)) {
+            return ROBOT_MAP.get(userId).getHeadImg();
+        }
+        return ROBOT_MAP.get(10L).getHeadImg();
     }
 
-    public static String getName(int type){
-        return StringUtils.defaultString(NAME_MAP.get(type), NAME_MAP.get(0));
+    public static String getName(long userId){
+        if (ROBOT_MAP.containsKey(userId)) {
+            return ROBOT_MAP.get(userId).getName();
+        }
+        return ROBOT_MAP.get(10L).getName();
     }
 }

@@ -1,5 +1,6 @@
 package com.mwb.web.model;
 
+import com.mwb.web.model.common.BaseBean;
 import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +21,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Table(name = "praise_info")
-public class PraiseInfo implements Serializable {
+public class PraiseInfo extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "object_id")
     private long objectId;
@@ -40,14 +36,8 @@ public class PraiseInfo implements Serializable {
     @Column(name = "type")
     private int type;
 
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
-
     public String getTimeDesc() {
-        return DateTimeUtils.fromTodayDesc(addTime);
+        return DateTimeUtils.fromTodayDesc(getAddTime());
     }
 
     public PraiseInfo(long objectId, long userId, int type) {

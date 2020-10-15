@@ -1,16 +1,17 @@
 package com.mwb.web.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mwb.web.model.common.BaseBean;
 import com.mwb.web.model.common.UserRobot;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 描述:
@@ -20,14 +21,11 @@ import java.util.Date;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user_info")
-public class UserInfo implements Serializable {
+public class UserInfo extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "account")
     private String account;
@@ -51,6 +49,7 @@ public class UserInfo implements Serializable {
     private int sex;
 
     @Column(name = "password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     /**
@@ -63,16 +62,17 @@ public class UserInfo implements Serializable {
      * 0 普通用户 1 管理员
      */
     @Column(name = "identity")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int identity;
-
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
 
     @Transient
     private int unReadMsgNum;
+
+    public UserInfo(long id, String name, String headImg) {
+        this.id = id;
+        this.name = name;
+        this.headImg = headImg;
+    }
 
     public boolean isFrozen() {
         return status == 2;
@@ -116,6 +116,6 @@ public class UserInfo implements Serializable {
     }
 
     public String getAvatar() {
-        return StringUtils.isNotEmpty(headImg) ? headImg : UserRobot.DEFAULT_AVATAR;
+        return StringUtils.isNotEmpty(headImg) ? headImg : UserRobot.DEFAULT.getHeadImg();
     }
 }

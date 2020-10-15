@@ -1,6 +1,7 @@
 package com.mwb.web.model;
 
 import com.alibaba.fastjson.JSON;
+import com.mwb.web.model.common.BaseBean;
 import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
 import lombok.ToString;
@@ -25,13 +26,8 @@ import java.util.List;
 @Data
 @ToString
 @Table(name = "dynamic_info")
-public class DynamicInfo implements Serializable {
+public class DynamicInfo extends BaseBean implements Serializable {
     private static final long serialVersionUID = -812286384321466835L;
-
-    @Id
-    @KeySql(useGeneratedKeys = true)
-    @Column(name = "id")
-    private long id;
 
     @Column(name = "user_id")
     private long userId;
@@ -60,12 +56,6 @@ public class DynamicInfo implements Serializable {
     @Column(name = "status")
     private int status;
 
-    @Column(name = "add_time", updatable = false)
-    private Date addTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
-
     @Transient
     private List<CommentInfo> comments;
 
@@ -73,7 +63,7 @@ public class DynamicInfo implements Serializable {
     private boolean praised;
 
     public String getTimeDesc() {
-        return DateTimeUtils.fromTodayDesc(addTime);
+        return DateTimeUtils.fromTodayDesc(getAddTime());
     }
 
     public int getCommentNum() {
