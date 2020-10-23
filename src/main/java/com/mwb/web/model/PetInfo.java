@@ -111,5 +111,12 @@ public class PetInfo extends BaseBean implements Serializable {
         return Arrays.asList(defect.split(","));
     }
 
+    private static final String WATERMARK = "?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,size_20,text_54yr5ZKq5LmL5a62,color_FFFFFF,shadow_50,t_100,g_se,x_10,y_10";
 
+    public String getImage() {
+        if (StringUtils.isNoneBlank(image)) {
+            return image + WATERMARK;
+        }
+        return image;
+    }
 }

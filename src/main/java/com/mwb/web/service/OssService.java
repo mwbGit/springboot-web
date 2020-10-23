@@ -37,6 +37,8 @@ public class OssService {
     private boolean mock =true;
     private String DEFAULT_URL = "https://imgs-xwz.coohua.com/20200819/1d38b3875aeeeb1a06ad9a1f8e2a522f.jpg";
 
+    //加水印
+//    https://imgs-xwz.coohua.com/20200824/1598276675516.jpg?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,size_30,text_54yr5ZKq5LmL5a62,color_FFFFFF,shadow_50,t_100,g_se,x_10,y_10
     @Autowired
     private OSSClient ossClient;
 

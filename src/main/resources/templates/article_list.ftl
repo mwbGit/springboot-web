@@ -14,7 +14,7 @@
 <div class="layui-layout layui-layout-admin">
     <#include "include/header.ftl">
     <#--     主体-->
-    <div class="layui-body" style="left:0; margin: 0 50px;">
+    <div class="layui-body" style="left:0; margin: 0 50px;" id="scrollElem">
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md8">

@@ -3,6 +3,7 @@ package com.mwb.web.model;
 import com.mwb.web.model.common.BaseBean;
 import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -60,10 +61,13 @@ public class ArticleInfo extends BaseBean implements Serializable {
         return DateTimeUtils.formatYYYYMMDD(getAddTime());
     }
 
-    public static void main(String[] args) {
-        String str  = "9、金毛犬不挑食，有时候会随便捡起地上的东西吃，这不是<img src=\"https://imgs-xwz.coohua.com/20200819/1d38b3875aeeeb1a06ad9a1f8e2a522f.jpg\" alt=\"7eb5c34d18064d3c4a0640aac680798982dfa5cfde049fbcc8fa446880d75552\">一个好习惯，需要从小就对它进行调教和训练，否则很难制止它的行为。\n";
-        System.out.println(str);
-        str =str.replaceAll("<img[^>]*>", " ");
-        System.out.println(str);
+    private static final String WATERMARK = "?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,size_20,text_54yr5ZKq5LmL5a62,color_FFFFFF,shadow_50,t_100,g_se,x_10,y_10";
+
+
+    public String getImage() {
+        if (StringUtils.isNoneBlank(image)) {
+            return image + WATERMARK;
+        }
+        return image;
     }
 }

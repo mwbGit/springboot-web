@@ -29,7 +29,7 @@
                    style="width: 40%;float: left;margin-right: 10px" class="layui-input">
             <div style="float: left">
                 <img src="/captcha" id="captchaId"> <a href="javascript:;" lay-active="e1"><i
-                            class="layui-icon layui-icon-refresh"></i></a>
+                            class="layui-icon layui-icon-refresh" style="margin: 0px 10px;"></i></a>
             </div>
         </div>
         <div class="layui-input-inline login-btn">
@@ -49,7 +49,7 @@
 
 <#include "include/js.ftl">
 <script type="text/javascript">
-    layui.use(['form', 'layer', 'jquery', 'util'], function () {
+    layui.use(['form', 'layer', 'util'], function () {
 
         // 操作对象
         var form = layui.form;

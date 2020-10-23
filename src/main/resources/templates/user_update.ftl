@@ -19,21 +19,21 @@
                 <legend>修改信息</legend>
             </fieldset>
             <div class="layui-row layui-col-space5">
-                <div class="layui-col-md3">
+                <div class="layui-col-md2">
                 </div>
-                <div class="layui-col-md6">
+                <div class="layui-col-md7">
                     <div class="layui-form" lay-filter="form1">
                         <div class="layui-col-md8">
                             <div class="layui-card">
                                 <div class="layui-card-body" pad15="">
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">账号</label>
+                                        <label class="layui-form-label" style="text-align: center">账号:</label>
                                         <div class="layui-input-inline">
-                                            <label class="layui-form-label" id="account">账号</label>
+                                            <label class="layui-form-label" id="account">账号:</label>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">昵称</label>
+                                        <label class="layui-form-label" style="text-align: center">昵称:</label>
                                         <div class="layui-input-inline">
                                             <input type="text" name="name" lay-verify="required" lay-vertype="tips"
                                                    placeholder="3-16字昵称"
@@ -41,16 +41,16 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">微信</label>
+                                        <label class="layui-form-label" style="text-align: center">微信:</label>
                                         <div class="layui-input-inline">
                                             <input type="text" name="wechat" class="layui-input" placeholder="微信号">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">介绍</label>
-                                        <div class="layui-input-inline" style="width: 400px">
+                                        <label class="layui-form-label" style="text-align: center">介绍:</label>
+                                        <div class="layui-input-inline" style="width: 74%; float: left">
                                             <textarea name="introduce" class="layui-textarea" placeholder="最多1000字"
-                                                      lay-verify="required"></textarea>
+                                                      lay-verify="required" ></textarea>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="layui-col-md4">
                             <div class="layui-upload-list">
-                                <img class="layui-upload-img" id="demo1" style="width: 100px" lay-data="">
+                                <img class="layui-upload-img" id="demo1" style="width: 100%; max-width: 200px" lay-data="">
                             </div>
                         </div>
 

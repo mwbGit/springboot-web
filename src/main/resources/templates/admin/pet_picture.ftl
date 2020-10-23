@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>文章详情</title>
+    <title>猫咪图片</title>
     <link rel="shortcut icon" href="../../static/favicon.ico">
     <link rel="stylesheet" href="../../static/css/layui.css"  media="all">
 </head>
@@ -33,7 +33,8 @@
 </style>
 <body style="margin: 10px 60px 15px 60px;">
 
-<div class="layui-fluid">
+<div class="layui-fluid"  id="scrollElem">
+
     <div class="layui-row layui-col-space15">
 
         <div class="layui-col-md12">
@@ -100,6 +101,7 @@
 
         flow.load({
             elem: '#t_body' //指定列表容器
+            ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）

@@ -6,15 +6,12 @@ import com.mwb.web.utils.DateTimeUtils;
 import lombok.Data;
 import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -92,4 +89,7 @@ public class DynamicInfo extends BaseBean implements Serializable {
     public void setImages(String images) {
         this.images = images;
     }
+
+
+
 }

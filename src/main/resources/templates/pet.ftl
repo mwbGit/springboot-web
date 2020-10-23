@@ -9,6 +9,8 @@
     <title>猫咪品种-猫咪之家</title>
     <#assign keyword = ",猫品种">
     <#include "include/css.ftl">
+    <link rel="stylesheet" href="../static/css/style.css">
+
 </head>
 <body class="layui-layout-body" >
 <div class="layui-layout layui-layout-admin">

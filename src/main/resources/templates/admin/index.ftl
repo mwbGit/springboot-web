@@ -123,7 +123,7 @@
 </div>
 <script src="../../static/layui.js"></script>
 <script>
-    layui.use(['element', 'jquery', 'util'], function () {
+    layui.use(['element', 'util'], function () {
         var element = layui.element;
         var $ = layui.jquery;
         var util = layui.util;

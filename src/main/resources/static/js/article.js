@@ -18,6 +18,7 @@ layui.use(['layer', 'util', 'flow'], function () {
 
     flow.load({
         elem: '#t_body' //指定列表容器
+        ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
         , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
             var lis = [];
             //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）

@@ -87,7 +87,7 @@
 
 <#include "include/js.ftl">
 <script type="text/javascript">
-    layui.use(['form', 'jquery', 'layer', 'util'], function () {
+    layui.use(['form', 'layer', 'util'], function () {
         var form = layui.form;
         var $ = layui.jquery;
         var layer = layui.layer;

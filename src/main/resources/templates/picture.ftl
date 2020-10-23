@@ -13,16 +13,17 @@
     .cmdlist-container img {
         max-width: 320px;
         max-height: 160px;
+        height: 100%;
     }
 
     .cmdlist-container {
-        margin: 5px 5px
+        margin: 2px
     }
 </style>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <#include "include/header.ftl">
-    <div class="layui-body" style="left:0; margin: 0 50px;">
+    <div class="layui-body" style="left:0; margin: 0 50px;" id="scrollElem">
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
 
@@ -67,18 +68,21 @@
         });
 
         flow.load({
+            isAuto: true,
             elem: '#t_body' //指定列表容器
+            ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
+                var pageSize = 30;
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                $.get('/pet/picture/search?pageSize=50&page=' + page, function (res) {
+                $.get('/pet/picture/search?pageSize=' + pageSize + '&page=' + page, function (res) {
                     //假设你的列表返回在data集合中
                     layui.each(res.data, function (index, val) {
                         var str = '' +
-                            '<div class="layui-input-inline">' +
-                            '<div class="cmdlist-container">' +
+                            '<div class="layui-input-inline cmdlist-container">' +
+                            '<div class="">' +
                             '<a href="javascript:;" lay-active="e1" lay-data="' + val.image + '">' +
-                            '<img  src="' + val.image + '" alt="' + val.title + '" title="' + val.title + '" style="max-height: 300px; height: 100%" > ' +
+                            '<img  src="' + val.image + '" alt="' + val.title + '" title="' + val.title + '"  > ' +
                             ' </a>' +
                             '</div>' +
                             '</div>';

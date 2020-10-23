@@ -16,6 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HtmlController {
 
+    @RequestMapping(value = {"/index.html", "/"})
+    public ModelAndView index(UserInfo userInfo) {
+        ModelAndView modelAndView = new ModelAndView("/index");
+        if (userInfo != null) {
+            modelAndView.addObject("userName", userInfo.getName());
+            modelAndView.addObject("avatar", userInfo.getAvatar());
+            modelAndView.addObject("admin", userInfo.isAdmin());
+            modelAndView.addObject("unRead", userInfo.getUnReadMsgNum() > 0);
+        }
+        return modelAndView;
+    }
+
     @RequestMapping("/html/{page}")
     public ModelAndView page(UserInfo userInfo, @PathVariable("page") String page) {
         page = page.substring(0, page.contains(".") ? page.indexOf(".") : page.length());
@@ -44,21 +56,8 @@ public class HtmlController {
         return null;
     }
 
-    @RequestMapping("/index.html")
-    public ModelAndView index(UserInfo userInfo) {
-        ModelAndView modelAndView = new ModelAndView("/index");
-        if (userInfo != null) {
-            modelAndView.addObject("userName", userInfo.getName());
-            modelAndView.addObject("avatar", userInfo.getAvatar());
-            modelAndView.addObject("admin", userInfo.isAdmin());
-            modelAndView.addObject("unRead", userInfo.getUnReadMsgNum() > 0);
-        }
-        return modelAndView;
-    }
-
     @RequestMapping("/baidu_verify_VuY12dJa6l.html")
     public ModelAndView baidu() {
-        ModelAndView modelAndView = new ModelAndView("/baidu_verify_VuY12dJa6l");
-        return modelAndView;
+        return new ModelAndView("/baidu_verify_VuY12dJa6l");
     }
 }

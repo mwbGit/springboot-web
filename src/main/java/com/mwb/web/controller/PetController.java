@@ -80,7 +80,7 @@ public class PetController {
 
     @RequestMapping("/picture/hot")
     public ApiResult searchHot() {
-        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(30, "level"));
+        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(20, "level"));
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
 

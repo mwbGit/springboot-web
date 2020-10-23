@@ -18,7 +18,7 @@
                 </#if>
             </li>
             <li class="layui-nav-item" lay-unselect="">
-                <a lay-href="/html/msg" lay-text="消息中心">
+                <a href="/html/msg.html" lay-text="消息中心">
                     <i class="layui-icon layui-icon-notice"></i>
                     <#if unRead == true>
                         <span class="layui-badge-dot"></span>
@@ -32,10 +32,10 @@
                     ${userName}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a lay-href="/html/user_update">修改信息</a></dd>
-                    <dd><a lay-href="/html/pwd_update">修改密码</a></dd>
+                    <dd><a href="/html/user_update.html">修改信息</a></dd>
+                    <dd><a href="/html/pwd_update.html">修改密码</a></dd>
                     <dd><a href="/login/out">退出登录</a></dd>
-                    <dd><a lay-href="/html/feedback">留言反馈</a></dd>
+                    <dd><a href="/html/feedback.html">留言反馈</a></dd>
                 </dl>
             </li>
         <#else>

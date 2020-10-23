@@ -1,4 +1,4 @@
-layui.use(['layer', 'jquery', 'util'], function () {
+layui.use(['layer', 'util'], function () {
     var $ = layui.jquery;
     var util = layui.util;
 

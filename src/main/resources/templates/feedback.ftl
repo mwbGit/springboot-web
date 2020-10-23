@@ -49,7 +49,7 @@
 </div>
 <#include "include/js.ftl">
 <script type="text/javascript">
-    layui.use(['form', 'jquery', 'layer'], function () {
+    layui.use(['form', 'layer'], function () {
         var form = layui.form;
         var $ = layui.jquery;
         var layer = layui.layer;

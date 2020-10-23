@@ -4,13 +4,13 @@ layui.use(['form', 'upload', 'layer', 'util', 'flow', 'element'], function () {
     var comId = 1;
     reloadMsg();
 
-
     flow.load({
         elem: '#t_body' //指定列表容器
+        ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
         , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
             var lis = [];
             //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-            $.get('/dynamic/search?pageSize=5&page=' + page, function (res) {
+            $.get('/dynamic/search?pageSize=10&page=' + page, function (res) {
                 //假设你的列表返回在data集合中
                 layui.each(res.data, function (index, val) {
                     var str = getListHtml(val);
@@ -87,7 +87,7 @@ layui.use(['form', 'upload', 'layer', 'util', 'flow', 'element'], function () {
             })
         }
         return false;
-    })
+    });
 
     // 事件监听
     util.event('lay-active', {

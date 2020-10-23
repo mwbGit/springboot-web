@@ -153,7 +153,7 @@
 <#include "include/js.ftl">
 
 <script>
-    layui.use(['layer', 'util', 'jquery', 'carousel', 'rate'], function () {
+    layui.use(['layer', 'util', 'carousel', 'rate'], function () {
         var $ = layui.jquery, util = layui.util, carousel = layui.carousel;
         var rate = layui.rate;
 
