@@ -93,7 +93,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" href="/user/info?dynamicId={{ d.id }}" target="_blank">查看</a>
+    <a class="layui-btn layui-btn-xs" href="/user/{{ d.userId }}.html?dynamicId={{ d.id }}" target="_blank">查看</a>
     {{#  if(d.status == 0){ }}
     <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="unPass">驳回</a>

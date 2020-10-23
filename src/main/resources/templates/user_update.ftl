@@ -1,83 +1,93 @@
 <!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]-->
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>修改信息</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css" media="all">
+    <title>修改信息-猫咪之家</title>
+    <#assign keyword = "">
+    <#include "include/css.ftl">
 </head>
-<body style="margin: 10px 60px 15px 60px;">
-<div class="layui-fluid">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-        <legend>修改信息</legend>
-    </fieldset>
-    <div class="layui-row layui-col-space5">
-        <div class="layui-col-md3">
-        </div>
-        <div class="layui-col-md6">
-            <div class="layui-form" lay-filter="form1">
-                <div class="layui-col-md8">
-                    <div class="layui-card">
-                        <div class="layui-card-body" pad15="">
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">账号</label>
-                                <div class="layui-input-inline">
-                                    <label class="layui-form-label" id="account">账号</label>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">昵称</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="name" lay-verify="required" lay-vertype="tips" placeholder="3-16字昵称"
-                                           class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">微信</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="wechat" class="layui-input" placeholder="微信号">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">介绍</label>
-                                <div class="layui-input-inline" style="width: 400px">
-                                    <textarea  name="introduce" class="layui-textarea" placeholder="最多1000字" lay-verify="required"></textarea>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label"></label>
-                                <div class="layui-input-inline">
-                                    <div class="layui-upload">
-                                        <button type="button" class="layui-btn" id="test11" style="font-size: small">
-                                            选择头像
-                                        </button>
-                                        <button class="layui-btn" type="button" lay-submit lay-filter="save" id="formDemo">
-                                            保存
-                                        </button>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <#include "include/header.ftl">
+    <div class="layui-body" style="left:0; margin: 0 50px;">
+        <div class="layui-fluid">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>修改信息</legend>
+            </fieldset>
+            <div class="layui-row layui-col-space5">
+                <div class="layui-col-md3">
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form" lay-filter="form1">
+                        <div class="layui-col-md8">
+                            <div class="layui-card">
+                                <div class="layui-card-body" pad15="">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">账号</label>
+                                        <div class="layui-input-inline">
+                                            <label class="layui-form-label" id="account">账号</label>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">昵称</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="name" lay-verify="required" lay-vertype="tips"
+                                                   placeholder="3-16字昵称"
+                                                   class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">微信</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="wechat" class="layui-input" placeholder="微信号">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">介绍</label>
+                                        <div class="layui-input-inline" style="width: 400px">
+                                            <textarea name="introduce" class="layui-textarea" placeholder="最多1000字"
+                                                      lay-verify="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"></label>
+                                        <div class="layui-input-inline">
+                                            <div class="layui-upload">
+                                                <button type="button" class="layui-btn" id="test11"
+                                                        style="font-size: small">
+                                                    选择头像
+                                                </button>
+                                                <button class="layui-btn" type="button" lay-submit lay-filter="save"
+                                                        id="formDemo">
+                                                    保存
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                    </div>
+                        <div class="layui-col-md4">
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" id="demo1" style="width: 100px" lay-data="">
+                            </div>
+                        </div>
 
-                </div>
-                <div class="layui-col-md4">
-                    <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="demo1" style="width: 100px" lay-data="">
                     </div>
                 </div>
-
+                <div class="layui-col-md3">
+                </div>
             </div>
         </div>
-        <div class="layui-col-md3">
-        </div>
     </div>
+    <#include "include/footer.ftl">
 </div>
-<script src="../static/layui.js"></script>
+<#include "include/js.ftl">
 <script type="text/javascript">
     layui.use(['form', 'upload', 'layer', 'util'], function () {
         var $ = layui.jquery, layer = layui.layer, upload = layui.upload, form = layui.form;

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]--><html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>萌宠图片</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css" media="all">
+    <title>萌宠图片-猫咪之家</title>
+    <#assign keyword = ",猫咪图片">
+    <#include "include/css.ftl">
 </head>
 <style type="text/css">
     .cmdlist-container img {
@@ -20,26 +19,31 @@
         margin: 5px 5px
     }
 </style>
-<body style="margin: 10px 60px 15px 60px;">
-
-<div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-
-        <div class="layui-col-md12">
-            <fieldset class="layui-elem-field layui-field-title">
-                <legend>最新图片</legend>
-            </fieldset>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <#include "include/header.ftl">
+    <div class="layui-body" style="left:0; margin: 0 50px;">
+        <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
-                <div id="t_body">
 
+                <div class="layui-col-md12">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>最新图片</legend>
+                    </fieldset>
+                    <div class="layui-row layui-col-space15">
+                        <div id="t_body">
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
+            </div>
+            <img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
+        </div>
     </div>
-    <img alt="" style="display:none" id="displayimg" src=""/>
+    <#include "include/footer.ftl">
 </div>
-<script src="../static/layui.js"></script>
+<#include "include/js.ftl">
 
 <script>
     layui.use(['layer', 'util', 'flow'], function () {
@@ -57,7 +61,7 @@
                     closeBtn: 1,
                     shadeClose: true,
                     area: [width + 'px', height + 'px'], //宽高
-                    content: "<img alt=" + name + " title=" + name + " src=" + url + " />"
+                    content: '<img alt="' + name + '" title="' + name + '" src="' + url + '" />'
                 });
             }
         });
@@ -67,14 +71,14 @@
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                $.get('/pet/picture/search?page=' + page, function (res) {
+                $.get('/pet/picture/search?pageSize=50&page=' + page, function (res) {
                     //假设你的列表返回在data集合中
                     layui.each(res.data, function (index, val) {
                         var str = '' +
                             '<div class="layui-input-inline">' +
                             '<div class="cmdlist-container">' +
                             '<a href="javascript:;" lay-active="e1" lay-data="' + val.image + '">' +
-                            '<img  src="' + val.image + '" alt="' + val.title + '" title="' + val.title + '"> ' +
+                            '<img  src="' + val.image + '" alt="' + val.title + '" title="' + val.title + '" style="max-height: 300px; height: 100%" > ' +
                             ' </a>' +
                             '</div>' +
                             '</div>';

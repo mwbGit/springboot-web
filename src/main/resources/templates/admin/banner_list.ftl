@@ -113,9 +113,9 @@
 
 <script type="text/html" id="sexTp3">
     {{#  if(d.type == 1){ }}
-    <a target="_blank" href="/article/detail?id={{ d.objectId }}">{{ d.title }}</a>
+    <a target="_blank" href="/article/{{ d.objectId }}.html">{{ d.title }}</a>
     {{#  } else if(d.type == 2) { }}
-    <a target="_blank" href="/pet/detail?id={{ d.objectId }}">{{ d.title }}</a>
+    <a target="_blank" href="/pet/{{ d.objectId }}.html">{{ d.title }}</a>
     {{#  } else { }}
     {{ d.title }}
     {{#  }  }}

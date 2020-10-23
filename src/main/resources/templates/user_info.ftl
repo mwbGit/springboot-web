@@ -1,16 +1,14 @@
 <!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]-->
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>用户主页</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css" media="all">
-    <link rel="stylesheet" href="../static/css/forum.css" media="all">
-
+    <title>${userInfo.name}-猫咪之家</title>
+    <#assign keyword = ",猫友">
+    <#include "include/css.ftl">
 </head>
 <style type="text/css">
     .cmdlist-container img {
@@ -33,259 +31,273 @@
         text-align: center;
     }
 </style>
-<body style="margin: 50px 60px 15px 60px;">
-
-<div class="layui-fluid">
-    <div class="layui-row layui-col-space8">
-        <div class="layui-col-md2">
-            <div class="layadmin-homepage-panel layadmin-homepage-shadow">
-                <div class="layui-card text-center">
-                    <div class="layui-card-body">
-                        <#if userInfo !>
-                            <div class="layadmin-homepage-pad-ver">
-                                <img class="layadmin-homepage-pad-img" src="${userInfo.avatar}"
-                                     width="96" height="96">
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <#include "include/header.ftl">
+    <div class="layui-body" style="left:0; margin: 0 50px;">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space8">
+                <div class="layui-col-md2">
+                    <div class="layadmin-homepage-panel layadmin-homepage-shadow">
+                        <div class="layui-card text-center">
+                            <div class="layui-card-body">
+                                <#if userInfo !>
+                                    <div class="layadmin-homepage-pad-ver">
+                                        <img class="layadmin-homepage-pad-img" src="${userInfo.avatar}"
+                                             width="96" height="96">
+                                    </div>
+                                    <a href="/user/${userInfo.id?c}.html"><h4
+                                                class="layadmin-homepage-font">${userInfo.name}</h4></a>
+                                    <br>
+                                    <button class="layui-btn layui-btn-fluid" lay-active='e4' lay-id="${userId}">发私信
+                                    </button>
+                                <#else >
+                                </#if>
                             </div>
-                            <a href="/user/info?userId=${userInfo.id}"><h4 class="layadmin-homepage-font">${userInfo.name}</h4></a>
-                            <br>
-                            <button class="layui-btn layui-btn-fluid" lay-active ='e4' lay-id="${userId}">发私信</button>
-                        <#else >
-                        </#if>
+                        </div>
+                        <p class="layadmin-homepage-about">
+                            关于我
+                        </p>
+                        <div class="layadmin-homepage-pad-hor">
+                            <mdall>
+                                <#if userInfo !>
+                                    ${userInfo.introduce}
+                                <#else >
+                                    暂无介绍
+                                </#if>
+                            </mdall>
+                        </div>
                     </div>
                 </div>
-                <p class="layadmin-homepage-about">
-                    关于我
-                </p>
-                <div class="layadmin-homepage-pad-hor">
-                    <mdall>
-                        <#if userInfo !>
-                            ${userInfo.introduce}
-                        <#else >
-                            暂无介绍
-                        </#if>
-                    </mdall>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md10">
-            <div class="layui-fluid layadmin-homepage-content">
-                <div class="layui-row layui-col-space20 layadmin-homepage-list-imgtxt">
-                    <div class="layui-col-md9">
-                        <div class="grid-demo">
-                            <#if dynamicInfo !>
+                <div class="layui-col-md10">
+                    <div class="layui-fluid layadmin-homepage-content">
+                        <div class="layui-row layui-col-space20 layadmin-homepage-list-imgtxt">
+                            <div class="layui-col-md9">
+                                <div class="grid-demo">
+                                    <#if dynamicInfo !>
 
-                                <div class="panel-body layadmin-homepage-shadow">
-                                    <a href="javascript:;" class="media-left">
-                                        <img src="${dynamicInfo.headImg}" height="46px"
-                                             width="46px">
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="pad-btm">
-                                            <p class="fontColor">
-                                                <a href="javascript:;">${dynamicInfo.userName}</a> &nbsp; 发布动态 &nbsp;<span>${dynamicInfo.title}</span>
-                                            </p>
-                                            <p class="min-font"><span class="layui-breadcrumb" style="visibility: visible;">
+                                        <div class="panel-body layadmin-homepage-shadow">
+                                            <a href="javascript:;" class="media-left">
+                                                <img src="${dynamicInfo.headImg}" height="46px"
+                                                     width="46px">
+                                            </a>
+                                            <div class="media-body">
+                                                <div class="pad-btm">
+                                                    <p class="fontColor">
+                                                        <a href="javascript:;">${dynamicInfo.userName}</a> &nbsp; 发布动态
+                                                        &nbsp;<span>${dynamicInfo.title}</span>
+                                                    </p>
+                                                    <p class="min-font"><span class="layui-breadcrumb"
+                                                                              style="visibility: visible;">
                                             <a href="javascript:;">${dynamicInfo.timeDesc}</a></span></p>
-                                        </div>
-                                        <p>${dynamicInfo.content}
-                                        <#if dynamicInfo.imageUrls !>
-                                                <#list dynamicInfo.imageUrls as url>
-                                                    <img class="h-img" src="${url}" style="width: 100%;">
-                                                </#list>
-                                        </#if>
-                                        <#--                                    点赞评论-->
-                                        </p>
-                                        <div class="media">
-                                            <div class="media-right">
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:;" lay-active="e3" lay-id="${dynamicInfo.id}" lay-data="${dynamicInfo.praised}">
-                                                            <#if dynamicInfo.praised>
-                                                                <i class="layui-icon layui-icon-heart-fill"></i>
-                                                            <#else >
-                                                                <i class="layui-icon layui-icon-heart"></i>
-                                                            </#if>
-                                                        </a>
-                                                        <span>${dynamicInfo.praiseNum}</span>
-                                                    </li>
-                                                    <li><a href="javascript:;" lay-active="e2" lay-id="${dynamicInfo.id}">
-                                                            <i class="layui-icon layui-icon-reply-fill"></i>
-                                                        </a>
-                                                        <span>${dynamicInfo.commentNum}</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <#--                                    评论-->
-                                        <#if dynamicInfo.comments !>
-                                            <div class="media-list">
-                                                <#list dynamicInfo.comments as comment>
-                                                    <#if comment_index == 2>
-                                                        <div id="comment${dynamicInfo.id}" style="display: none">
-                                                    </#if >
-                                                    <div class="media-item">
-                                                        <a href="javascript:;" class="media-item-left">
-                                                            <img class="img-xs"
-                                                                 src="${comment.headImg}">
-                                                        </a>
-                                                        <div class="media-text">
-                                                            <div>
-                                                                <a href="/user/info?userId=${comment.userId}">${comment.userName}</a>
-                                                                <mdall> ${comment.timeDesc}</mdall>
-                                                            </div>
-                                                            <div>${comment.content}</div>
-                                                        </div>
+                                                </div>
+                                                <p>${dynamicInfo.content}
+                                                    <#if dynamicInfo.imageUrls !>
+                                                        <#list dynamicInfo.imageUrls as url>
+                                                            <img class="h-img" src="${url}" style="width: 100%;">
+                                                        </#list>
+                                                    </#if>
+                                                    <#--                                    点赞评论-->
+                                                </p>
+                                                <div class="media">
+                                                    <div class="media-right">
+                                                        <ul class="list-inline">
+                                                            <li><a href="javascript:;" lay-active="e3"
+                                                                   lay-id="${dynamicInfo.id?c}"
+                                                                   lay-data="${dynamicInfo.praised}">
+                                                                    <#if dynamicInfo.praised>
+                                                                        <i class="layui-icon layui-icon-heart-fill"></i>
+                                                                    <#else >
+                                                                        <i class="layui-icon layui-icon-heart"></i>
+                                                                    </#if>
+                                                                </a>
+                                                                <span>${dynamicInfo.praiseNum}</span>
+                                                            </li>
+                                                            <li><a href="javascript:;" lay-active="e2"
+                                                                   lay-id="${dynamicInfo.id?c}">
+                                                                    <i class="layui-icon layui-icon-reply-fill"></i>
+                                                                </a>
+                                                                <span>${dynamicInfo.commentNum}</span>
+                                                            </li>
+                                                        </ul>
                                                     </div>
-                                                    <#if comment_index gt 2 &&  comment_has_next != true>
-                                                        </div>
-                                                    </#if >
-                                                </#list>
-                                                <#if dynamicInfo.comments?size gt 2>
-                                                    <a href="javascript:;" class="layui-btn" lay-data="true" lay-id="${dynamicInfo.id}" lay-active="e1">展示全部</a>
-                                                </#if >
+                                                </div>
+                                                <#--                                    评论-->
+                                                <#if dynamicInfo.comments !>
+                                                    <div class="media-list">
+                                                        <#list dynamicInfo.comments as comment>
+                                                            <#if comment_index == 2>
+                                                                <div id="comment${dynamicInfo.id?c}" style="display: none">
+                                                            </#if >
+                                                            <div class="media-item">
+                                                                <a href="javascript:;" class="media-item-left">
+                                                                    <img class="img-xs"
+                                                                         src="${comment.headImg}">
+                                                                </a>
+                                                                <div class="media-text">
+                                                                    <div>
+                                                                        <a href="/user/${comment.userId?c}.html">${comment.userName}</a>
+                                                                        <mdall> ${comment.timeDesc}</mdall>
+                                                                    </div>
+                                                                    <div>${comment.content}</div>
+                                                                </div>
+                                                            </div>
+                                                            <#if comment_index gt 2 &&  comment_has_next != true>
+                                                                </div>
+                                                            </#if >
+                                                        </#list>
+                                                        <#if dynamicInfo.comments?size gt 2>
+                                                            <a href="javascript:;" class="layui-btn" lay-data="true"
+                                                               lay-id="${dynamicInfo.id?c}" lay-active="e1">展示全部</a>
+                                                        </#if >
+                                                    </div>
+                                                </#if>
                                             </div>
-                                        </#if>
-                                    </div>
-                                </div>
+                                        </div>
 
-                            </#if>
+                                    </#if>
 
-                            <fieldset class="layui-elem-field layui-field-title">
-                                <legend>全部动态</legend>
-                            </fieldset>
+                                    <fieldset class="layui-elem-field layui-field-title">
+                                        <legend>全部动态</legend>
+                                    </fieldset>
 
-                            <#if all !>
-                                <#list all.list as dynamicItme>
-                                <div class="panel-body layadmin-homepage-shadow">
-                                    <a href="javascript:;" class="media-left">
-                                        <img src="${dynamicItme.headImg}" height="46px"
-                                             width="46px">
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="pad-btm">
-                                            <p class="fontColor">
-                                                <a href="javascript:;">${dynamicItme.userName}</a> &nbsp; 发布动态 &nbsp;<span>${dynamicItme.title}</span>
-                                            </p>
-                                            <p class="min-font"><span class="layui-breadcrumb" style="visibility: visible;">
+                                    <#if all !>
+                                        <#list all.list as dynamicItme>
+                                            <div class="panel-body layadmin-homepage-shadow">
+                                                <a href="javascript:;" class="media-left">
+                                                    <img src="${dynamicItme.headImg}" height="46px"
+                                                         width="46px">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="pad-btm">
+                                                        <p class="fontColor">
+                                                            <a href="javascript:;">${dynamicItme.userName}</a> &nbsp;
+                                                            发布动态 &nbsp;<span>${dynamicItme.title}</span>
+                                                        </p>
+                                                        <p class="min-font"><span class="layui-breadcrumb"
+                                                                                  style="visibility: visible;">
                                             <a href="javascript:;">${dynamicItme.timeDesc}</a></span></p>
+                                                    </div>
+                                                    <p>${dynamicItme.content}
+                                                        <#if dynamicItme.imageUrls !>
+                                                            <#list dynamicItme.imageUrls as url>
+                                                                <img class="h-img" src="${url}" style="width: 100%;">
+                                                            </#list>
+                                                        </#if>
+                                                    </p>
+                                                    <#--                                    点赞评论-->
+                                                    <div class="media">
+                                                        <div class="media-right">
+                                                            <ul class="list-inline">
+                                                                <li><a href="javascript:;" lay-active="e3"
+                                                                       lay-id="${dynamicItme.id?c}"
+                                                                       lay-data="${dynamicItme.praised}">
+                                                                        <#if dynamicItme.praised>
+                                                                            <i class="layui-icon layui-icon-heart-fill"></i>
+                                                                        <#else >
+                                                                            <i class="layui-icon layui-icon-heart"></i>
+                                                                        </#if>
+                                                                    </a>
+                                                                    <span>${dynamicItme.praiseNum}</span>
+                                                                </li>
+                                                                <li><a href="javascript:;" lay-active="e2"
+                                                                       lay-id="${dynamicItme.id?c}">
+                                                                        <i class="layui-icon layui-icon-reply-fill"></i>
+                                                                    </a>
+                                                                    <span>${dynamicItme.commentNum}</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <#--                                    评论-->
+                                                    <#if dynamicItme.comments !>
+                                                        <div class="media-list">
+                                                            <#list dynamicItme.comments as comment>
+                                                                <#if comment_index == 2>
+                                                                    <div id="comment${dynamicItme.id?c}" style="display: none">
+                                                                </#if >
+                                                                <div class="media-item">
+                                                                    <a href="javascript:;" class="media-item-left">
+                                                                        <img class="img-xs"
+                                                                             src="${comment.headImg}">
+                                                                    </a>
+                                                                    <div class="media-text">
+                                                                        <div>
+                                                                            <a href="/user/${comment.userId?c}.html">${comment.userName}</a>
+                                                                            <mdall> ${comment.timeDesc}</mdall>
+                                                                        </div>
+                                                                        <div>${comment.content}</div>
+                                                                    </div>
+                                                                </div>
+                                                                <#if comment_index gt 1 &&  comment_has_next != true>
+                                                                    </div>
+                                                                </#if >
+                                                            </#list>
+                                                            <#if dynamicItme.comments?size gt 2>
+                                                                <a href="javascript:;" class="layui-btn" lay-data="true"
+                                                                   lay-id="${dynamicItme.id?c}" lay-active="e1">展示全部</a>
+                                                            </#if >
+                                                        </div>
+                                                    </#if>
+                                                </div>
+                                            </div>
+                                        </#list>
+                                    </#if>
+                                </div>
+
+                            </div>
+                            <div class="layui-col-md3">
+                                <div class="grid-demo">
+                                    <div class="layui-card homepage-bottom">
+                                        <div class="layui-card-header">
+                                            <h3 class="panel-title">
+                                                他的动态
+                                            </h3>
                                         </div>
-                                        <p>${dynamicItme.content}
-                                            <#if dynamicItme.imageUrls !>
-                                                <#list dynamicItme.imageUrls as url>
-                                                    <img class="h-img" src="${url}" style="width: 100%;">
-                                                </#list>
-                                            </#if>
-                                        </p>
-                                        <#--                                    点赞评论-->
-                                        <div class="media">
-                                            <div class="media-right">
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:;" lay-active="e3" lay-id="${dynamicItme.id}" lay-data="${dynamicItme.praised}">
-                                                            <#if dynamicItme.praised>
-                                                                <i class="layui-icon layui-icon-heart-fill"></i>
-                                                            <#else >
-                                                                <i class="layui-icon layui-icon-heart"></i>
-                                                            </#if>
-                                                        </a>
-                                                        <span>${dynamicItme.praiseNum}</span>
-                                                    </li>
-                                                    <li><a href="javascript:;" lay-active="e2" lay-id="${dynamicItme.id}">
-                                                            <i class="layui-icon layui-icon-reply-fill"></i>
-                                                        </a>
-                                                        <span>${dynamicItme.commentNum}</span>
-                                                    </li>
+                                        <div class="layui-card-body layui-text">
+                                            <div class="layui-card-body">
+                                                <ul class="layuiadmin-card-status layuiadmin-home2-usernote"
+                                                    id="hot_ul">
+                                                    <#if hot! >
+                                                        <#list hot as dynamic>
+                                                            <li>
+                                                                <a href="/user/${dynamic.userId?c}.html?dynamicId=${dynamic.id?c}">${dynamic.title}</a>
+                                                                <span><i class="layui-icon">&#xe6c6;</i>${dynamic.praiseNum}</span>
+                                                            </li>
+                                                        </#list>
+                                                    </#if>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <#--                                    评论-->
-                                        <#if dynamicItme.comments !>
-                                            <div class="media-list">
-                                                <#list dynamicItme.comments as comment>
-                                                    <#if comment_index == 2>
-                                                        <div id="comment${dynamicItme.id}" style="display: none">
-                                                    </#if >
-                                                    <div class="media-item">
-                                                        <a href="javascript:;" class="media-item-left">
-                                                            <img class="img-xs"
-                                                                 src="${comment.headImg}">
-                                                        </a>
-                                                        <div class="media-text">
-                                                            <div>
-                                                                <a href="/user/info?userId=${comment.userId}">${comment.userName}</a>
-                                                                <mdall> ${comment.timeDesc}</mdall>
-                                                            </div>
-                                                            <div>${comment.content}</div>
-                                                        </div>
-                                                    </div>
-                                                    <#if comment_index gt 1 &&  comment_has_next != true>
-                                                        </div>
-                                                    </#if >
-                                                </#list>
-                                                <#if dynamicItme.comments?size gt 2>
-                                                    <a href="javascript:;" class="layui-btn" lay-data="true" lay-id="${dynamicItme.id}" lay-active="e1">展示全部</a>
-                                                </#if >
-                                            </div>
-                                        </#if>
-                                    </div>
-                                </div>
-                                </#list>
-                            </#if>
-                        </div>
-
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="grid-demo">
-                            <div class="layui-card homepage-bottom">
-                                <div class="layui-card-header">
-                                    <h3 class="panel-title">
-                                        他的动态
-                                    </h3>
-                                </div>
-                                <div class="layui-card-body layui-text">
-                                    <div class="layui-card-body">
-                                        <ul class="layuiadmin-card-status layuiadmin-home2-usernote" id="hot_ul">
-                                            <#if hot! >
-                                                <#list hot as dynamic>
-                                                    <li>
-                                                        <a href="/user/info?dynamicId=${dynamic.id}">${dynamic.title}</a>
-                                                        <span><i class="layui-icon">&#xe6c6;</i>${dynamic.praiseNum}</span>
-                                                    </li>
-                                                </#list>
-                                            </#if>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="layui-col-md9" style="text-align: center">
-                <#if all ! && all.total gt 0>
-                    <#if all.isFirstPage == false >
-                        <a href="/user/info?userId=${userId}&page=${all.prePage}">上一页</a>
-                    </#if>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <#if all.isLastPage == false >
-                        <a href="/user/info?userId=${userId}&page=${all.nextPage}">下一页</a>
-                    </#if>
-                    <#else >
-                        暂无动态
-                </#if>
-                <div class="layui-col-md12" style="text-align: center; margin-top: 55px">
-                    <h7>
-                        <span ><a href="http://www.maomihome.com/" target="_blank">猫咪之家</a></span><br>
-                        <span ><a href="http://www.maomihome.com/" style="color: #00C0F7" target="_blank">www.maomihome.com</a></span>
-                    </h7>
+                    <div class="layui-col-md9" style="text-align: center">
+                        <#if all ! && all.total gt 0>
+                            <#if all.isFirstPage == false >
+                                <a href="/user/${userId?c}.html?page=${all.prePage}">上一页</a>
+                            </#if>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <#if all.isLastPage == false >
+                                <a href="/user/${userId?c}.html?page=${all.nextPage}">下一页</a>
+                            </#if>
+                        <#else >
+                            暂无动态
+                        </#if>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <#include "include/footer.ftl">
 </div>
 </div>
 
 
-<script src="../static/layui.js"></script>
+<#include "include/js.ftl">
 
 <script>
     layui.use(['layer', 'util'], function () {

@@ -9,7 +9,7 @@ layui.use(['layer', 'util', 'flow'], function () {
             if (data.code == 0) {
                 var str = '';
                 $.each(data.data, function (i, val) {
-                    str += '<li><a href="/article/detail?id=' + val.id + '" >' + val.title + '</a> <span><i class="layui-icon">&#xe6c6;</i>' + val.praiseNum + '</span></li>';
+                    str += '<li><a href="/article/' + val.id + '.html" >' + val.title + '</a> <span><i class="layui-icon">&#xe6c6;</i>' + val.praiseNum + '</span></li>';
                 });
                 $('#hot_ul').html(str);
             }
@@ -30,7 +30,7 @@ layui.use(['layer', 'util', 'flow'], function () {
                         '<div class="layui-col-md8" >' +
                         '<div class="layui-row layui-col-space5" >' +
                         '<div class="layui-col-md12">' +
-                        ' <h2><a href="/article/detail?id=' + val.id + '"> ' + val.title + '</a></h2>' +
+                        ' <h2><a href="/article/' + val.id + '.html"> ' + val.title + '</a></h2>' +
                         '</div>' +
                         '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
                         '<span>' + val.bodyDesc + '</span>' +

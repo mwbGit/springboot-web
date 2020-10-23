@@ -1,50 +1,53 @@
 <!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]-->
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>消息中心</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css" media="all">
-    <link rel="stylesheet" href="../static/css/forum.css" media="all">
+    <title>消息中心-猫咪之家</title>
+    <#assign keyword = "">
+    <#include "include/css.ftl">
 </head>
 <style type="text/css">
 
 </style>
 
-<body style="margin: 10px 60px 15px 60px;">
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <#include "include/header.ftl">
+    <div class="layui-body" style="left:0; margin: 0 50px;">
+        <div class="layui-fluid" id="LAY-app-message">
+            <div class="layui-card">
+                <div class="layui-tab layui-tab-brief" lay-filter="msg_tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">全部消息</li>
+                        <li>系统通知</li>
+                        <li>动态消息</li>
+                        <li>私信消息</li>
+                    </ul>
+                    <div class="layui-tab-content">
 
-<div class="layui-fluid" id="LAY-app-message">
-    <div class="layui-card">
-        <div class="layui-tab layui-tab-brief" lay-filter="msg_tab">
-            <ul class="layui-tab-title">
-                <li class="layui-this">全部消息</li>
-                <li>系统通知</li>
-                <li>动态消息</li>
-                <li>私信消息</li>
-            </ul>
-            <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show" style="">
 
-                <div class="layui-tab-item layui-show" style="">
+                            <div class="LAY-app-message-btns" style="margin-bottom: 10px;">
+                                <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="direct"
+                                        data-events="readyAll" lay-active="e1">全部已读
+                                </button>
+                            </div>
 
-                    <div class="LAY-app-message-btns" style="margin-bottom: 10px;">
-                        <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="direct"
-                                data-events="readyAll" lay-active="e1">全部已读
-                        </button>
+                            <table class="" id="test" lay-filter="table"></table>
+                        </div>
                     </div>
-
-                    <table class="" id="test" lay-filter="table"></table>
                 </div>
             </div>
+
         </div>
     </div>
-
+    <#include "include/footer.ftl">
 </div>
-
-<script src="../static/layui.js"></script>
+<#include "include/js.ftl">
 <script src="../static/js/msg.js"></script>
 <script type="text/html" id="statusTpl">
     {{#  if(d.status == 0){ }}
@@ -55,7 +58,7 @@
 </script>
 <script type="text/html" id="statusTpl1">
     {{#  if(d.type == 2){ }}
-        <a href="/user/info?id={{d.objectId}}" target="_blank" style="color: blue">{{d.title}}</a>
+    <a href="/user/{{d.objectId}}.html" target="_blank" style="color: blue">{{d.title}}</a>
     {{#  } else{ }}
     {{ d.title }}
     {{#  }  }}

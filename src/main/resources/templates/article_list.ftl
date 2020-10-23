@@ -1,46 +1,52 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]-->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>猫猫文章</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css">
+    <title>猫咪文章-猫咪之家</title>
+    <#assign keyword = "">
+    <#include "include/css.ftl">
 </head>
-<body style="margin: 10px 60px 15px 60px;">
-
-<div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md8">
-            <fieldset class="layui-elem-field layui-field-title">
-                <legend>最新文章</legend>
-            </fieldset>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <#include "include/header.ftl">
+    <#--     主体-->
+    <div class="layui-body" style="left:0; margin: 0 50px;">
+        <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
-                <div class="layui-col-md12">
-                    <div class="layui-card">
-                        <ul id="t_body">
-                        </ul>
+                <div class="layui-col-md8">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>最新文章</legend>
+                    </fieldset>
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <ul id="t_body">
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="layui-col-md4">
-            <div class="layui-card-body layui-text">
-                <div class="layui-card-header">热门文章</div>
-                <div class="layui-card-body">
-                    <ul class="layuiadmin-card-status layuiadmin-home2-usernote" id="hot_ul">
-                    </ul>
+                <div class="layui-col-md4">
+                    <div class="layui-card-body layui-text">
+                        <div class="layui-card-header">热门文章</div>
+                        <div class="layui-card-body">
+                            <ul class="layuiadmin-card-status layuiadmin-home2-usernote" id="hot_ul">
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
+    <#include "include/footer.ftl">
 </div>
-<script src="../static/layui.js"></script>
+<#include "include/js.ftl">
 <script src="../static/js/article.js"></script>
 <script type="text/html" id="sexTpl">
     <div class="layui-row layui-col-space5">

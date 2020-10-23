@@ -25,7 +25,7 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
                 field: 'dynamicId',
                 title: '动态ID',
                 width: 100,
-                templet: '<div><a href="/user/info?dynamicId={{ d.dynamicId }}" target="_blank">{{ d.dynamicId }}</div>'
+                templet: '<div><a href="/user/{{d.userId}}}.html?dynamicId={{ d.dynamicId }}" target="_blank">{{ d.dynamicId }}</div>'
             }, {field: 'content', title: '评论内容'}
             , {
                 field: 'addTime',

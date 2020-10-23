@@ -59,7 +59,7 @@
         </div>
 
     </div>
-    <img alt="" style="display:none" id="displayimg" src=""/>
+    <img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
 </div>
 <script src="../../static/layui.js"></script>
 

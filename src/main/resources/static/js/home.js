@@ -20,7 +20,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<dd> <div>' +
-                    '<p>' + val.userName + ' 发布新动态 <a href="/user/info?dynamicId='+val.id+'"> 【' + val.title + '】</a></p>' +
+                    '<p>' + val.userName + ' 发布新动态 <a href="/user/'+val.userId +'.html?dynamicId='+val.id+'"> 【' + val.title + '】</a></p>' +
                     '<span>' + val.timeDesc + '</span>' +
                     '</div></dd>';
             });
@@ -80,12 +80,12 @@ layui.use(['carousel', 'layer', 'util'], function () {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<div class="layui-col-md3">' +
-                    '<a href="/pet/detail?id=' + val.id + '" ><img src="' + val.image + '" class="layui-circle" style="width: 80px;height: 80px"></a>' +
+                    '<a href="/pet/' + val.id + '.html" target="_blank"><img src="' + val.image + '" class="layui-circle" style="width: 80px;height: 80px"></a>' +
                     '<div style="text-align:center">' +
                     '<span class="inf">' + val.name + '</span>' +
                     '</div></div>';
             });
-            str += '<div class="layui-col-md12"> <a href="/html/pet">查看更多</a></div>';
+            str += '<div class="layui-col-md12"> <a href="/html/pet.html">查看更多</a></div>';
             $('#pet_ul').html(str);
         }
     });
@@ -101,7 +101,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
                     '<div class="layui-col-md8" >' +
                     '<div class="layui-row layui-col-space5" >' +
                     '<div class="layui-col-md12">' +
-                    ' <h2><a href="/article/detail?id=' + val.id + '"> ' + val.title + '</a></h2>' +
+                    ' <h2><a href="/article/' + val.id + '.html"> ' + val.title + '</a></h2>' +
                     '</div>' +
                     '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
                     '<span>' + val.bodyDesc + '</span>' +
@@ -115,7 +115,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
                     '</div></div><div>' +
                     '</li>';
             });
-            str += '<div class="layui-col-md12"> <a href="/html/article_list">查看更多</a></div>';
+            str += '<div class="layui-col-md12"> <a href="/html/article_list.html">查看更多</a></div>';
             $('#article_ul').html(str);
         }
     });

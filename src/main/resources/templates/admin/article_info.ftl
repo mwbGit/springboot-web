@@ -27,7 +27,7 @@
                         <label class="layui-form-label">标题:</label>
                         <div class="layui-input-inline" style="width: 500px;">
                             <#if article ! >
-                                <input type="hidden" name="id"  value="${article.id}">
+                                <input type="hidden" name="id"  value="${article.id?c}">
                             <#else >
                                 <input type="hidden" name="id"  value="0">
                             </#if>
@@ -109,7 +109,7 @@
                 <div class="layui-inline1" style="text-align: center">
                     <div class="layui-btn-container">
                         <#if article ! >
-                            <a class="layui-btn" href="/article/detail?id=${article.id}" target="_blank">查看</a>
+                            <a class="layui-btn" href="/article/${article.id?c}.html" target="_blank">查看</a>
                         </#if>
 
                         <button class="layui-btn" lay-event="search" lay-submit lay-filter="add_btn">保存</button>

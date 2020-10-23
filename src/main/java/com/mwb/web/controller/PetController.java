@@ -13,6 +13,7 @@ import com.mwb.web.service.PetPictureService;
 import com.mwb.web.service.PetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,8 +59,8 @@ public class PetController {
         return ApiResult.success(petCharacterService.getAll());
     }
 
-    @RequestMapping("/detail")
-    public ModelAndView detail(@RequestParam("id") long id) {
+    @RequestMapping("/{id}.html")
+    public ModelAndView detail(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView("/pet_detail");
         PetInfo petInfo = petService.selectByKey(id);
         if (petInfo == null) {
@@ -79,7 +80,7 @@ public class PetController {
 
     @RequestMapping("/picture/hot")
     public ApiResult searchHot() {
-        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(20, "level"));
+        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(30, "level"));
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
 

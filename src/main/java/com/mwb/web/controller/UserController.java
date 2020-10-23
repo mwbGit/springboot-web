@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,8 +52,8 @@ public class UserController {
      * @param
      * @return
      */
-    @RequestMapping("/info")
-    public ModelAndView info(UserInfo userInfo, @RequestParam(value = "userId", required = false) Long userId,
+    @RequestMapping("/{userId}.html")
+    public ModelAndView info(UserInfo userInfo, @PathVariable(value = "userId") Long userId,
                              @RequestParam(value = "dynamicId", required = false) Long dynamicId,
                              @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         ModelAndView modelAndView = new ModelAndView("/user_info");

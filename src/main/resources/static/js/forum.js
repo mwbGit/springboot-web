@@ -212,7 +212,7 @@ layui.use(['form', 'upload', 'layer', 'util', 'flow', 'element'], function () {
             '    </a>' +
             '    <div class="media-body">' +
             '        <div class="pad-btm">' +
-            '            <p class="fontColor"><a href="/user/info?userId='+data.userId+'">' + data.userName + '</a> &nbsp 发布动态 &nbsp<a href="/user/info?dynamicId='+data.id+'"><span>' + data.title + '</span></a>' +
+            '            <p class="fontColor"><a href="/user/'+data.userId+'.html">' + data.userName + '</a> &nbsp 发布动态 &nbsp<a href="/user/'+data.userId+'.html?dynamicId='+data.id+'"><span>' + data.title + '</span></a>' +
             '            </p>' +
             '            <p class="min-font">' +
             '               <span class="layui-breadcrumb" lay-separator="-" style="visibility: visible;">' +

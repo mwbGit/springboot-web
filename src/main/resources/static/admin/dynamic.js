@@ -15,7 +15,7 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
             {type: 'space', hide: true}
             , {
                 field: 'id', title: 'ID', width: 50,
-                templet: '<div><a href="/user/info?dynamicId={{ d.id }}" target="_blank">{{ d.id }}</div>'
+                templet: '<div><a href="/user/{{ d.userId }}.html?dynamicId={{ d.id }}" target="_blank">{{ d.id }}</div>'
             }
             , {
                 field: 'headImg',

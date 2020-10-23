@@ -12,6 +12,7 @@ import com.mwb.web.service.PraiseService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,8 +51,8 @@ public class ArticleController {
         return ApiResult.success(pageInfo);
     }
 
-    @RequestMapping("/detail")
-    public ModelAndView detail(@RequestParam("id") long id) {
+    @RequestMapping("/{id}.html")
+    public ModelAndView detail(@PathVariable("id") long id) {
         ArticleInfo articleInfo = articleService.selectByKey(id);
         if (articleInfo != null) {
             articleInfo.setViewNum(articleInfo.getViewNum() + 1);

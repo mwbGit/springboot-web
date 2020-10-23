@@ -48,7 +48,7 @@
                         <label class="layui-form-label">标题:</label>
                         <div class="layui-input-inline" style="width: 500px;">
                             <#if pet ! >
-                                <input type="hidden" name="id"  value="${pet.id}">
+                                <input type="hidden" name="id"  value="${pet.id?c}">
                             <#else >
                                 <input type="hidden" name="id"  value="0">
                             </#if>

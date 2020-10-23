@@ -46,7 +46,7 @@ public class BannerInfo extends BaseBean implements Serializable {
     @Column(name = "object_id")
     private int objectId;
 
-    public String getTypeDesc(){
+    public String getTypeDesc() {
         switch (type) {
             case 1:
                 return "文章";
@@ -59,14 +59,15 @@ public class BannerInfo extends BaseBean implements Serializable {
         }
     }
 
-    public String getJumpUrl(){
+    public String getJumpUrl() {
+        String urlSuffix =  objectId + ".html";
         switch (type) {
             case 1:
-                return "/article/detail?id=" + objectId;
+                return "/article/" + urlSuffix;
             case 2:
-                return "/pet/detail?id=" + objectId;
+                return "/pet/" + urlSuffix;
             case 3:
-                return "/user/info?dynamicId=" + objectId;
+                return "/user/" + urlSuffix;
             default:
                 return url;
         }

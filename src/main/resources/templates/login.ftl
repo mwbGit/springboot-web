@@ -1,16 +1,15 @@
 <!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]-->
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>登录</title>
-    <link rel="shortcut icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/layui.css">
+    <title>登录-猫咪之家</title>
+    <#assign keyword = "">
+    <#include "include/css.ftl">
     <link rel="stylesheet" href="../static/css/style.css">
-
 </head>
 <body style="margin: 10px 60px 15px 60px;">
 
@@ -48,7 +47,7 @@
 </div>
 
 
-<script src="../static/layui.js"></script>
+<#include "include/js.ftl">
 <script type="text/javascript">
     layui.use(['form', 'layer', 'jquery', 'util'], function () {
 

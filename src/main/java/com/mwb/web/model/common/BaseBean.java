@@ -21,7 +21,6 @@ public class BaseBean {
     @Id
     @KeySql(useGeneratedKeys = true)
     @Column(name = "id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     protected long id;
 
     @Column(name = "add_time", updatable = false)

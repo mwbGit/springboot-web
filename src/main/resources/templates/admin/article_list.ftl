@@ -82,7 +82,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" href="/article/detail?id={{ d.id }}" target="_blank">查看</a>
+    <a class="layui-btn layui-btn-xs" href="/article/{{ d.id }}.html" target="_blank">查看</a>
     <a class="layui-btn layui-btn-xs" href="/article/info?id={{ d.id }}" >编辑</a>
     <a class="layui-btn layui-btn-xs" lay-event="praise">+赞</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>

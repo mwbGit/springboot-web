@@ -33,7 +33,7 @@
                         <label class="layui-form-label">名称:</label>
                         <div class="layui-input-inline" style="width: 480px;">
                             <#if pet ! >
-                                <input type="hidden" name="id"  value="${pet.id}">
+                                <input type="hidden" name="id"  value="${pet.id?c}">
                             <#else >
                                 <input type="hidden" name="id"  value="0">
                             </#if>
@@ -168,9 +168,9 @@
                         <div class="layui-input-inline" style="width: 480px;">
                             <#list types  as type>
                                 <#if type.checked >
-                                    <input type="checkbox" name="types" value="${type.id}" title="${type.name}" lay-skin="primary" checked>
+                                    <input type="checkbox" name="types" value="${type.id?c}" title="${type.name}" lay-skin="primary" checked>
                                 <#else >
-                                    <input type="checkbox" name="types" value="${type.id}" title="${type.name}" lay-skin="primary">
+                                    <input type="checkbox" name="types" value="${type.id?c}" title="${type.name}" lay-skin="primary">
                                 </#if>
                             </#list>
                         </div>
