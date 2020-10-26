@@ -5,15 +5,16 @@ import com.mwb.web.mapper.PetPictureMapper;
 import com.mwb.web.model.PetPicture;
 import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.service.PetPictureService;
+import com.mwb.web.utils.WebConstant;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 描述:
@@ -52,7 +53,14 @@ public class PetPictureServiceImpl extends BaseServiceImpl<PetPicture> implement
         criteria.andEqualTo("petId", petId);
         example.orderBy("level").desc();
         example.orderBy("id").desc();
-        List<PetPicture> petCharacters = selectByExample(example);
-        return CollectionUtils.isEmpty(petCharacters) ? Collections.emptyList() : petCharacters.stream().map(PetPicture::getImage).collect(Collectors.toList());
+        List<PetPicture> petPictures = selectByExample(example);
+        if (CollectionUtils.isNotEmpty(petPictures)) {
+            List<String> result = new ArrayList<>(petPictures.size());
+            for (PetPicture petPicture : petPictures) {
+                result.add(WebConstant.getWaterImage(petPicture.getImage()));
+            }
+            return result;
+        }
+        return Collections.emptyList();
     }
 }

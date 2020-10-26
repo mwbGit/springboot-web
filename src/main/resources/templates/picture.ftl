@@ -81,8 +81,8 @@
                         var str = '' +
                             '<div class="layui-input-inline cmdlist-container">' +
                             '<div class="">' +
-                            '<a href="javascript:;" lay-active="e1" lay-data="' + val.image + '">' +
-                            '<img  src="' + val.image + '" alt="' + val.title + '" title="' + val.title + '"  > ' +
+                            '<a href="javascript:;" lay-active="e1" lay-data="' + val.waterImage + '">' +
+                            '<img  src="' + val.waterImage + '" alt="' + val.title + '" title="' + val.title + '"  > ' +
                             ' </a>' +
                             '</div>' +
                             '</div>';

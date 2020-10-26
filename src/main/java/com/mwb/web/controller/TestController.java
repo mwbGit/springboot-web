@@ -4,7 +4,6 @@ import cn.wanghaomiao.seimi.spring.common.CrawlerCache;
 import cn.wanghaomiao.seimi.struct.CrawlerModel;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.mwb.web.model.MessageInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
 import com.mwb.web.service.*;
@@ -36,7 +35,7 @@ public class TestController {
     private PetService petService;
 
     @Autowired
-    private PetCharacterService petCharacterService;
+    private com.mwb.web.mapper.MessageMapper messageMapper;
 
     @Autowired
     private PetPictureService petPictureService;
@@ -49,13 +48,9 @@ public class TestController {
 
     @RequestMapping("/test")
     public Boolean test(UserInfo user) {
-        MessageInfo messageInfo = new MessageInfo();
-        messageInfo.setUserId(user.getId());
-        messageInfo.setType(1);
-        messageInfo.setTitle("注册成功");
-        messageInfo.setBody("欢迎来到猫咪之家");
-        messageService.sendMsg(messageInfo);
-
+        for (int i=0 ; i < 500 ; i ++) {
+            messageMapper.insertCaht(i% 10, i%2 == 0? 1:0, i );
+        }
         return true;
     }
 

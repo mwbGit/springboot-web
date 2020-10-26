@@ -1,6 +1,7 @@
 package com.mwb.web.mapper;
 
 import com.mwb.web.model.MessageInfo;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -18,4 +19,7 @@ public interface MessageMapper extends tk.mybatis.mapper.common.Mapper<MessageIn
 
     @Select("select count(*) from message_info where user_id = #{userId} and status =0")
     int countStatus(@Param("userId") long userId);
+
+    @Insert("insert into geek_second_chat (uid_tail, type, position, add_time) values(#{uidTail}, #{type}, #{position}, now())")
+    int insertCaht(@Param("uidTail") int uidTail, @Param("type") int type,@Param("position") int position);
 }

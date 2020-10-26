@@ -37,7 +37,7 @@ layui.use(['layer', 'util'], function () {
                     var str = '';
                     $.each(data.data, function (i, val) {
                         str += '<div class="layui-col-md4 layui-col-sm4">' +
-                            '<a href="/pet/' + val.id + '.html" ><img src="' + val.image + '" style="max-width: 250px;height: 190px">' +
+                            '<a href="/pet/' + val.id + '.html" ><img src="' + val.waterImage + '" style="max-width: 250px;height: 190px">' +
                             '<div class="cmdlist-text" style="text-align:center">' +
                             ' <span class="inf">' + val.name + '</span><' +
                             '/div></a>' +

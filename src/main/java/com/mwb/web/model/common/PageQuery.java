@@ -1,5 +1,6 @@
 package com.mwb.web.model.common;
 
+import com.mwb.web.utils.WebConstant;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -58,7 +59,10 @@ public class PageQuery implements Serializable {
     }
 
     public String getOrder() {
-        return order;
+        if (WebConstant.checkSql(order)) {
+            return order;
+        }
+        return "";
     }
 
     public void setOrder(String order) {

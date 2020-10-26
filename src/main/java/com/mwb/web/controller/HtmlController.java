@@ -60,4 +60,9 @@ public class HtmlController {
     public ModelAndView baidu() {
         return new ModelAndView("/baidu_verify_VuY12dJa6l");
     }
+
+    @RequestMapping("/watermark.html")
+    public ModelAndView watermark() {
+        return new ModelAndView("/watermark");
+    }
 }

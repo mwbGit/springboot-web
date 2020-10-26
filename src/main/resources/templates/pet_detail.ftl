@@ -35,7 +35,7 @@
                             <div class="layui-col-md12">
                                 <a href="javascript:;">
                                     <div class="layadmin-text-center">
-                                        <img src="${pet.image}"
+                                        <img src="${pet.waterImage}"
                                              style="width: 100%">
                                     </div>
                                 </a>
