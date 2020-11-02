@@ -11,6 +11,7 @@ import com.mwb.web.model.query.UserQuery;
 import com.mwb.web.service.DynamicService;
 import com.mwb.web.service.OssService;
 import com.mwb.web.service.UserInfoService;
+import com.mwb.web.utils.HttpUtil;
 import com.mwb.web.utils.MD5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -124,7 +126,7 @@ public class UserController {
     @WebLogin(option = WebLogin.Option.MUST, valid = true, accessMax = 1, accessSeconds = 3)
     @RequestMapping("/info/update")
     public ApiResult userUpdate(UserInfo userInfo, @RequestParam("name") String name, @RequestParam(value = "wechat", required = false, defaultValue = "") String wechat,
-                                @RequestParam(value = "introduce", required = false, defaultValue = "") String introduce, @RequestParam(value = "file", required = false) MultipartFile file) {
+                                @RequestParam(value = "introduce", required = false, defaultValue = "") String introduce, @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
         log.info("UserInfoController.userUpdate name={},wechat={},file={}", userInfo, wechat, file == null);
         if (StringUtils.isBlank(name)) {
             return ApiResult.failed("用户名不可以为空");
@@ -143,7 +145,7 @@ public class UserController {
             userInfo.setIntroduce(introduce);
         }
         if (file != null) {
-            String url = ossService.uploadImage(file);
+            String url = ossService.uploadImage(file, HttpUtil.isOnlineDomain(request));
             if (StringUtils.isNotBlank(url)) {
                 userInfo.setHeadImg(url);
             }

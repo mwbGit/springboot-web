@@ -11,6 +11,14 @@
     <#include "include/css.ftl">
     <link rel="stylesheet" href="../static/css/forum.css" media="all">
 </head>
+<style type="text/css">
+    p img {
+        /*clear: both;*/
+        display: block;
+        margin: 0 auto;
+    }
+
+</style>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <#include "include/header.ftl">

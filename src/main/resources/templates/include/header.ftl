@@ -9,9 +9,9 @@
         <li class="layui-nav-item"><a href="/html/forum.html">动态</a></li>
     </ul>
     <ul class="layui-nav layui-layout-right" lay-filter="test1">
-        <#if avatar!>
+        <#if user!>
             <li class="layui-nav-item" lay-unselect="">
-                <#if admin == true >
+                <#if user.admin == true >
                     <a href="/admin/index.html" target="_blank">
                         后台管理
                     </a>
@@ -20,16 +20,16 @@
             <li class="layui-nav-item" lay-unselect="">
                 <a href="/html/msg.html" lay-text="消息中心">
                     <i class="layui-icon layui-icon-notice"></i>
-                    <#if unRead == true>
-                        <span class="layui-badge-dot"></span>
+                    <#if user.unReadMsgNum gt 0 >
+                        <span class="layui-badge-dot" style="margin-left:0px"></span>
                     <#else>
                     </#if>
                 </a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="${avatar}" class="layui-nav-img">
-                    ${userName}
+                    <img src="${user.avatar}" class="layui-nav-img">
+                    ${user.userName}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="/html/user_update.html">修改信息</a></dd>

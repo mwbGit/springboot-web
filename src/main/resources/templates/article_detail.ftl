@@ -10,33 +10,36 @@
     <#include "include/css.ftl">
     <title>${article.title}-猫咪之家</title>
     <link rel="stylesheet" href="../static/css/forum.css" media="all">
-    <style type="text/css">
-        p {
-            margin-bottom: 10px;
-            margin-top: 10px;
-        }
-
-        .media-body {
-            font-size: 18px;
-        }
-
-        .media-body b {
-            font-size: 20px;
-        }
-
-        .media-body ul {
-            margin-left: 20px;
-        }
-
-        li {
-            list-style-type: square;
-        }
-
-    </style>
 </head>
 <style type="text/css">
+    p {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .media-body {
+        font-size: 18px;
+    }
+
+    .media-body b {
+        font-size: 20px;
+    }
+
+    .media-body ul {
+        margin-left: 20px;
+    }
+
+    li {
+        list-style-type: square;
+    }
+    p img {
+        /*clear: both;*/
+        display: block;
+        margin: 0 auto;
+    }
 
 </style>
+
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <#include "include/header.ftl">
@@ -54,11 +57,11 @@
                                 <div class="pad-btm">
                                     <h1 style="text-align: center; margin-top: 10px;">${article.title}</h1>
                                     <p class="min-font">
-                      <span class="layui-breadcrumb" lay-separator="-"
-                            style="visibility: visible; float: right;margin-bottom: 20px">
-                        <a href="http://www.maomihome.com"
-                           target="_blank">猫咪之家-${article.author}-${article.dateTime}</a>
-                      </span>
+                                      <span class="layui-breadcrumb" lay-separator="-"
+                                            style="visibility: visible; float: right;margin-bottom: 20px">
+                                        <a href="http://www.maomihome.com"
+                                           target="_blank">猫咪之家-${article.author}&nbsp;${article.dateTime}</a>
+                                      </span>
                                     </p>
                                 </div>
                                 <p style="font-size: medium">${article.body}</p>

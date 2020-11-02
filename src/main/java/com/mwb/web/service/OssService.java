@@ -43,8 +43,8 @@ public class OssService {
     private OSSClient ossClient;
 
 
-    public String uploadImage(MultipartFile file) {
-        if (mock) {
+    public String uploadImage(MultipartFile file, boolean isOnline) {
+        if (!isOnline) {
             return DEFAULT_URL;
         }
 

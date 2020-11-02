@@ -5,8 +5,12 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 public class HttpUtil {
+    private static final List<String> DOMAINS = Arrays.asList("mengweibo.com", "maomihome.com");
+
     public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -64,6 +68,11 @@ public class HttpUtil {
 //        }
 
         response.addCookie(cookie);
+    }
+
+    public static boolean isOnlineDomain(HttpServletRequest request) {
+        String domain = request.getServerName().replaceFirst("www", "");
+        return DOMAINS.contains(domain);
     }
 
     public static String getMainDomain(HttpServletRequest request) {

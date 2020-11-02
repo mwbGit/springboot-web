@@ -27,13 +27,13 @@ layui.use(['layer', 'util', 'flow'], function () {
                 layui.each(res.data, function (index, val) {
                     var str = '<li>' +
                         '<div class="layui-row layui-col-space5" >' +
-                        '<div class="layui-col-md4" ><img src="' + val.image + '" style="max-width: 250px" ></div>' +
+                        '<div class="layui-col-md4" style="text-align:center;"><img src="' + val.image + '" style="max-width: 250px" ></div>' +
                         '<div class="layui-col-md8" >' +
                         '<div class="layui-row layui-col-space5" >' +
                         '<div class="layui-col-md12">' +
                         ' <h2><a href="/article/' + val.id + '.html"> ' + val.title + '</a></h2>' +
                         '</div>' +
-                        '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
+                        '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">' +
                         '<span>' + val.bodyDesc + '</span>' +
                         '</div>' +
                         '<div class="layui-col-md3">' +

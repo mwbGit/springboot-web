@@ -50,7 +50,8 @@ public class ArticleInfo extends BaseBean implements Serializable {
     private int petId;
 
     public String getBodyDesc() {
-        return body.replaceAll("<img[^>]*>", " ");
+        String desc = WebConstant.delHTMLTag(body);
+        return desc == null || desc.length() < 320 ? desc : desc.substring(0, 320);
     }
 
     public String getTimeDesc() {
@@ -64,4 +65,6 @@ public class ArticleInfo extends BaseBean implements Serializable {
     public String getWaterImage() {
         return WebConstant.getWaterImage(image);
     }
+
+
 }

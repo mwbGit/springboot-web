@@ -22,7 +22,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/upload")
 public class UploadController {
-    String string = "https://imgs-xwz.coohua.com/20200819/1d38b3875aeeeb1a06ad9a1f8e2a522f.jpg";
 
     @Autowired
     private OssService ossService;
@@ -30,14 +29,14 @@ public class UploadController {
     @WebLogin(option = WebLogin.Option.MUST, valid = true, accessSeconds = 5, accessMax = 1)
     @RequestMapping("/image")
     public ApiResult image(@RequestParam(value = "file") MultipartFile file) {
-        String url = ossService.uploadImage(file);
+        String url = ossService.uploadImage(file, true);
         return ApiResult.success(url);
     }
 
     @WebLogin(option = WebLogin.Option.MUST, valid = true, accessSeconds = 5, accessMax = 1)
     @RequestMapping("/layedit")
     public ApiResult layedit(@RequestParam(value = "file") MultipartFile file) {
-        String url = ossService.uploadImage(file);
+        String url = ossService.uploadImage(file, true);
         Map<String, Object> result = new HashMap<>(2);
         result.put("src", url);
         result.put("title", FilenameUtils.getBaseName(file.getOriginalFilename()));

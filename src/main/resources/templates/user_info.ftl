@@ -9,15 +9,13 @@
     <title>${userInfo.name}-猫咪之家</title>
     <#assign keyword = ",猫友">
     <#include "include/css.ftl">
+    <link rel="stylesheet" href="../static/css/forum.css" media="all">
+
 </head>
 <style type="text/css">
     .cmdlist-container img {
         max-width: 320px;
         max-height: 160px;
-    }
-
-    .cmdlist-container {
-        margin: 5px 5px
     }
 
     .cmdlist-text .info {
@@ -30,6 +28,25 @@
         margin-bottom: 10px;
         text-align: center;
     }
+    p img {
+        /*clear: both;*/
+        display: block;
+        margin: 0 auto;
+        /*width: 100%;*/
+        /*height: auto;*/
+    }
+    span {
+        color: black !important;
+    }
+    .pad-btm {
+        padding-bottom: 1px !important;
+    }
+    .media {
+        margin-top: 1px !important;
+    }
+    .panel-body {
+        padding: 15px 20px 5px !important;
+    }
 </style>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -40,7 +57,7 @@
                 <div class="layui-col-md2">
                     <div class="layadmin-homepage-panel layadmin-homepage-shadow">
                         <div class="layui-card text-center">
-                            <div class="layui-card-body">
+                            <div class="layui-card-body user-show">
                                 <#if userInfo !>
                                     <div class="layadmin-homepage-pad-ver">
                                         <img class="layadmin-homepage-pad-img" src="${userInfo.avatar}"
@@ -85,7 +102,7 @@
                                                 <div class="pad-btm">
                                                     <p class="fontColor">
                                                         <a href="javascript:;">${dynamicInfo.userName}</a> &nbsp; 发布动态
-                                                        &nbsp;<span>${dynamicInfo.title}</span>
+                                                        &nbsp;<span><a href="/user/${dynamicInfo.userId?c}.html?dynamicId=${dynamicInfo.id?c}">${dynamicInfo.title}</a></span>
                                                     </p>
                                                     <p class="min-font"><span class="layui-breadcrumb"
                                                                               style="visibility: visible;">
@@ -172,7 +189,7 @@
                                                     <div class="pad-btm">
                                                         <p class="fontColor">
                                                             <a href="javascript:;">${dynamicItme.userName}</a> &nbsp;
-                                                            发布动态 &nbsp;<span>${dynamicItme.title}</span>
+                                                            发布动态 &nbsp;<span><a href="/user/${dynamicItme.userId?c}.html?dynamicId=${dynamicItme.id?c}">${dynamicItme.title}</a></span>
                                                         </p>
                                                         <p class="min-font"><span class="layui-breadcrumb"
                                                                                   style="visibility: visible;">

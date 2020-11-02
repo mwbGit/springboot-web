@@ -46,10 +46,10 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
         long userId = getLoginUserId(request);
         String ip = HttpUtil.getIpAddress(request);
         String uri = request.getRequestURI();
-        accessLog.info("---access---total_access:{},userId:{},ip:{},uri:{}", TOTAL_ACCESS++, userId, ip, uri);
+        accessLog.info("access-total_access:{},ip: {} userId: {} uri: {}", TOTAL_ACCESS++, ip, userId,  uri);
         //黑名单校验
         if (accessCacheService.isBlackList(ip)) {
-            accessLog.warn("---access---isBlackList:{},userId:{},ip:{},uri:{}", TOTAL_ACCESS++, userId, ip, uri);
+            accessLog.warn("access-total_access:{},is black ip: {} userId: {} uri: {}", TOTAL_ACCESS++, ip, userId, uri);
             return false;
         }
 
@@ -63,24 +63,24 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
         if (annotation != null) {
             if (annotation.option() == WebLogin.Option.MUST) {
                 if (userInfo == null) {
-                    accessLog.info("---access---noLogin---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
+                    accessLog.info("---access---noLogin---ip: {} ,uri: {} ，userInfo:{}", ip, uri, userInfo);
                     authError(response, "请登录后操作");
                     return false;
                 } else if (annotation.valid()) {
                     if (userInfo.isFrozen()) {
                         authError(response, "账号已冻结");
-                        accessLog.info("---access---isFrozen---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
+                        accessLog.info("---access---isFrozen---ip: {} ,uri: {} ，userInfo:{}", ip, uri, userInfo);
                         return false;
                     } else if (userInfo.unPass()) {
                         authError(response, "请修改个人信息后重试");
-                        accessLog.info("---access---unPass---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
+                        accessLog.info("---access---unPass---ip: {} ,uri: {} ，userInfo:{}", ip, uri, userInfo);
                         return false;
                     }
                 }
             } else if (annotation.option() == WebLogin.Option.ADMIN) {
                 if (userInfo == null || userInfo.getIdentity() != 1) {
                     authError(response, "无权限操作");
-                    accessLog.info("---access---identity---ip:{},uri:{}，userInfo:{}", ip, uri, userInfo);
+                    accessLog.info("---access---identity---ip: {} ,uri: {} ，userInfo:{}", ip, uri, userInfo);
                     return false;
                 }
             }
@@ -103,7 +103,7 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
                 }
                 if (curNum > accessMax) {
                     authError(response, "请稍后再试");
-                    accessLog.info("---access---limit---userId:{},ip:{},uri:{}，curNum:{}", userId, ip, uri, curNum);
+                    accessLog.info("---access---limit---userId: {} ,ip: {} ,uri:{}，curNum:{}", userId, ip, uri, curNum);
                     return false;
                 }
             }

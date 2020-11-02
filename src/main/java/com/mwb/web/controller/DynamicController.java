@@ -13,7 +13,9 @@ import com.mwb.web.service.CommentService;
 import com.mwb.web.service.DynamicService;
 import com.mwb.web.service.OssService;
 import com.mwb.web.service.PraiseService;
+import com.mwb.web.utils.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,7 +68,7 @@ public class DynamicController {
     @RequestMapping("/save")
     public ApiResult save(UserInfo userInfo, @RequestParam("title") String title,
                           @RequestParam("content") String content,
-                          @RequestParam(value = "file", required = false) MultipartFile file) {
+                          @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
         if (StringUtils.isBlank(title)) {
             return ApiResult.failed("请输入标题");
         } else if (StringUtils.isBlank(content)) {
@@ -85,7 +87,7 @@ public class DynamicController {
         dynamicInfo.setAddTime(new Date());
         dynamicInfo.setUpdateTime(new Date());
         if (file != null) {
-            String url = ossService.uploadImage(file);
+            String url = ossService.uploadImage(file, HttpUtil.isOnlineDomain(request));
             if (StringUtils.isNotBlank(url)) {
                 dynamicInfo.setImages(new String[]{url});
             }

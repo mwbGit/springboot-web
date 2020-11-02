@@ -80,7 +80,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<div class="layui-col-md3">' +
-                    '<a href="/pet/' + val.id + '.html" target="_blank"><img src="' + val.waterImage + '" class="layui-circle" style="width: 80px;height: 80px"></a>' +
+                    '<a href="/pet/' + val.id + '.html" target="_blank"><div style="text-align:center"><img src="' + val.waterImage + '" class="layui-circle" style="width: 80px;height: 80px"></div></a>' +
                     '<div style="text-align:center">' +
                     '<span class="inf">' + val.name + '</span>' +
                     '</div></div>';
@@ -97,13 +97,13 @@ layui.use(['carousel', 'layer', 'util'], function () {
             $.each(data.data, function (i, val) {
                 str += '<li>' +
                     '<div class="layui-row layui-col-space5" >' +
-                    '<div class="layui-col-md4" ><img src="' + val.waterImage + '" style="max-width: 250px" ></div>' +
+                    '<div class="layui-col-md4" style="text-align:center;"><img src="' + val.waterImage + '" style="max-width: 250px" ></div>' +
                     '<div class="layui-col-md8" >' +
                     '<div class="layui-row layui-col-space5" >' +
                     '<div class="layui-col-md12">' +
-                    ' <h2><a href="/article/' + val.id + '.html"> ' + val.title + '</a></h2>' +
+                    ' <h2><a style="color: #333" href="/article/' + val.id + '.html"> ' + val.title + '</a></h2>' +
                     '</div>' +
-                    '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">' +
+                    '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">' +
                     '<span>' + val.bodyDesc + '</span>' +
                     '</div>' +
                     '<div class="layui-col-md3">' +

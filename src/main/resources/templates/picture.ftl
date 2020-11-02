@@ -73,7 +73,7 @@
             ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
-                var pageSize = 30;
+                var pageSize = 50;
                 //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
                 $.get('/pet/picture/search?pageSize=' + pageSize + '&page=' + page, function (res) {
                     //假设你的列表返回在data集合中

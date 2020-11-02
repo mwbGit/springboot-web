@@ -61,6 +61,11 @@ public class HtmlController {
         return new ModelAndView("/baidu_verify_VuY12dJa6l");
     }
 
+    @RequestMapping("/sitemap.txt")
+    public ModelAndView sitemap() {
+        return new ModelAndView("/sitemap");
+    }
+
     @RequestMapping("/watermark.html")
     public ModelAndView watermark() {
         return new ModelAndView("/watermark");
