@@ -17,7 +17,7 @@ layui.use(['form', 'layer', 'table', 'util'], function () {
                 templet: '#sexTpl'
             }
             , {field: 'account', title: '账号',width : 100,
-                templet: '<div><a href="/user/{{ d.id }}.html" target="_blank">{{ d.id }}</div>'
+                templet: '<div><a href="/user/{{ d.id }}.html" target="_blank">{{ d.account }}</div>'
             }
             , {field: 'name', title: '昵称',width : 100}
             , {field: 'sexDesc', title: '性别',width : 80}

@@ -144,7 +144,7 @@
                 </div>
                 <div class="layui-col-md1">
                 </div>
-                <img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
+                <img alt="" style="display:none; width: 600px;" id="displayimg" src="" />
             </div>
         </div>
     </div>
@@ -191,7 +191,7 @@
                     closeBtn: 1,
                     shadeClose: true,
                     area: [width + 'px', height + 'px'], //宽高
-                    content: "<img alt=" + name + " title=" + name + " src=" + url + " />"
+                    content: "<img style='width: 600px;'  alt=" + name + " title=" + name + " src=" + url + " />"
                 });
             }
         });

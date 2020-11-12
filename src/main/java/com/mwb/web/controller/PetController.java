@@ -4,8 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.PetInfo;
 import com.mwb.web.model.PetPicture;
 import com.mwb.web.model.common.ApiResult;
-import com.mwb.web.model.common.PageQuery;
 import com.mwb.web.model.common.WebLogin;
+import com.mwb.web.model.query.PetPictureQuery;
 import com.mwb.web.model.query.PetQuery;
 import com.mwb.web.model.vo.PetInfoVO;
 import com.mwb.web.service.PetCharacterService;
@@ -73,14 +73,16 @@ public class PetController {
     }
 
     @RequestMapping("/picture/search")
-    public ApiResult pictureSearch(PageQuery query) {
+    public ApiResult pictureSearch(PetPictureQuery query) {
         PageInfo<PetPicture> pageInfo = petPictureService.search(query);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
 
     @RequestMapping("/picture/hot")
     public ApiResult searchHot() {
-        PageInfo<PetPicture> pageInfo = petPictureService.search(new PageQuery(20, "level"));
+        PetPictureQuery query = new PetPictureQuery();
+        query.setOrder("level");
+        PageInfo<PetPicture> pageInfo = petPictureService.search(query);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }
 

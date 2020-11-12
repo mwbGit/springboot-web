@@ -92,7 +92,7 @@
 </form>
 <!-- 你的HTML代码 -->
 <table class="layui-hide" id="test" lay-filter="table"></table>
-<img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
+<img alt="" style="display:none; width: 600px;" id="displayimg" src="" />
 
 <script src="../../static/layui.js"></script>
 <script src="../../static/admin/banner.js"></script>

@@ -32,8 +32,9 @@ import java.io.PrintWriter;
 
 @Configuration
 public class WebAuthInterceptor extends HandlerInterceptorAdapter {
-    private static final Logger accessLog = LoggerFactory.getLogger(WebAuthInterceptor.class);
+    private final static Logger accessLog = LoggerFactory.getLogger(WebAuthInterceptor.class);
     private static long TOTAL_ACCESS = 0;
+    private final static String ERROR_URI = "/error";
 
     @Autowired
     private UserInfoService loginUserService;
@@ -47,6 +48,10 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
         String ip = HttpUtil.getIpAddress(request);
         String uri = request.getRequestURI();
         accessLog.info("access-total_access:{},ip: {} userId: {} uri: {}", TOTAL_ACCESS++, ip, userId,  uri);
+        if (ERROR_URI.equals(uri)) {
+            return true;
+        }
+
         //黑名单校验
         if (accessCacheService.isBlackList(ip)) {
             accessLog.warn("access-total_access:{},is black ip: {} userId: {} uri: {}", TOTAL_ACCESS++, ip, userId, uri);
@@ -101,13 +106,13 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
                         break;
                     }
                 }
+                accessCacheService.put(ip, uri);
                 if (curNum > accessMax) {
                     authError(response, "请稍后再试");
                     accessLog.info("---access---limit---userId: {} ,ip: {} ,uri:{}，curNum:{}", userId, ip, uri, curNum);
                     return false;
                 }
             }
-            accessCacheService.put(ip, uri);
         }
 
         if (userInfo != null) {

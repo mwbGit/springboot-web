@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
+            <img alt="" style="display:none; width: 600px;" id="displayimg" src="" />
 
         </div>
     </div>

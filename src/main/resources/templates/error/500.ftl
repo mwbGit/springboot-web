@@ -24,13 +24,15 @@
                 <i class="layui-icon" face=""></i>
                 <div class="layui-text">
                     <h1>
-                        <span class="layui-anim layui-anim-loop layui-anim-">服务异常请稍后再试</span>
+                        <span class="layui-anim layui-anim-loop layui-anim-">5</span>
                         <span class="layui-anim layui-anim-loop layui-anim-rotate">0</span>
-                        <span class="layui-anim layui-anim-loop layui-anim-"></span>
+                        <span class="layui-anim layui-anim-loop layui-anim-">0</span>
                     </h1>
                     <h2>
                         <span class="layui-anim layui-anim-loop layui-anim-">服务异常请稍后再试</span>
                     </h2>
+                    <br>
+                    <h2><a href="/">返回首页</a></h2>
                 </div>
             </div>
         </div></div>

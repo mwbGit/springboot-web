@@ -2,7 +2,7 @@ package com.mwb.web.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.PetPicture;
-import com.mwb.web.model.common.PageQuery;
+import com.mwb.web.model.query.PetPictureQuery;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PetPictureService extends BaseService<PetPicture> {
 
-    PageInfo<PetPicture> search(PageQuery query);
+    PageInfo<PetPicture> search(PetPictureQuery query);
 
     PetPicture saveOrUpdate(PetPicture petPicture);
 

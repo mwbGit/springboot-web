@@ -16,7 +16,7 @@
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?20c742aa750b3ba3e9eb9203b391174a";
+        hm.src = "https://hm.baidu.com/hm.js?e3134cf558006a6ba91e4d9192113f30";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();

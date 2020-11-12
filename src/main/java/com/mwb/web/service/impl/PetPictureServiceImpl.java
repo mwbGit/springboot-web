@@ -1,9 +1,10 @@
 package com.mwb.web.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mwb.web.mapper.PetPictureMapper;
 import com.mwb.web.model.PetPicture;
-import com.mwb.web.model.common.PageQuery;
+import com.mwb.web.model.query.PetPictureQuery;
 import com.mwb.web.service.PetPictureService;
 import com.mwb.web.utils.WebConstant;
 import org.apache.commons.collections.CollectionUtils;
@@ -29,8 +30,19 @@ public class PetPictureServiceImpl extends BaseServiceImpl<PetPicture> implement
     private PetPictureMapper petPictureMapper;
 
     @Override
-    public PageInfo<PetPicture> search(PageQuery query) {
-        return new PageInfo<>(pageSearch(query, PetPicture.class));
+    public PageInfo<PetPicture> search(PetPictureQuery query) {
+        if (query.isPaged()) {
+            PageHelper.startPage(query.getPage(), query.getPageSize());
+        }
+        Example example = new Example(PetPicture.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (query.getPetId() != null) {
+            criteria.andEqualTo("petId", query.getPetId());
+        }
+
+        //排序
+        example.orderBy(query.getOrder()).desc();
+        return new PageInfo<>(mapper.selectByExample(example));
     }
 
     @Override

@@ -58,12 +58,27 @@ public class HtmlController {
 
     @RequestMapping("/baidu_verify_VuY12dJa6l.html")
     public ModelAndView baidu() {
-        return new ModelAndView("/baidu_verify_VuY12dJa6l");
+        return new ModelAndView("/verify/baidu_verify_VuY12dJa6l");
+    }
+
+    @RequestMapping("/baidu_verify_code-ocJ54M1LNf.html")
+    public ModelAndView maomiBaidu() {
+        return new ModelAndView("/verify/baidu_verify_code-ocJ54M1LNf");
+    }
+
+    @RequestMapping("/sogousiteverification.txt")
+    public ModelAndView sogo() {
+        return new ModelAndView("/verify/sogousiteverification");
     }
 
     @RequestMapping("/sitemap.txt")
     public ModelAndView sitemap() {
-        return new ModelAndView("/sitemap");
+        return new ModelAndView("/verify/sitemap");
+    }
+
+    @RequestMapping("/sitemap1.txt")
+    public ModelAndView sitemap1() {
+        return new ModelAndView("/verify/sitemap1");
     }
 
     @RequestMapping("/watermark.html")

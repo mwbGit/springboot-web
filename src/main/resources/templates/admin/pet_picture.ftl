@@ -32,8 +32,7 @@
     }
 </style>
 <body style="margin: 10px 60px 15px 60px;">
-
-<div class="layui-fluid"  id="scrollElem">
+<div class="layui-body" style="left:0; margin: 0 50px;" id="scrollElem">
 
     <div class="layui-row layui-col-space15">
 
@@ -53,14 +52,15 @@
                         </div>
                     </div>
                 </form>
-                <div id="t_body">
-
+                <div id="tab-active">
+                    <div id="t_body">
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <img alt="" style="display:none; max-width: 80%" id="displayimg" src="" />
+    <img alt="" style="display:none; width: 600px;" id="displayimg" src="" />
 </div>
 <script src="../../static/layui.js"></script>
 
@@ -69,8 +69,9 @@
         var $ = layui.jquery, util = layui.util;
         var flow = layui.flow;
         var form = layui.form;
+        var petId = 0;
         reload();
-
+        load();
 
         util.event('lay-active', {
             e1: function () {
@@ -86,7 +87,7 @@
                     // closeBtn: 1,
                     shadeClose: true,
                     area: [width + 'px', height + 'px'], //宽高
-                    content: "<img alt=" + name + " title=" + name + " src=" + url + " />"
+                    content: "<img style='width: 600px;'  alt=" + name + " title=" + name + " src=" + url + " />"
                     , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         ajaxGet("/pet/picture/delete?id=" + id);
@@ -99,35 +100,44 @@
             }
         });
 
-        flow.load({
-            elem: '#t_body' //指定列表容器
-            ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
-            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
-                var lis = [];
-                //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-                $.get('/pet/picture/search?page=' + page, function (res) {
-                    //假设你的列表返回在data集合中
-                    layui.each(res.data, function (index, val) {
-                        var str = '' +
-                            '<div class="layui-input-inline">' +
-                            '<div class="cmdlist-container">' +
-                            '<a href="javascript:;" lay-active="e1" lay-data="' + val.waterImage + '" lay-id="' + val.id + '">' +
-                            '<img  src="' + val.waterImage + '" alt="' + val.title + '"> ' +
-                            '<div class="cmdlist-text">' +
-                            // '<p class="info">' + val.title + '</p>' +
-                            '</div>' +
-                            ' </a>' +
-                            '</div>' +
-                            '</div>';
-                        lis.push(str);
-                    });
-                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
-                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-                    next(lis.join(''), page < res.pages);
-                });
-            }
+        form.on('select(selectF)', function(data){
+            petId = data.value;
+            $("#t_body").remove();
+            // $(document).unbind();
+            $('#tab-active').append('<ul id="t_body"></ul>');
+            load();
         });
 
+        function load() {
+            flow.load({
+                elem: '#t_body' //指定列表容器
+                ,scrollElem: '#scrollElem' //滚动条所在元素，一般不用填，此处只是演示需要。
+                , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+                    var lis = [];
+                    //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                    $.get('/pet/picture/search?pageSize=50&page=' + page + '&petId=' + petId, function (res) {
+                        //假设你的列表返回在data集合中
+                        layui.each(res.data, function (index, val) {
+                            var str = '' +
+                                '<div class="layui-input-inline">' +
+                                '<div class="cmdlist-container">' +
+                                '<a href="javascript:;" lay-active="e1" lay-data="' + val.waterImage + '" lay-id="' + val.id + '">' +
+                                '<img  src="' + val.waterImage + '" alt="' + val.title + '"> ' +
+                                '<div class="cmdlist-text">' +
+                                // '<p class="info">' + val.title + '</p>' +
+                                '</div>' +
+                                ' </a>' +
+                                '</div>' +
+                                '</div>';
+                            lis.push(str);
+                        });
+                        //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                        //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                        next(lis.join(''), page < res.pages);
+                    });
+                }
+            });
+        }
 
         function ajaxGet(url) {
             $.get(url, function (data) {
