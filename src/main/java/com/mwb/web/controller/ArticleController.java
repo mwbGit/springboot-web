@@ -41,6 +41,7 @@ public class ArticleController {
 
     @RequestMapping("/search")
     public ApiResult search(ArticleQuery query) {
+        query.setOrder("addTime");
         PageInfo<ArticleInfo> pageInfo = articleService.search(query);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }

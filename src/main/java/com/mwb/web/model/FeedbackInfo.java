@@ -19,7 +19,12 @@ public class FeedbackInfo extends BaseBean {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "contact")
+    private String contact;
+
     @Column(name = "user_id")
     private long userId;
 
+    @Column(name = "source")
+    private int source;
 }

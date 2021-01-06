@@ -79,8 +79,9 @@ public class PetController {
     }
 
     @RequestMapping("/picture/hot")
-    public ApiResult searchHot() {
+    public ApiResult searchHot(@RequestParam(value = "pageSize", defaultValue = "30", required = false) int pageSize) {
         PetPictureQuery query = new PetPictureQuery();
+        query.setPageSize(pageSize);
         query.setOrder("level");
         PageInfo<PetPicture> pageInfo = petPictureService.search(query);
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());

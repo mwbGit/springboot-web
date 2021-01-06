@@ -108,10 +108,12 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
                 }
                 accessCacheService.put(ip, uri);
                 if (curNum > accessMax) {
-                    authError(response, "请稍后再试");
+                    authError(response, "请求过于频繁，请稍后再试");
                     accessLog.info("---access---limit---userId: {} ,ip: {} ,uri:{}，curNum:{}", userId, ip, uri, curNum);
                     return false;
                 }
+            } else {
+                accessCacheService.put(ip, uri);
             }
         }
 

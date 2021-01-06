@@ -181,7 +181,7 @@
                         <button type="button" class="layui-btn" id="test11">上传主图</button>
                         <button class="layui-btn" lay-event="search" lay-submit lay-filter="add_btn">保存</button>
                     </div>
-                    <input type="hidden" value="" id="image" name ="image"/>
+                    <input type="hidden" value="${pet.image}" id="image" name ="image"/>
                 </div>
             </form>
         </div>

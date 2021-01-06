@@ -160,7 +160,8 @@ layui.use(['form', 'layer', 'table', 'upload', 'util'], function () {
         , choose: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
-                $('#demo1').attr("src", result)
+                $('#demo1').attr("src", result);
+                $('#image').attr("src", result)
             });
         }
         , done: function (res, index, upload) { //上传后的回调

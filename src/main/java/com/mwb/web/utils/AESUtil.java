@@ -6,6 +6,8 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -116,11 +118,14 @@ public class AESUtil {
         return null;
     }
 
-    public static void main(String[] args) {
-        String content = "2";
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String conten1 = "OaYWSF92LmLUh8uOKkzsmRsgCTXPLbwy58bjWn54peJ3LuaZJP3L/Agndp4w/M38FEBLSL1nWODPYfgV3eh0rDiruEDBwpmlv3sUlq1lUIwcvDYGTL3lwvMJUJvoflEldLYMPXF9zgc A817Vm3qXnks8oVG6QbYWr8OPTu/LrjOHQ9Vq5f7GQ5plB/s1PRhm1tiPem5YQWXpRLrZJjrRQoyadA4p0TCBTOWrrIgc/y9v3kh5l25RyXInMKRnUqYlW5KL2NTVIi443LdC7fK8g==";
+        String content = "OaYWSF92LmLUh8uOKkzsmRsgCTXPLbwy58bjWn54peJ3LuaZJP3L/Agndp4w/M38FEBLSL1nWODPYfgV3eh0rDiruEDBwpmlv3sUlq1lUIwcvDYGTL3lwvMJUJvoflEldLYMPXF9zgc+A817Vm3qXnks8oVG6QbYWr8OPTu/LrjOHQ9Vq5f7GQ5plB/s1PRhm1tiPem5YQWXpRLrZJjrRQoyadA4p0TCBTOWrrIgc/y9v3kh5l25RyXInMKRnUqYlW5KL2NTVIi443LdC7fK8g==";
+        System.out.println(conten1.equals(content));
         System.out.println("原始内容:" + content);
-        String s1 = AESUtil.encryptId(22222);
+        String s1 = AESUtil.encrypt(content);
         System.out.println("加密后:" + s1);
-        System.out.println("解密后:" + AESUtil.decryptId(s1));
+        System.out.println("解密后:" + AESUtil.decrypt(content));
+        System.out.println(URLEncoder.encode(content, "utf-8"));
     }
 }

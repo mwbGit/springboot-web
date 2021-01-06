@@ -51,15 +51,17 @@ public class DynamicController {
     private OssService ossService;
 
     @RequestMapping("/new")
-    public ApiResult newList(UserInfo userInfo) {
+    public ApiResult newList(@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
         DynamicQuery query = new DynamicQuery();
-        query.setPageSize(6);
+        query.setPageSize(pageSize);
         query.setStatus(1);
+        query.setOrder("addTime");
         return ApiResult.success(dynamicService.search(query, 0).getList());
     }
 
     @RequestMapping("/search")
     public ApiResult search(UserInfo userInfo, DynamicQuery query) {
+        query.setOrder("addTime");
         PageInfo<DynamicInfo> pageInfo = dynamicService.search(query, userInfo == null ? 0 : userInfo.getId());
         return ApiResult.success(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
     }

@@ -15,7 +15,7 @@
     <meta name="description" content="专业去视频水印，支持主流短视频平台去水印，图片九宫格、合成视频等功能。"/>
     <link rel="stylesheet" href="../static/css/layui.css" media="all" type="text/css">
     <link rel="canonical" href="http://www.mengweibo.com/">
-    <title>水印专家</title>
+    <title>水印助手</title>
     <link rel="stylesheet" href="../static/css/layui.css" media="all">
     <link rel="shortcut icon" href="../static/watermark/favicon.ico">
 <#--<style type="text/css" >-->
@@ -38,16 +38,17 @@
 
         <div class="layui-col-md6">
             <div style="text-align: center">
-                <h1><a href="https://apps.apple.com/cn/app/id1537228751">水印专家</a></h1>
+                <h1><a href="https://apps.apple.com/cn/app/id1537228751">水印助手</a></h1>
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-header">功能介绍</div>
                         <div class="layui-card-body" style="color: red">
-                            主流短视频平台去水印<br>
-                            朋友圈图片九宫格、四宫格<br>
-                            多张图片合成视频<br>
+                            <b>主流短视频平台去水印</b><br>
+                            图片加水印<br>
+                            图片九宫格<br>
+                            图片合成视频<br>
                             生成二维码<br>
-                            下载地址：<a href="https://apps.apple.com/cn/app/id1537228751">https://apps.apple.com/cn/app/id1537228751</a>
+                            <a href="https://apps.apple.com/cn/app/id1537228751" style="color: blue">IOS下载地址</a>
                         </div>
                     </div>
                 </div>
@@ -55,6 +56,9 @@
             <div class="layui-form" lay-filter="passForm" style="text-align: center">
                        <textarea placeholder="反馈内容" name="content" class="layui-textarea"
                                  lay-verify="required" style="float: left; width: 100%"></textarea>
+                <input type="text" name="contact" required placeholder="联系方式(选填)" autocomplete="off"
+                       class="layui-input" style="">
+                <input type="hidden" value="1" name="source">
                 <button class="layui-btn" lay-submit="" lay-filter="feedback" style="margin-top: 20px">
                     反馈
                 </button>

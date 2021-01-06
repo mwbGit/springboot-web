@@ -31,14 +31,19 @@ public class FeedbackController {
     private FeedbackService feedbackService;
 
     @RequestMapping("/save")
-    public ApiResult save(UserInfo user, @RequestParam("content") String content) {
+    public ApiResult save(UserInfo user, @RequestParam("content") String content, @RequestParam("contact") String contact,
+                          @RequestParam(value = "source", required = false, defaultValue = "0") int source) {
         if (StringUtils.isBlank(content)) {
             return ApiResult.failed("请输入反馈内容");
         } else if (content.length() > 1000) {
             return ApiResult.failed("反馈内容过长");
+        } else if (contact.length() > 120) {
+            return ApiResult.failed("请输入有效联系方式");
         }
         FeedbackInfo feedbackInfo = new FeedbackInfo();
         feedbackInfo.setContent(content);
+        feedbackInfo.setContact(contact);
+        feedbackInfo.setSource(source);
         feedbackInfo.setUserId(user == null ? 0 : user.getId());
         feedbackInfo.setAddTime(new Date());
         feedbackInfo.setUpdateTime(new Date());

@@ -23,7 +23,7 @@
                         <legend>热门品种</legend>
                     </fieldset>
 
-                    <div class="layui-row layui-col-space15" id="t_body">
+                    <div class="layui-row layui-col-space10" id="t_body">
                     </div>
                 </div>
 

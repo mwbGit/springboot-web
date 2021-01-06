@@ -4,19 +4,28 @@ import cn.wanghaomiao.seimi.spring.common.CrawlerCache;
 import cn.wanghaomiao.seimi.struct.CrawlerModel;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mwb.web.mock.Mock;
+import com.mwb.web.model.ArticleInfo;
+import com.mwb.web.model.DynamicInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
 import com.mwb.web.service.*;
+import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 描述:
@@ -24,18 +33,15 @@ import java.util.Collections;
  * @author mengweibo@kanzhun.com
  * @create 2020/8/3
  */
-@Controller
+@Slf4j
+@RestController
 public class TestController {
 
     @Autowired
     private UserInfoService loginUserService;
 
-
     @Autowired
-    private PetService petService;
-
-    @Autowired
-    private com.mwb.web.mapper.MessageMapper messageMapper;
+    private DynamicService dynamicService;
 
     @Autowired
     private PetPictureService petPictureService;
@@ -44,29 +50,49 @@ public class TestController {
     private CommentService commentService;
 
     @Autowired
-    private MessageService messageService;
+    private ArticleService articleService;
 
-    @RequestMapping("/test")
-    public Boolean test(UserInfo user) {
-        for (int i=0 ; i < 500 ; i ++) {
-            messageMapper.insertCaht(i% 10, i%2 == 0? 1:0, i );
-        }
-        return true;
-    }
-
-
-    @ResponseBody
+    @Mock
     @RequestMapping("/test11")
     public ApiResult test11(UserInfo user) {
         return ApiResult.success(commentService.searchById(Collections.singletonList(1L)));
     }
 
+//    @Scheduled(cron="0/5 * * * * ?")
+    @Scheduled(cron = "0 0 0 1/3 * ? ")
+    public void executeFileDownLoadTask() {
+        System.out.println("定时任务启动");
+        test2();
+        log.info("定时任务执行完成");
+    }
 
     @ResponseBody
     @RequestMapping("/test2")
-    public ApiResult test2(String name) {
-        UserInfo user = loginUserService.getByAccount(name);
-        return ApiResult.success(user);
+    public ApiResult test2() {
+        Random random =  new Random();
+        List<ArticleInfo> list = articleService.selectAll();
+        for (ArticleInfo articleInfo : list) {
+            DateTime dateTime = new DateTime();
+            dateTime = dateTime.minusDays(random.nextInt(3));
+            dateTime = dateTime.minusHours(random.nextInt(15));
+            articleInfo.setAddTime(dateTime.toDate());
+            articleInfo.setUpdateTime(new Date());
+            articleInfo.setPraiseNum(random.nextInt(300));
+            articleService.updateNotNull(articleInfo);
+        }
+        List<DynamicInfo> list2 = dynamicService.selectAll();
+        for (DynamicInfo articleInfo : list2) {
+            DateTime dateTime = new DateTime();
+            dateTime = dateTime.minusDays(random.nextInt(3));
+            dateTime = dateTime.minusHours(random.nextInt(15));
+            articleInfo.setAddTime(dateTime.toDate());
+            articleInfo.setUpdateTime(new Date());
+            if (articleInfo.getUserId() < 21) {
+                articleInfo.setPraiseNum(random.nextInt(300));
+            }
+            dynamicService.updateNotNull(articleInfo);
+        }
+        return ApiResult.success(1);
     }
 
     @ResponseBody

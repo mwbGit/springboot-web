@@ -8,20 +8,20 @@ layui.use(['carousel', 'layer', 'util'], function () {
         , autoplay: 'true'
         , interval: '5000'
         , width: '100%' //设置容器宽度
-        , height: '350px' //设置容器宽度
+        , height: '440px' //设置容器宽度
         , arrow: 'always' //始终显示箭头
         //,anim: 'updown' //切换动画方式
         ,trigger : 'click'
     });
 
     //最近动态
-    $.get('/dynamic/new', function (data) {
+    $.get('/dynamic/new?pageSize=10', function (data) {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {
                 str += '<dd> <div>' +
-                    '<p>' + val.userName + ' 发布新动态 <a href="/user/'+val.userId +'.html?dynamicId='+val.id+'"> 【' + val.title + '】</a></p>' +
-                    '<span>' + val.timeDesc + '</span>' +
+                    '<p><a href="/user/'+val.userId +'.html">' + val.userName + '</a> 发布新动态 <a href="/user/'+val.userId +'.html?dynamicId='+val.id+'"> ' + val.title + '' +
+                    '</a></p> <span style="color: #BBB"> ' + val.timeDesc + '</span>' +
                     '</div></dd>';
             });
             $('#msg_list').html(str);
@@ -43,7 +43,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
 
 
     //图片
-    $.get('/pet/picture/hot', function (data) {
+    $.get('/pet/picture/hot?pageSize=30', function (data) {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {
@@ -75,7 +75,7 @@ layui.use(['carousel', 'layer', 'util'], function () {
     });
 
     //品种
-    $.get('/pet/hot/search?pageSize=8', function (data) {
+    $.get('/pet/hot/search?pageSize=12', function (data) {
         if (data.code == 0) {
             var str = '';
             $.each(data.data, function (i, val) {

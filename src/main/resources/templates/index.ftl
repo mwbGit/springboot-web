@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
-<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
-<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
-<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html class="" lang="zh-cn"><!--<![endif]-->
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="" lang="zh-cn"><!--<![endif]-->
 <html>
 <head>
     <title>猫咪之家</title>
@@ -68,16 +73,6 @@
                             <a href="/html/forum.html">查看更多</a>
                         </div>
                     </div>
-
-                    <div class="layui-card">
-                        <div class="layui-card-header">
-                            网站寄语
-                        </div>
-                        <div class="layui-card-body layui-text layadmin-text">
-                            <p>
-                                但经历整个人世冷暖，彼此命运交叠成无数曲折，它们说，或许生的序幕由他人打开，但舞台上的热泪盈眶却必须由自己奏响。要永远炙烈燃放如同烟火，即便幻灭而逝，也不要放弃能璀璨永存的那一刻。</p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="layui-row layui-col-space15">
@@ -90,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <img alt="" style="display:none; width: 600px;" id="displayimg" src="" />
+            <img alt="" style="display:none; width: 600px;" id="displayimg" src=""/>
 
         </div>
     </div>

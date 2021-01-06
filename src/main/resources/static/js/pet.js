@@ -26,7 +26,7 @@ layui.use(['layer', 'util'], function () {
 
     function reload(type) {
         $.ajax({
-            url: '/pet/hot/search?pageSize=50',
+            url: '/pet/search?pageSize=50',
             data: {
                 characterId: type
             },
@@ -36,8 +36,8 @@ layui.use(['layer', 'util'], function () {
                 if (data.code == 0) {
                     var str = '';
                     $.each(data.data, function (i, val) {
-                        str += '<div class="layui-col-md3 layui-col-space5">' +
-                            '<a href="/pet/' + val.id + '.html" ><div style="text-align:center;"><img src="' + val.waterImage + '" style="max-width: 250px; max-height: 190px;height: 100%"></div>' +
+                        str += '<div class="layui-col-md3">' +
+                            '<a href="/pet/' + val.id + '.html" ><div style="text-align:center;"><img src="' + val.waterImage + '" style="width: 200px; height: 180px;"></div>' +
                             '<div class="cmdlist-text" style="text-align:center">' +
                             ' <span class="inf">' + val.name + '</span><' +
                             '/div></a>' +
