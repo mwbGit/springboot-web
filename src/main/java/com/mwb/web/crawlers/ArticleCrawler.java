@@ -6,7 +6,12 @@ import cn.wanghaomiao.seimi.struct.Response;
 import com.mwb.web.model.ArticleInfo;
 import com.mwb.web.service.ArticleService;
 import org.seimicrawler.xpath.JXDocument;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +34,7 @@ public class ArticleCrawler extends BaseSeimiCrawler {
 
         String[] strs = new String[1000];
 
-        int index = 5000;
+        int index = 4000;
         for (int i = 0; i < 1000; i++) {
             strs[i] = String.format("https://www.pethome.com.cn/cjh/article/%d.html", index++);
         }
@@ -60,9 +65,13 @@ public class ArticleCrawler extends BaseSeimiCrawler {
             articleInfo.setImage((String) image);
             articleInfo.setViewNum(500 + new Random().nextInt(3000));
             articleInfo.setPraiseNum(new Random().nextInt(500));
+            articleInfo.setAddTime(new Date());
+            articleInfo.setUpdateTime(new Date());
 //                petPictureService.saveNotNull(petPicture);
 //            }
+            if (articleInfo.getTitle().contains("猫")) {
             articleService.saveNotNull(articleInfo);
+            }
             System.out.println(22);
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,4 +104,21 @@ public class ArticleCrawler extends BaseSeimiCrawler {
 
     }
 
+    /**
+     * 百度api推送
+     */
+    public static void baidu() {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 1032; i < 1226; i++) {
+            sb.append(String.format("http://www.maomihome.com/article/%d.html", i));
+            sb.append("\n");
+        }
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("text/plain");
+        headers.setContentType(type);
+        HttpEntity<String> formEntity = new HttpEntity<>(sb.toString(), headers);
+        RestTemplate restTemplate = new RestTemplate();
+        String s = restTemplate.postForEntity("http://data.zz.baidu.com/urls?site=www.maomihome.com&token=k2n5HRW5orlGqayp", formEntity, String.class).getBody();
+        System.out.println(s);
+    }
 }

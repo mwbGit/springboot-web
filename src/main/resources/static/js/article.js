@@ -36,11 +36,11 @@ layui.use(['layer', 'util', 'flow'], function () {
                         '<div class="layui-col-md12" style="text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">' +
                         '<span>' + val.bodyDesc + '</span>' +
                         '</div>' +
-                        '<div class="layui-col-md3">' +
+                        '<div class="layui-col-md9">' +
                         '<span><i class="layui-icon">&#xe6c6;</i>' + val.praiseNum + '</span>' +
                         '</div>' +
-                        ' <div class="layui-col-md5 layui-col-md-offset4">' +
-                        '<span>' + _util(val.addTime) + '</span>' +
+                        ' <div class="layui-col-md3">' +
+                        '<span style="color: #BBB">' + _util(val.addTime) + '</span>' +
                         '</div>' +
                         '</div></div><div>' +
                         '</li>';

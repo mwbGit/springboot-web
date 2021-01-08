@@ -32,14 +32,14 @@ public class DynamicCrawler extends BaseSeimiCrawler {
     @Override
     public String[] startUrls() {
 
-//        List<Integer> forunms = Arrays.asList(77, 83,53,55,145,144,52,151,56,57,84,49,47,48,50);
-//        String[] strs = new String[10 * forunms.size()];
-//        int index = 0;
-//        for (Integer indx : forunms) {
-//            for (int i = 0; i < 10; i++) {
-//                strs[index++] = String.format("https://talk.pethome.com.cn/forum-%d-%d.htm?orderby=lastpid&digest=0", indx, i);
-//            }
-//        }
+        List<Integer> forunms = Arrays.asList(77, 83,53,55,145,144,52,151,56,57,84,49,47,48,50);
+        String[] strs = new String[10 * forunms.size()];
+        int index = 0;
+        for (Integer indx : forunms) {
+            for (int i = 0; i < 10; i++) {
+                strs[index++] = String.format("https://talk.pethome.com.cn/forum-%d-%d.htm?orderby=lastpid&digest=0", indx, i);
+            }
+        }
         return new String[]{""};
     }
 
@@ -88,7 +88,7 @@ public class DynamicCrawler extends BaseSeimiCrawler {
     public static void main(String[] args) {
         Seimi s = new Seimi();
 
-        s.goRun("basic");
+        s.goRun("dynamic");
 
     }
 
@@ -111,15 +111,15 @@ public class DynamicCrawler extends BaseSeimiCrawler {
             dynamicInfo.setImages("");
             dynamicInfo.setStatus(1);
             dynamicInfo.setPraiseNum(54 + new Random().nextInt(100));
-            dynamicInfo.setAddTime(new Date(1602727832036L - 100000000 * new Random().nextInt(10)));
+            dynamicInfo.setAddTime(new Date());
             System.out.println(response.getUrl());
             //do something
-            dynamicService.saveNotNull(dynamicInfo);
+//            dynamicService.saveNotNull(dynamicInfo);
+            System.out.println(1);
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-
     }
 }
