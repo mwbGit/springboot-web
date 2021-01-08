@@ -64,13 +64,13 @@ public class MockConfigContext implements InitializingBean, DisposableBean, Appl
         scheduled.scheduleAtFixedRate(() -> {
             Map<String, String> map = null;
             try {
-               List<MockData> list = getInstance().getBean(MockConfigApi.class).getOnlineConfigs();
-               if (list != null && list.size() > 0 ) {
-                   map = new HashMap<>(list.size());
-                   for (MockData mockData : list) {
-                       map.put(mockData.getOnlyKey(), mockData.getResult());
-                   }
-               }
+                List<MockData> list = getInstance().getBean(MockConfigApi.class).getOnlineConfigs();
+                if (list != null && list.size() > 0) {
+                    map = new HashMap<>(list.size());
+                    for (MockData mockData : list) {
+                        map.put(mockData.getOnlyKey(), mockData.getResult());
+                    }
+                }
             } catch (Exception e) {
                 LOGGER.error("MockConfigApi.load data err", e);
             }

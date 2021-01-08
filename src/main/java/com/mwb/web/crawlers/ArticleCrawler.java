@@ -3,17 +3,13 @@ package com.mwb.web.crawlers;
 import cn.wanghaomiao.seimi.core.Seimi;
 import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;
 import cn.wanghaomiao.seimi.struct.Response;
-import com.mwb.web.model.ArticleInfo;
-import com.mwb.web.service.ArticleService;
 import org.seimicrawler.xpath.JXDocument;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 描述:
@@ -26,8 +22,8 @@ import java.util.Random;
 //@Crawler(name = "article")
 public class ArticleCrawler extends BaseSeimiCrawler {
 
-//    @Autowired
-    private ArticleService articleService;
+    //    @Autowired
+//    private ArticleService articleService;
 
     @Override
     public String[] startUrls() {
@@ -57,21 +53,19 @@ public class ArticleCrawler extends BaseSeimiCrawler {
 
 //            for (Object s : urls) {
 //                System.out.println(s);
-            ArticleInfo articleInfo = new ArticleInfo();
-            articleInfo.setAuthor((String) name);
-            articleInfo.setSource("宠物之家");
-            articleInfo.setTitle((String) title);
-            articleInfo.setBody(urls.get(0).toString());
-            articleInfo.setImage((String) image);
-            articleInfo.setViewNum(500 + new Random().nextInt(3000));
-            articleInfo.setPraiseNum(new Random().nextInt(500));
-            articleInfo.setAddTime(new Date());
-            articleInfo.setUpdateTime(new Date());
+//            ArticleInfo articleInfo = new ArticleInfo();
+//            articleInfo.setAuthor((String) name);
+//            articleInfo.setSource("宠物之家");
+//            articleInfo.setTitle((String) title);
+//            articleInfo.setBody(urls.get(0).toString());
+//            articleInfo.setImage((String) image);
+//            articleInfo.setViewNum(500 + new Random().nextInt(3000));
+//            articleInfo.setPraiseNum(new Random().nextInt(500));
+//            articleInfo.setAddTime(new Date());
+//            articleInfo.setUpdateTime(new Date());
 //                petPictureService.saveNotNull(petPicture);
 //            }
-            if (articleInfo.getTitle().contains("猫")) {
-            articleService.saveNotNull(articleInfo);
-            }
+
             System.out.println(22);
         } catch (Exception e) {
             e.printStackTrace();

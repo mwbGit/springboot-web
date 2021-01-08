@@ -47,7 +47,7 @@ public class WebAuthInterceptor extends HandlerInterceptorAdapter {
         long userId = getLoginUserId(request);
         String ip = HttpUtil.getIpAddress(request);
         String uri = request.getRequestURI();
-        accessLog.info("access-total_access:{},ip: {} userId: {} uri: {}", TOTAL_ACCESS++, ip, userId,  uri);
+        accessLog.info("access-total_access:{},ip: {} userId: {} uri: {}", TOTAL_ACCESS++, ip, userId, uri);
         if (ERROR_URI.equals(uri)) {
             return true;
         }

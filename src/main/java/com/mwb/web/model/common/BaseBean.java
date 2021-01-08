@@ -30,7 +30,7 @@ public class BaseBean {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Date updateTime;
 
-    public String getIdStr () {
+    public String getIdStr() {
         return AESUtil.encryptId(id);
     }
 

@@ -35,6 +35,7 @@ public class WebConstant {
 
     /**
      * sql注入检测
+     *
      * @param str
      * @return
      */
@@ -57,6 +58,7 @@ public class WebConstant {
 
     /**
      * 删除html标签
+     *
      * @param htmlStr
      * @return
      */

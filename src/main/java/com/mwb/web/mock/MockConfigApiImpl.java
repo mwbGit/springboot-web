@@ -1,8 +1,6 @@
-package com.mwb.web.controller;
+package com.mwb.web.mock;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mwb.web.mock.MockConfigApi;
-import com.mwb.web.mock.MockData;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ public class MockConfigApiImpl implements MockConfigApi {
         CONFIG_CACHE.add(JSONObject.parseObject(json3, MockData.class));
         CONFIG_CACHE.add(JSONObject.parseObject(json4, MockData.class));
     }
+
     @Override
     public void saveConfig(MockData mockData) {
         System.out.println("saveConfig");

@@ -4,13 +4,11 @@ import cn.wanghaomiao.seimi.core.Seimi;
 import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;
 import cn.wanghaomiao.seimi.struct.Request;
 import cn.wanghaomiao.seimi.struct.Response;
-import com.mwb.web.model.DynamicInfo;
-import com.mwb.web.model.PetPicture;
-import com.mwb.web.service.DynamicService;
 import org.apache.commons.lang3.StringUtils;
 import org.seimicrawler.xpath.JXDocument;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -24,15 +22,13 @@ import java.util.stream.Collectors;
 //@Crawler(name = "dynamic")
 public class DynamicCrawler extends BaseSeimiCrawler {
 
-    Map<String, PetPicture> map = new HashMap<>();
-
 //    @Autowired
-    private DynamicService dynamicService;
+//    private DynamicService dynamicService;
 
     @Override
     public String[] startUrls() {
 
-        List<Integer> forunms = Arrays.asList(77, 83,53,55,145,144,52,151,56,57,84,49,47,48,50);
+        List<Integer> forunms = Arrays.asList(77, 83, 53, 55, 145, 144, 52, 151, 56, 57, 84, 49, 47, 48, 50);
         String[] strs = new String[10 * forunms.size()];
         int index = 0;
         for (Integer indx : forunms) {
@@ -102,16 +98,16 @@ public class DynamicCrawler extends BaseSeimiCrawler {
             if (imgs.size() > 2) {
                 return;
             }
-            DynamicInfo dynamicInfo = new DynamicInfo();
-            dynamicInfo.setUserId(10 + new Random().nextInt(5));
-            dynamicInfo.setUserName("");
-            dynamicInfo.setHeadImg("");
-            dynamicInfo.setTitle((String) title);
-            dynamicInfo.setContent(content.toString());
-            dynamicInfo.setImages("");
-            dynamicInfo.setStatus(1);
-            dynamicInfo.setPraiseNum(54 + new Random().nextInt(100));
-            dynamicInfo.setAddTime(new Date());
+//            DynamicInfo dynamicInfo = new DynamicInfo();
+//            dynamicInfo.setUserId(10 + new Random().nextInt(5));
+//            dynamicInfo.setUserName("");
+//            dynamicInfo.setHeadImg("");
+//            dynamicInfo.setTitle((String) title);
+//            dynamicInfo.setContent(content.toString());
+//            dynamicInfo.setImages("");
+//            dynamicInfo.setStatus(1);
+//            dynamicInfo.setPraiseNum(54 + new Random().nextInt(100));
+//            dynamicInfo.setAddTime(new Date());
             System.out.println(response.getUrl());
             //do something
 //            dynamicService.saveNotNull(dynamicInfo);

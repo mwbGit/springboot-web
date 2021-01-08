@@ -16,7 +16,7 @@ public class MD5Util {
 
     public static void main(String[] args) {
         //1f18d6d3718c5ed821986fa1dbd50f21
-        System.out.println(501566316% 10 >= 6 && 501566316 % 10 <= 7);
+        System.out.println(501566316 % 10 >= 6 && 501566316 % 10 <= 7);
     }
 
 }

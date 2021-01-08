@@ -4,8 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.query.UserQuery;
 
-import java.util.List;
-
 /**
  * 描述:
  *
@@ -24,9 +22,4 @@ public interface UserInfoService extends BaseService<UserInfo> {
 
     UserInfo update(UserInfo user);
 
-    List<Long> getValidIds();
-
-    void updateCache(long id);
-
-    boolean audit(long id, int status, String reason);
 }

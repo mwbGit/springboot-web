@@ -5,10 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.mwb.web.mapper.UserInfoMapper;
-import com.mwb.web.model.MessageInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.query.UserQuery;
-import com.mwb.web.service.MessageService;
 import com.mwb.web.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,9 +24,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Service("loginUserService")
 public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements UserInfoService {
-
-    @Autowired
-    private MessageService messageService;
 
     private static Cache<Long, UserInfo> USER_CACHE = CacheBuilder.newBuilder()
             .maximumSize(100)
@@ -46,15 +40,6 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
         userInfo.setAddTime(new Date());
         userInfo.setUpdateTime(new Date());
         saveNotNull(userInfo);
-        if (userInfo.getId() > 0) {
-            MessageInfo messageInfo = new MessageInfo();
-            messageInfo.setUserId(userInfo.getId());
-            messageInfo.setType(1);
-            messageInfo.setStatus(0);
-            messageInfo.setTitle("注册成功");
-            messageInfo.setBody("欢迎来到猫咪之家");
-            messageService.sendMsg(messageInfo);
-        }
         return userInfo.getId();
     }
 
@@ -72,8 +57,6 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
         if (userInfo == null) {
             userInfo = selectByKey(id);
             if (userInfo != null) {
-                int num = messageService.unReadNum(id);
-                userInfo.setUnReadMsgNum(num);
                 USER_CACHE.put(id, userInfo);
             }
         }
@@ -85,11 +68,6 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
         updateNotNull(user);
         USER_CACHE.put(user.getId(), user);
         return user;
-    }
-
-    @Override
-    public void updateCache(long id) {
-        USER_CACHE.invalidate(id);
     }
 
     @Override
@@ -114,29 +92,5 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
         }
         example.orderBy("id").desc();
         return new PageInfo<>(selectByExample(example));
-    }
-
-    @Override
-    public boolean audit(long id, int status, String reason) {
-        UserInfo curUser = selectByKey(id);
-        if (curUser != null && curUser.getStatus() != status) {
-            curUser.setStatus(status);
-            updateNotNull(curUser);
-            if (StringUtils.isNotBlank(reason)) {
-                MessageInfo messageInfo = new MessageInfo();
-                messageInfo.setUserId(id);
-                messageInfo.setType(1);
-                messageInfo.setTitle("个人信息被驳回");
-                messageInfo.setBody("原因：" + reason);
-                messageInfo.setAddTime(new Date());
-                messageService.sendMsg(messageInfo);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public List<Long> getValidIds() {
-        return userInfoMapper.selectByStatus();
     }
 }

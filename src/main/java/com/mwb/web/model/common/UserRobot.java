@@ -23,14 +23,14 @@ public class UserRobot {
         ROBOT_MAP.put(15L, new UserInfo(5, "一根藤上七只猫", "http://img.boqiicdn.com/Data/BK/P/imagick12791473240420.jpg"));
     }
 
-    public static String getImg(long userId){
+    public static String getImg(long userId) {
         if (ROBOT_MAP.containsKey(userId)) {
             return ROBOT_MAP.get(userId).getHeadImg();
         }
         return ROBOT_MAP.get(10L).getHeadImg();
     }
 
-    public static String getName(long userId){
+    public static String getName(long userId) {
         if (ROBOT_MAP.containsKey(userId)) {
             return ROBOT_MAP.get(userId).getName();
         }

@@ -28,7 +28,6 @@ public interface MockConfigApi {
 
     /**
      * 上线、下线
-     *
      */
     void updateStatus(String key, int status);
 
