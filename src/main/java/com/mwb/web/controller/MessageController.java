@@ -36,7 +36,7 @@ public class MessageController {
     public ApiResult aloneSend(UserInfo userInfo, @RequestParam("userId") long userId, @RequestParam("content") String content) {
         log.info("MessageController.aloneSend userInfo={},userId={},content={}", userInfo, userId, content);
         MessageInfo messageInfo = new MessageInfo();
-        messageInfo.setType(3);
+        messageInfo.setType(2);
         messageInfo.setTitle("来自用户" + userInfo.getName() + "的私信");
         messageInfo.setBody(content);
         messageInfo.setUserId(userInfo.getId());

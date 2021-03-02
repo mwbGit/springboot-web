@@ -93,12 +93,20 @@ public class CommentServiceImpl extends BaseServiceImpl<CommentInfo> implements 
             updateNotNull(commentInfo);
 
             if (status == 1) {
-                dynamicService.updateCommentNum(commentInfo.getDynamicId());
-            }
-            if (StringUtils.isNotBlank(reason)) {
+                long userId = dynamicService.updateCommentNum(commentInfo.getDynamicId());
+                if (userId > 0) {
+                    MessageInfo messageInfo = new MessageInfo();
+                    messageInfo.setUserId(userId);
+                    messageInfo.setType(1);
+                    messageInfo.setTitle(commentInfo.getUserName() + " 评论了您的动态");
+                    messageInfo.setBody(commentInfo.getContent());
+                    messageInfo.setAddTime(new Date());
+                    messageService.sendMsg(messageInfo);
+                }
+            } else if (StringUtils.isNotBlank(reason)) {
                 MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setUserId(commentInfo.getUserId());
-                messageInfo.setType(1);
+                messageInfo.setType(0);
                 messageInfo.setTitle("评论被驳回");
                 messageInfo.setBody("原因：" + reason);
                 messageInfo.setAddTime(new Date());

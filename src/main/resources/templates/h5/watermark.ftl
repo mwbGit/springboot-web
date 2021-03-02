@@ -11,7 +11,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <Meta name="Copyright" Content="本页版权归水印专家所有。All Rights Reserved">
-    <meta name="keywords" content="水印专家,去水印,视频去水印,水印大师,图片九宫格"/>
+    <meta name="keywords" content="水印专家,去水印,视频去水印,水印大师,水印助手"/>
     <meta name="description" content="专业去视频水印，支持主流短视频平台去水印，图片九宫格、合成视频等功能。"/>
     <link rel="stylesheet" href="../../static/css/layui.css" media="all" type="text/css">
     <link rel="canonical" href="http://www.mengweibo.com/">

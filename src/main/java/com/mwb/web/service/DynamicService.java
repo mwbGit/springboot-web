@@ -19,7 +19,7 @@ public interface DynamicService extends BaseService<DynamicInfo> {
 
     void updatePraiseNum(long id, boolean addUp);
 
-    void updateCommentNum(long id);
+    long updateCommentNum(long id);
 
     void audit(long id, int status, String reason);
 }

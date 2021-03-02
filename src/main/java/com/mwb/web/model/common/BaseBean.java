@@ -23,7 +23,7 @@ public class BaseBean {
     @Column(name = "id")
     protected long id;
 
-    @Column(name = "add_time")
+    @Column(name = "add_time", updatable = false)
     private Date addTime;
 
     @Column(name = "update_time")

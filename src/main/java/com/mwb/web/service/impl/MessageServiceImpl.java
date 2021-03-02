@@ -64,7 +64,7 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageInfo> implements 
         if (query.getObjectId() != null) {
             criteria.andEqualTo("objectId", query.getObjectId());
         }
-        if (query.getType() != null) {
+        if (query.getType() != null && query.getType() > 0) {
             criteria.andEqualTo("type", query.getType());
         }
         if (query.getStatus() != null) {

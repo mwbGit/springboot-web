@@ -114,12 +114,14 @@ public class DynamicServiceImpl extends BaseServiceImpl<DynamicInfo> implements 
     }
 
     @Override
-    public void updateCommentNum(long id) {
+    public long updateCommentNum(long id) {
         DynamicInfo dynamicInfo = selectByKey(id);
         if (dynamicInfo != null) {
             dynamicInfo.setPraiseNum(dynamicInfo.getPraiseNum() + 1);
             saveOrUpdate(dynamicInfo);
+            return dynamicInfo.getUserId();
         }
+        return 0;
     }
 
     @Override
@@ -131,7 +133,7 @@ public class DynamicServiceImpl extends BaseServiceImpl<DynamicInfo> implements 
             if (StringUtils.isNotBlank(reason)) {
                 MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setUserId(dynamicInfo.getUserId());
-                messageInfo.setType(1);
+                messageInfo.setType(0);
                 messageInfo.setTitle("动态被驳回");
                 messageInfo.setBody("原因：" + reason);
                 messageInfo.setAddTime(new Date());

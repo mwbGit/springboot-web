@@ -49,7 +49,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
         if (userInfo.getId() > 0) {
             MessageInfo messageInfo = new MessageInfo();
             messageInfo.setUserId(userInfo.getId());
-            messageInfo.setType(1);
+            messageInfo.setType(0);
             messageInfo.setStatus(0);
             messageInfo.setTitle("注册成功");
             messageInfo.setBody("欢迎来到猫咪之家");
@@ -125,7 +125,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<UserInfo> implements Us
             if (StringUtils.isNotBlank(reason)) {
                 MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setUserId(id);
-                messageInfo.setType(1);
+                messageInfo.setType(0);
                 messageInfo.setTitle("个人信息被驳回");
                 messageInfo.setBody("原因：" + reason);
                 messageInfo.setAddTime(new Date());
