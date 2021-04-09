@@ -1,6 +1,5 @@
 package com.mwb.web.crawlers;
 
-import cn.wanghaomiao.seimi.core.Seimi;
 import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;
 import cn.wanghaomiao.seimi.struct.Response;
 import com.mwb.web.model.ArticleInfo;
@@ -26,7 +25,7 @@ import java.util.Random;
 //@Crawler(name = "article")
 public class ArticleCrawler extends BaseSeimiCrawler {
 
-//    @Autowired
+//        @Autowired
     private ArticleService articleService;
 
     @Override
@@ -34,7 +33,7 @@ public class ArticleCrawler extends BaseSeimiCrawler {
 
         String[] strs = new String[1000];
 
-        int index = 4000;
+        int index = 5000;
         for (int i = 0; i < 1000; i++) {
             strs[i] = String.format("https://www.pethome.com.cn/cjh/article/%d.html", index++);
         }
@@ -70,7 +69,7 @@ public class ArticleCrawler extends BaseSeimiCrawler {
 //                petPictureService.saveNotNull(petPicture);
 //            }
             if (articleInfo.getTitle().contains("猫")) {
-            articleService.saveNotNull(articleInfo);
+                articleService.saveNotNull(articleInfo);
             }
             System.out.println(22);
         } catch (Exception e) {
@@ -98,9 +97,12 @@ public class ArticleCrawler extends BaseSeimiCrawler {
     }
 
     public static void main(String[] args) {
-        Seimi s = new Seimi();
-
-        s.goRun("article");
+//        Seimi s = new Seimi();
+//
+//        s.goRun("article");
+        for (int i = 1226; i < 1509; i ++) {
+            System.out.println(String.format("http://www.maomihome.com/article/%d.html", i));
+        }
 
     }
 

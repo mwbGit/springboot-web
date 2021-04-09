@@ -1,16 +1,18 @@
 package com.mwb.web.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.mwb.web.mock.Mock;
 import com.mwb.web.model.ArticleInfo;
 import com.mwb.web.model.DynamicInfo;
 import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
+import com.mwb.web.model.query.ArticleQuery;
 import com.mwb.web.service.ArticleService;
 import com.mwb.web.service.CommentService;
 import com.mwb.web.service.DynamicService;
 import com.mwb.web.service.UserInfoService;
-import com.mwb.web.utils.DateTimeUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -59,6 +61,36 @@ public class TestController {
         log.info("定时任务执行完成");
     }
 
+    /**
+     * 处理无图片文章
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/test3")
+    public ApiResult test3() {
+        ArticleQuery query = new ArticleQuery();
+        query.setPageSize(300);
+        PageInfo<ArticleInfo> pageInfo = articleService.search(query);
+        for (ArticleInfo articleInfo : pageInfo.getList()) {
+            if (StringUtils.isBlank(articleInfo.getImage()) && StringUtils.isNotBlank(articleInfo.getBody())) {
+                String str = "";
+                try {
+                    str = articleInfo.getBody().substring(articleInfo.getBody().indexOf("https"), articleInfo.getBody().indexOf("\" width="));
+                    if (StringUtils.isNotBlank(str)) {
+                        System.out.println(articleInfo.getId() + "-----"  + str);
+                    }
+                } catch (Exception e) {
+
+                }
+                if (StringUtils.isBlank(str)){
+                    str = "https://pethomeweb.oss-cn-beijing.aliyuncs.com/uploads/20200808/42f5f123f9dc09f3c6e72771413f6534.png";
+                }
+                articleInfo.setImage(str.trim());
+                articleService.updateNotNull(articleInfo);
+            }
+        }
+        return ApiResult.failed("");
+    }
     @ResponseBody
     @RequestMapping("/test2")
     public ApiResult test2() {
@@ -108,14 +140,9 @@ public class TestController {
 //        RestTemplate restTemplate = new RestTemplate();
 //        String s = restTemplate.postForEntity("http://data.zz.baidu.com/urls?site=www.maomihome.com&token=k2n5HRW5orlGqayp", formEntity, String.class).getBody();
 //        System.out.println(s);
-        DateTime dateTime = new DateTime();
-        Random random =  new Random();
-        dateTime = dateTime.minusDays(random.nextInt(3));
-        dateTime = dateTime.minusHours(random.nextInt(15));
-        dateTime = dateTime.minusMinutes(random.nextInt(40));
-        dateTime = dateTime.minusHours(random.nextInt(12));
-        dateTime = dateTime.minusMillis(random.nextInt(50));
-        System.out.println(DateTimeUtils.formatYYYYMMDDHHMMSS(dateTime.toDate()));
+
+
     }
+
 
 }
