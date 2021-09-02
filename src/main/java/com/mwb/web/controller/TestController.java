@@ -1,10 +1,11 @@
 package com.mwb.web.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.mwb.web.mock.Mock;
+import com.mwb.web.es.ArticleEO;
+import com.mwb.web.es.ArticleEsQuery;
+import com.mwb.web.es.OpinionInfoEsService;
 import com.mwb.web.model.ArticleInfo;
 import com.mwb.web.model.DynamicInfo;
-import com.mwb.web.model.UserInfo;
 import com.mwb.web.model.common.ApiResult;
 import com.mwb.web.model.query.ArticleQuery;
 import com.mwb.web.service.ArticleService;
@@ -15,15 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 描述:
@@ -47,18 +44,28 @@ public class TestController {
     @Autowired
     private ArticleService articleService;
 
-    @Mock
-    @RequestMapping("/test11")
-    public ApiResult test11(UserInfo user) {
-        return ApiResult.success(commentService.searchById(Collections.singletonList(1L)));
-    }
+    @Autowired
+    private OpinionInfoEsService opinionInfoEsService;
 
-//    @Scheduled(cron="0/5 * * * * ?")
-    @Scheduled(cron = "0 0 0 1/3 * ? ")
-    public void executeFileDownLoadTask() {
-        System.out.println("定时任务启动");
-        test2();
-        log.info("定时任务执行完成");
+
+    @RequestMapping("/test11")
+    public ApiResult test11() {
+        ArticleEO articleEO = new ArticleEO();
+        articleEO.setId(new Random().nextLong());
+        articleEO.setTitle("标题" + articleEO.getId());
+        articleEO.setAddTime(new Date());
+        articleEO.setCompany("公司2");
+        opinionInfoEsService.save(articleEO);
+        ArticleEsQuery query = new ArticleEsQuery();
+        query.setPageSize(1);
+        query.setPage(1);
+        query.setSortKey("id");
+        query.setSortDesc(true);
+        Map<String, Object> result = new HashMap<>();
+        query.setGroupKey("company");
+        result.put("group", opinionInfoEsService.normalGroupByEsQuery(query));
+        result.put("search", opinionInfoEsService.searchNormalPage(query));
+        return ApiResult.success(result);
     }
 
     /**

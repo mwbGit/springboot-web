@@ -1,4 +1,44 @@
 
+use pet;
+DROP TABLE IF EXISTS `geek_second_chat_copy1`;
+CREATE TABLE `geek_second_chat_copy1` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+ `position` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+ `type` varchar(32) NOT NULL DEFAULT '' COMMENT '内容',
+ `special_type` varchar(32) NOT NULL DEFAULT '' COMMENT '内容',
+ `uid_tail` varchar(256) NOT NULL DEFAULT '' COMMENT '标题',
+  `position_name` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+  `content` varchar(256) NOT NULL DEFAULT '' COMMENT '主图',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章信息';
+
+
+DROP TABLE IF EXISTS `geek_second_chat`;
+CREATE TABLE `geek_second_chat` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+ `position` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+  `type` varchar(32) NOT NULL DEFAULT '' COMMENT '内容',
+ `special_type` varchar(32) NOT NULL DEFAULT '' COMMENT '内容',
+ `uid_tail` varchar(256) NOT NULL DEFAULT '' COMMENT '标题',
+  `position_name` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+  `content` varchar(256) NOT NULL DEFAULT '' COMMENT '主图',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章信息';
+
+
+DROP TABLE IF EXISTS `pet_info3`;
+CREATE TABLE `pet_info3` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+ `position` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+  `type` varchar(32) NOT NULL DEFAULT '' COMMENT '内容',
+ `special_type` varchar(32) NOT NULL DEFAULT '' COMMENT '内容',
+ `uid_tail` varchar(256) NOT NULL DEFAULT '' COMMENT '标题',
+  `position_name` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+  `content` varchar(256) NOT NULL DEFAULT '' COMMENT '主图',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章信息';
+
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -9,7 +49,7 @@ DROP TABLE IF EXISTS `article_info`;
 CREATE TABLE `article_info` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `title` varchar(256) NOT NULL DEFAULT '' COMMENT '标题',
-  `body` varchar(2048) NOT NULL DEFAULT '' COMMENT '内容',
+  `body` text NOT NULL DEFAULT '' COMMENT '内容',
   `image` varchar(256) NOT NULL DEFAULT '' COMMENT '主图',
   `view_num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '观看数',
   `praise_num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '点赞数',
@@ -38,6 +78,7 @@ CREATE TABLE `banner_info` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `status` int(11) NOT NULL COMMENT '0 下线 1上线',
   `object_id` int(11) unsigned NOT NULL COMMENT '关联的Id',
+    `url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='轮播信息';
 
@@ -161,8 +202,14 @@ DROP TABLE IF EXISTS `pet_info`;
 CREATE TABLE `pet_info` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(64) NOT NULL DEFAULT '' COMMENT '名称',
+  `nation` varchar(64) NOT NULL DEFAULT '' COMMENT '产地',
   `image` varchar(256) NOT NULL DEFAULT '' COMMENT '主图',
+  `life` varchar(32) NOT NULL DEFAULT '' COMMENT '寿命',
+  `feature` varchar(256) NOT NULL DEFAULT '' COMMENT '特点',
   `introduce` varchar(2048) NOT NULL DEFAULT '' COMMENT '介绍',
+  `care_knowledge` varchar(2048) NOT NULL DEFAULT '' COMMENT '介绍',
+  `feed_points` varchar(2048) NOT NULL DEFAULT '' COMMENT '介绍',
+  `character_feature` varchar(2048) NOT NULL DEFAULT '' COMMENT '介绍',
   `level` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '优先级',
   `type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '状态 0-猫 1狗',
   `trait` varchar(128) NOT NULL DEFAULT '' COMMENT '特点（,分割）',
